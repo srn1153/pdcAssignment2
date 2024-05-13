@@ -6,6 +6,7 @@ package pdc_GUI;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -26,5 +27,24 @@ public class TempoTicketsWebsite extends JFrame {
         add(hpp); 
         
         setVisible(true); 
+    }
+    
+    //go to new page
+    public void nextPage(JPanel newPanel){
+        getContentPane().removeAll(); 
+        currPanel = newPanel; 
+        add(newPanel); 
+        revalidate(); 
+        repaint(); 
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new TempoTicketsWebsite(); 
+            }
+            
+        }); 
     }
 }

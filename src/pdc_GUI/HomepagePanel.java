@@ -46,6 +46,7 @@ public class HomepagePanel extends JPanel {
         JLabel upcoming = new JLabel("Here are the upcoming events:"); 
         upcoming.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel clickArtist = new JLabel("Click on an artist to see more details!"); 
+        clickArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         panel.add(Box.createVerticalStrut(10)); 
         panel.add(upcoming); 
@@ -64,28 +65,28 @@ public class HomepagePanel extends JPanel {
         artist1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                ttw.nextPage(new artist1().getContent());
             }
         });
         
         artist2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                ttw.nextPage(new artist2().getContent());
             }
         });
         
         artist3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                ttw.nextPage(new artist3().getContent());
             }
         });
         
         artist4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                ttw.nextPage(new artist4().getContent());
             }
         });
         
@@ -93,6 +94,8 @@ public class HomepagePanel extends JPanel {
         options.add(artist2); 
         options.add(artist3); 
         options.add(artist4); 
+        
+        add(options, BorderLayout.CENTER); 
     }
     
 }
