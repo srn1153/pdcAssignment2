@@ -31,10 +31,15 @@ public final class Database {
         try { 
             conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD); 
             Statement statement = conn.createStatement(); 
-            String tableName = "Customer_Login"; 
+            String customerLoginTable = "Customer_Login"; 
+            String BookingRecords = "Booking_Records"; 
             
-            if(!checkTableExisting(tableName)) {
-                statement.executeUpdate("CREATE TABLE " + tableName + " (userid VARCHAR(12) PRIMARY KEY, username VARCHAR(50), password VARCHAR(12), email VARCHAR(50), phone_number VARCHAR(20))");
+            if(!checkTableExisting(customerLoginTable)) {
+                statement.executeUpdate("CREATE TABLE " + customerLoginTable + " (userid VARCHAR(12) PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), email VARCHAR(50), phone_number VARCHAR(20))");
+            }
+            
+            if(!checkTableExisting(BookingRecords)) {
+                statement.executeUpdate("CREATE TABLE " + BookingRecords + " (ticketid INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, userid VARCHAR(12), artist VARCHAR(12), event_date DATE, status VARCHAR(20), refund_amount DECIMAL(10,2))");
             }
             statement.close(); 
             

@@ -21,6 +21,8 @@ public class TempoTicketsWebsite extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocationRelativeTo(null); 
         
+        Database db = new Database(); 
+        
         //creating homepage window 
         HomepagePanel hpp = new HomepagePanel(this); 
         currPanel = hpp; 
