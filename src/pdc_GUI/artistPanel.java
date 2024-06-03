@@ -50,7 +50,7 @@ public class artistPanel extends BookingPage {
         artistPanel.add(genre);
         
         //adding gaps between info 
-        artistPanel.add(Box.createVerticalStrut(20)); 
+        artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying location
         JLabel loc = new JLabel("Location: " + artist.getLoc());
@@ -59,7 +59,7 @@ public class artistPanel extends BookingPage {
         artistPanel.add(loc);
         
         //adding gaps between info 
-        artistPanel.add(Box.createVerticalStrut(20)); 
+        artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying date
         JLabel date = new JLabel("Date: " + artist.getDate());
@@ -68,7 +68,7 @@ public class artistPanel extends BookingPage {
         artistPanel.add(date);
         
         //adding gaps between info 
-        artistPanel.add(Box.createVerticalStrut(20)); 
+        artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying time
         JLabel time = new JLabel("Time: " + artist.getTime());
@@ -77,13 +77,31 @@ public class artistPanel extends BookingPage {
         artistPanel.add(time);
         
         //adding gaps between info 
-        artistPanel.add(Box.createVerticalStrut(20)); 
+        artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying price
         JLabel price = new JLabel("Price: $" + artist.getPrice());
         price.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         price.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(price);
+        
+        //adding gaps between info 
+        artistPanel.add(Box.createVerticalStrut(20)); 
+        
+        //displaying disclaimer
+        JLabel fyi = new JLabel("Disclaimer: All tickets sold are for standing areas.");
+        fyi.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        fyi.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        artistPanel.add(fyi);
+        JLabel fyi2 = new JLabel("However, we do provide wheelchair-accessible sections.");
+        fyi2.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        fyi2.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        artistPanel.add(fyi2);
+        
+        JLabel fyi3 = new JLabel("We apologise for any inconvenience");
+        fyi3.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        fyi3.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        artistPanel.add(fyi3);
         
         //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(30)); 
@@ -103,6 +121,6 @@ public class artistPanel extends BookingPage {
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
         JButton bookingButton = buttons.bookingStage(bookingPanel); 
         bookingPanel.add(bookingButton); 
-        add(bookingPanel, BorderLayout.SOUTH);
+        artistPanel.add(bookingPanel);
     } 
 }

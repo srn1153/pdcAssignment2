@@ -37,14 +37,14 @@ class buttons {
     public static JButton bookingStage(JPanel buttonPanel){
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
     
-        buttonPanel.add(Box.createVerticalGlue());
+        buttonPanel.add(Box.createVerticalStrut(30));
         JButton ticketButton = new JButton("Get Tickets!");
         ticketButton.setPreferredSize(new Dimension(200, 50)); //making button bigger 
         ticketButton.setForeground(Color.WHITE);
         ticketButton.setBackground(new Color(120, 220, 120));
         ticketButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(ticketButton);
-        buttonPanel.add(Box.createVerticalStrut(100)); //Add space below the button
+        //buttonPanel.add(Box.createVerticalStrut(150)); //adding space below the button
         
         return ticketButton;    
     }
