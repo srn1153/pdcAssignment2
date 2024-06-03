@@ -34,14 +34,15 @@ public final class Database {
             Statement statement = conn.createStatement(); 
             String customerLoginTable = "Customer_Login"; 
             String BookingRecords = "Booking_Records"; 
-            
-            if(!checkTableExisting(customerLoginTable)) {
-                statement.executeUpdate("CREATE TABLE " + customerLoginTable + " (userid VARCHAR(12) PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), email VARCHAR(50), phone_number VARCHAR(20))");
+                        
+            if (!checkTableExisting(customerLoginTable)) {
+                statement.executeUpdate("CREATE TABLE " + customerLoginTable + " (userid VARCHAR(12) PRIMARY KEY, username VARCHAR(30), password VARCHAR(30))");
             }
-            
-            if(!checkTableExisting(BookingRecords)) {
-                statement.executeUpdate("CREATE TABLE " + BookingRecords + " (ticketid INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, userid VARCHAR(12), artist VARCHAR(12), event_date DATE, status VARCHAR(20), refund_amount DECIMAL(10,2))");
+
+            if (!checkTableExisting(BookingRecords)) {
+                statement.executeUpdate("CREATE TABLE " + BookingRecords + " (booking_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, userid VARCHAR(12), first_name VARCHAR(50), last_name VARCHAR(50), artist VARCHAR(100), ticket_type VARCHAR(50), number_of_tickets INT, total_cost DECIMAL(10, 2), booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, status VARCHAR(20) DEFAULT 'Booked', refund_amount DECIMAL(10, 2), refund_date TIMESTAMP)");
             }
+
             statement.close(); 
             
         }catch (Throwable e){
@@ -49,6 +50,7 @@ public final class Database {
             e.printStackTrace(); 
         }
     } 
+
     
     //checking if table already exists 
     private boolean checkTableExisting(String tableName) {
@@ -141,6 +143,4 @@ public final class Database {
     customerUpdate createAccount(String username, String password, String email, String phone) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-
 }
