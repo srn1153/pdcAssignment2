@@ -8,9 +8,9 @@ package pdc_GUI;
  *
  * @author nikis
  */
-public class artist4 extends artistPanel {
+public class soulBossaDuo extends artistPanel{
     
-    public artist4(TempoTicketsWebsite ttw){
-        super(ttw, "Pink Peppers"); 
+    public soulBossaDuo(TempoTicketsWebsite ttw){
+        super(ttw, new artist("Soul Bossa Duo", "Jazz", "Tuning Fork", "21st June 2024", "8pm-12am", 20.0)); 
     }
 }

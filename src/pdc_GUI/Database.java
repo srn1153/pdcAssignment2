@@ -134,5 +134,9 @@ public final class Database {
         }
     }
 
+    customerUpdate createAccount(String username, String password, String email, String phone) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 }

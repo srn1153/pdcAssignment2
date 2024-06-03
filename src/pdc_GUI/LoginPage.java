@@ -5,7 +5,6 @@
 package pdc_GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -16,25 +15,30 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author nikis
  */
-
-public class HomepagePanel extends JPanel {
+public class LoginPage extends JPanel{
     private TempoTicketsWebsite ttw; 
+    private Database db; 
+    private HomepagePanel hpp; 
     
-    public HomepagePanel(TempoTicketsWebsite ttw){
+    public LoginPage(TempoTicketsWebsite ttw, Database db){
         this.ttw = ttw; 
-        HomePage(); 
+        this.db = db; 
+        LoginPanel(); 
     }
     
-    public void HomePage() {
+    public void LoginPanel() {
         setLayout(new BorderLayout()); 
         
-        //Homepage Panel 
         JPanel panel = new JPanel(); 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT); 
@@ -51,60 +55,43 @@ public class HomepagePanel extends JPanel {
         panel.add(tempoTickets); 
         
         //adding text 
-        JLabel upcoming = new JLabel("Here are the upcoming events:"); 
+        JLabel upcoming = new JLabel("Sign in/up with us to see the upcoming events!"); 
         upcoming.setFont(new Font("Garamond", Font.PLAIN, 18)); 
         upcoming.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel clickArtist = new JLabel("Click on an artist to see more details!"); 
-        clickArtist.setFont(new Font("Garamond", Font.PLAIN, 18)); 
-        clickArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
         panel.add(Box.createVerticalStrut(10)); 
         panel.add(upcoming); 
-        panel.add(clickArtist); 
         
         add(panel, BorderLayout.NORTH); 
         
-        //Artist options 
-        JPanel options = new JPanel(new GridLayout(2, 2)); 
+        JPanel loginPanel = new JPanel(); 
+        loginPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
+        loginPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        JButton artist1 = new JButton("The Terrys");
-        JButton artist2 = new JButton("Soul Bosssa Duo"); 
-        JButton artist3 = new JButton("Dylan"); 
-        JButton artist4 = new JButton("Pink Peppers"); 
+        JLabel unLabel = new JLabel("Username:"); 
+        unLabel.setHorizontalAlignment(SwingConstants.RIGHT); 
+        loginPanel.add(unLabel); 
         
-        artist1.addActionListener(new ActionListener() {
+        JTextField usernameField = new JTextField(20);
+        loginPanel.add(usernameField);
+
+        JLabel passLabel = new JLabel("Password:"); 
+        passLabel.setHorizontalAlignment(SwingConstants.RIGHT); 
+        loginPanel.add(passLabel); 
+        
+        JTextField passwordField = new JTextField(20);
+        loginPanel.add(passwordField);
+        
+        add(loginPanel, BorderLayout.CENTER); 
+
+        JButton loginButton = new JButton("Login/Sign up");
+        loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new theTerrys(ttw).getContent());
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
-        });
+        }); 
+        loginPanel.add(loginButton); 
         
-        artist2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new soulBossaDuo(ttw).getContent());
-            }
-        });
-        
-        artist3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new dylan(ttw).getContent());
-            }
-        });
-        
-        artist4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new pinkPeppers(ttw).getContent());
-            }
-        });
-        
-        options.add(artist1); 
-        options.add(artist2); 
-        options.add(artist3); 
-        options.add(artist4); 
-        
-        add(options, BorderLayout.CENTER); 
-    }    
+        add(loginPanel,BorderLayout.CENTER);
+    }
 }

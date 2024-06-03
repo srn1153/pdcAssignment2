@@ -14,19 +14,24 @@ import javax.swing.SwingUtilities;
  */
 public class TempoTicketsWebsite extends JFrame {
     private JPanel currPanel; 
+    private Database db; 
     
     public TempoTicketsWebsite() {
         setTitle("Tempo Tickets Website!"); 
-        setSize(800, 800); 
+        setSize(600, 600); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocationRelativeTo(null); 
         
-        Database db = new Database(); 
+        db = new Database(); 
         
-        //creating homepage window 
-        HomepagePanel hpp = new HomepagePanel(this); 
-        currPanel = hpp; 
+        //login panel 
+        //LoginPage lp = new LoginPage(this, db); 
+        //currPanel = lp; 
+        //add(lp); 
+        HomepagePanel hpp = new HomepagePanel(TempoTicketsWebsite.this);
+        this.nextPage(hpp);
         add(hpp); 
+        
         
         setVisible(true); 
     }
