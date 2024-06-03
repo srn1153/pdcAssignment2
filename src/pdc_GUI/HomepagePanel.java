@@ -20,6 +20,7 @@ import javax.swing.JPanel;
  *
  * @author nikis
  */
+
 public class HomepagePanel extends JPanel {
     private TempoTicketsWebsite ttw; 
     
@@ -36,16 +37,23 @@ public class HomepagePanel extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT); 
         
-        //Adding the title to panel 
-        JLabel title = new JLabel("Tempo Tickets"); 
-        title.setFont(new Font("Arial", Font.BOLD, 24)); 
-        title.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        panel.add(title); 
+        //Adding the welcome to tempo tickets onto panel 
+        JLabel welcome = new JLabel("Welcome to "); 
+        welcome.setFont(new Font("Garamond", Font.BOLD, 26)); 
+        welcome.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        panel.add(welcome); 
+                
+        JLabel tempoTickets = new JLabel("Tempo Tickets"); 
+        tempoTickets.setFont(new Font("Garamond", Font.BOLD, 26)); 
+        tempoTickets.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        panel.add(tempoTickets); 
         
         //adding text 
         JLabel upcoming = new JLabel("Here are the upcoming events:"); 
+        upcoming.setFont(new Font("Garamond", Font.PLAIN, 18)); 
         upcoming.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel clickArtist = new JLabel("Click on an artist to see more details!"); 
+        clickArtist.setFont(new Font("Garamond", Font.PLAIN, 18)); 
         clickArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         panel.add(Box.createVerticalStrut(10)); 
@@ -57,36 +65,36 @@ public class HomepagePanel extends JPanel {
         //Artist options 
         JPanel options = new JPanel(new GridLayout(2, 2)); 
         
-        JButton artist1 = new JButton("Artist 1");
-        JButton artist2 = new JButton("Artist 2"); 
-        JButton artist3 = new JButton("Artist 3"); 
-        JButton artist4 = new JButton("Artist 4"); 
+        JButton artist1 = new JButton("The Terrys");
+        JButton artist2 = new JButton("Soul Bosssa Duo"); 
+        JButton artist3 = new JButton("Dylan"); 
+        JButton artist4 = new JButton("Pink Peppers"); 
         
         artist1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new artist1().getContent());
+                ttw.nextPage(new artist1(ttw).getContent());
             }
         });
         
         artist2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new artist2().getContent());
+                ttw.nextPage(new artist2(ttw).getContent());
             }
         });
         
         artist3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new artist3().getContent());
+                ttw.nextPage(new artist3(ttw).getContent());
             }
         });
         
         artist4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new artist4().getContent());
+                ttw.nextPage(new artist4(ttw).getContent());
             }
         });
         
