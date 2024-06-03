@@ -23,16 +23,11 @@ public class TempoTicketsWebsite extends JFrame {
         setLocationRelativeTo(null); 
         
         db = new Database(); 
-        
-        //login panel 
-        //LoginPage lp = new LoginPage(this, db); 
-        //currPanel = lp; 
-        //add(lp); 
+ 
         HomepagePanel hpp = new HomepagePanel(TempoTicketsWebsite.this);
         this.nextPage(hpp);
         add(hpp); 
-        
-        
+
         setVisible(true); 
     }
     

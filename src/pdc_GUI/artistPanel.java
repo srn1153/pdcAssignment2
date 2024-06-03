@@ -6,14 +6,12 @@ package pdc_GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -41,8 +39,8 @@ public class artistPanel extends BookingPage {
         name.setFont(new Font("Garamond", Font.BOLD, 40)); 
         name.setAlignmentX(Component.CENTER_ALIGNMENT);
         artistPanel.add(name); 
-        //add(name, BorderLayout.CENTER);
         
+        //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(30)); 
         
         //displaying genre
@@ -50,8 +48,8 @@ public class artistPanel extends BookingPage {
         genre.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         genre.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(genre);
-        //add(genre, BorderLayout.CENTER); 
         
+        //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(20)); 
         
         //displaying location
@@ -59,8 +57,8 @@ public class artistPanel extends BookingPage {
         loc.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         loc.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(loc);
-        //add(loc, BorderLayout.CENTER); 
         
+        //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(20)); 
         
         //displaying date
@@ -68,8 +66,8 @@ public class artistPanel extends BookingPage {
         date.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         date.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(date);
-        //add(date, BorderLayout.CENTER);
         
+        //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(20)); 
         
         //displaying time
@@ -77,8 +75,8 @@ public class artistPanel extends BookingPage {
         time.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         time.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(time);
-        //add(time, BorderLayout.CENTER);
         
+        //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(20)); 
         
         //displaying price
@@ -86,19 +84,25 @@ public class artistPanel extends BookingPage {
         price.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         price.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(price);
-        //add(price, BorderLayout.CENTER);
         
+        //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(30)); 
         
-        add(artistPanel, BorderLayout.CENTER); 
+        //centering information about artist
+        add(artistPanel, BorderLayout.CENTER);
         
+        //adding in homepage button 
+        JPanel homeButtonPanel = new JPanel();
+        homeButtonPanel.setLayout(new BoxLayout(homeButtonPanel, BoxLayout.Y_AXIS));
         JButton homeButton = buttons.homePageButton(ttw); 
-        add(homeButton, BorderLayout.NORTH); 
+        homeButtonPanel.add(homeButton); 
+        add(homeButtonPanel, BorderLayout.NORTH); 
         
-        JButton bookingButton = buttons.bookingStage("Book Tickets Nows!"); 
-        add(bookingButton, BorderLayout.SOUTH); 
-    }
-    
-    
-    
+        //adding in ticket button 
+        JPanel bookingPanel = new JPanel();
+        bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
+        JButton bookingButton = buttons.bookingStage(bookingPanel); 
+        bookingPanel.add(bookingButton); 
+        add(bookingPanel, BorderLayout.SOUTH);
+    } 
 }

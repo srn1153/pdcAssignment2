@@ -11,7 +11,5 @@ import javax.swing.JPanel;
  * @author nikis
  */
 interface BookingPageInterface {
-    
     JPanel getContent(); 
-    
 }

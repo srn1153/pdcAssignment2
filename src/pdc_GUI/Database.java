@@ -27,6 +27,7 @@ public final class Database {
         dbSetup(); 
     }
     
+    //initial db setup (creating tables to insert data in later on)
     public void dbSetup() {
         try { 
             conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD); 
@@ -49,7 +50,7 @@ public final class Database {
         }
     } 
     
-    
+    //checking if table already exists 
     private boolean checkTableExisting(String tableName) {
         try {
 
@@ -73,6 +74,7 @@ public final class Database {
         return false;
     }
     
+    //checking to see if account exists, if not create account 
     public customerUpdate checkName(String username, String password) {
         customerUpdate info = new customerUpdate();
         try {
@@ -112,7 +114,7 @@ public final class Database {
         return this.conn;
     }*/
 
-    //Establish connection
+    //Establishing connection
     public void establishConnection() {
         if (this.conn == null) {
             try {
@@ -124,6 +126,7 @@ public final class Database {
         }
     }
 
+    //closing connection 
     public void closeConnections() {
         if (conn != null) {
             try {
@@ -134,6 +137,7 @@ public final class Database {
         }
     }
 
+    //to be implemented 
     customerUpdate createAccount(String username, String password, String email, String phone) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

@@ -5,13 +5,11 @@
 package pdc_GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -40,22 +38,22 @@ public class HomepagePanel extends JPanel {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT); 
         
         //Adding the welcome to tempo tickets onto panel 
-        JLabel welcome = new JLabel("Welcome to "); 
-        welcome.setFont(new Font("Garamond", Font.BOLD, 26)); 
+        JLabel welcome = new JLabel("Welcome to"); 
+        welcome.setFont(new Font("Garamond", Font.BOLD, 30)); 
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT); 
         panel.add(welcome); 
                 
         JLabel tempoTickets = new JLabel("Tempo Tickets"); 
-        tempoTickets.setFont(new Font("Garamond", Font.BOLD, 26)); 
+        tempoTickets.setFont(new Font("Garamond", Font.BOLD, 30)); 
         tempoTickets.setAlignmentX(Component.CENTER_ALIGNMENT); 
         panel.add(tempoTickets); 
         
         //adding text 
         JLabel upcoming = new JLabel("Here are the upcoming events:"); 
-        upcoming.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        upcoming.setFont(new Font("Garamond", Font.PLAIN, 20)); 
         upcoming.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel clickArtist = new JLabel("Click on an artist to see more details!"); 
-        clickArtist.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        clickArtist.setFont(new Font("Garamond", Font.PLAIN, 20)); 
         clickArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         panel.add(Box.createVerticalStrut(10)); 
@@ -64,9 +62,10 @@ public class HomepagePanel extends JPanel {
         
         add(panel, BorderLayout.NORTH); 
         
-        //Artist options 
+        //Artist options
         JPanel options = new JPanel(new GridLayout(2, 2)); 
         
+        //Artist buttons
         JButton artist1 = new JButton("The Terrys");
         JButton artist2 = new JButton("Soul Bosssa Duo"); 
         JButton artist3 = new JButton("Dylan"); 

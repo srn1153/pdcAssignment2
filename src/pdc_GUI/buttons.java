@@ -4,9 +4,15 @@
  */
 package pdc_GUI;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,6 +20,7 @@ import javax.swing.JButton;
  */
 class buttons {
     
+    //homePage button for every stage
     public static JButton homePageButton(TempoTicketsWebsite ttw) {
         JButton homeButton = new JButton("<--- back to HomePage"); 
         homeButton.addActionListener(new ActionListener(){
@@ -26,11 +33,19 @@ class buttons {
         return homeButton; 
     }
     
-    public static JButton bookingStage(String bb){
-        JButton bookingButton = new JButton(bb); 
-        //adding in actionlistener later once new classes have been made
-        return bookingButton; 
+    //ticketButton for every artist
+    public static JButton bookingStage(JPanel buttonPanel){
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+    
+        buttonPanel.add(Box.createVerticalGlue());
+        JButton ticketButton = new JButton("Get Tickets!");
+        ticketButton.setPreferredSize(new Dimension(200, 50)); //making button bigger 
+        ticketButton.setForeground(Color.WHITE);
+        ticketButton.setBackground(new Color(120, 220, 120));
+        ticketButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(ticketButton);
+        buttonPanel.add(Box.createVerticalStrut(100)); //Add space below the button
+        
+        return ticketButton;    
     }
-    
-    
 }
