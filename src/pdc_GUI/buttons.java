@@ -34,7 +34,7 @@ class buttons {
     }
     
     //ticketButton for every artist
-    public static JButton bookingStage(JPanel buttonPanel){
+    public static JButton bookingStage(TempoTicketsWebsite ttw, JPanel buttonPanel){
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
     
         buttonPanel.add(Box.createVerticalStrut(30));
@@ -44,7 +44,14 @@ class buttons {
         ticketButton.setBackground(new Color(120, 220, 120));
         ticketButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(ticketButton);
-        //buttonPanel.add(Box.createVerticalStrut(150)); //adding space below the button
+        
+        ticketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ttw.nextPage(new BookingPage(ttw) {}); 
+            }
+            
+        }); 
         
         return ticketButton;    
     }

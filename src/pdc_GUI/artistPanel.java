@@ -119,7 +119,7 @@ public class artistPanel extends BookingPage {
         //adding in ticket button 
         JPanel bookingPanel = new JPanel();
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
-        JButton bookingButton = buttons.bookingStage(bookingPanel); 
+        JButton bookingButton = buttons.bookingStage(ttw, bookingPanel); 
         bookingPanel.add(bookingButton); 
         artistPanel.add(bookingPanel);
     } 

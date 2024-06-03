@@ -5,11 +5,13 @@
 package pdc_GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -31,14 +33,30 @@ public abstract class BookingPage extends JPanel implements BookingPageInterface
     private void detailsPage() {
         
         JPanel bookingPanel = new JPanel(); 
-        JLabel title = new JLabel("Booking Page"); 
-        title.setFont(new Font("Arial", Font.PLAIN, 18));
-        title.setHorizontalAlignment(SwingConstants.CENTER);
-        bookingPanel.add(title, BorderLayout.NORTH); 
-        
+        bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS)); 
+                
+        //adding in homepage button 
+        JPanel homeButtonPanel = new JPanel();
+        homeButtonPanel.setLayout(new BorderLayout());
         JButton homeButton = buttons.homePageButton(ttw); 
-        bookingPanel.add(homeButton, BorderLayout.SOUTH); 
+        homeButtonPanel.add(homeButton, BorderLayout.WEST); 
+        bookingPanel.add(homeButtonPanel); 
+        add(bookingPanel, BorderLayout.NORTH);
         
-        add(bookingPanel, BorderLayout.NORTH); 
+        //displaying title (this is the stage after logging in)
+        JLabel loggedIn = new JLabel("You have successfully logged in!");
+        loggedIn.setFont(new Font("Garamond", Font.BOLD, 28)); 
+        loggedIn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bookingPanel.add(loggedIn); 
+        
+        bookingPanel.add(Box.createVerticalStrut(20)); 
+        
+        //adding in text before drop boxes 
+        JLabel title = new JLabel("Select from the options below:");
+        title.setFont(new Font("Garamond", Font.BOLD, 20)); 
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bookingPanel.add(title);
+        
+        add(bookingPanel, BorderLayout.NORTH);
     }
 }
