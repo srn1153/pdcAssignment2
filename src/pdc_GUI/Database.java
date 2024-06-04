@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 /**
  *
@@ -106,12 +107,21 @@ public final class Database {
         try {
             Statement statement = conn.createStatement(); 
             System.out.println("Creating account ");
-            statement.executeUpdate("INSERT INTO Customer_Login (userid, username, password) " + "VALUES(UUID(), '" + username + "', '" + password + "')"); 
+            
+            String userid = randomCode(); 
+            
+            statement.executeUpdate("INSERT INTO Customer_Login (userid, username, password) " + "VALUES('" + userid + "', '" + username + "', '" + password + "')"); 
             info.loginFlag = true; 
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
         return info; 
+    }
+    
+    private String randomCode() {
+        Random rand = new Random(); 
+        int randNum = rand.nextInt(900000) + 100000;
+        return String.valueOf(randNum); 
     }
 
     /*public static void main(String[] args) {
@@ -122,6 +132,25 @@ public final class Database {
     public Connection getConnection() {
         return this.conn;
     }*/
+    
+    public void printCustomerLoginTable() {
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Customer_Login");
+
+            while (rs.next()) {
+                String userid = rs.getString("userid");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                System.out.println("userid: " + userid + ", username: " + username + ", password: " + password);
+            }
+
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //Establishing connection
     public void establishConnection() {

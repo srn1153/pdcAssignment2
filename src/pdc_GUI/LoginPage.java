@@ -116,6 +116,20 @@ public class LoginPage extends JPanel{
                 }
             }
         }); 
+        
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String user = userText.getText(); 
+                String pass = passText.getText(); 
+                
+                Database db = new Database(); 
+                db.createAccount(user, pass); 
+                System.out.println("Account created");
+                db.printCustomerLoginTable();
+                //add in next page here
+            }
+        }); 
            
         add(loginPanel,BorderLayout.CENTER);
     }        
