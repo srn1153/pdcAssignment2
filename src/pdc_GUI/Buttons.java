@@ -40,8 +40,8 @@ public class Buttons {
         buttonPanel.add(Box.createVerticalStrut(30));
         JButton ticketButton = new JButton("Get Tickets!");
         ticketButton.setPreferredSize(new Dimension(200, 50)); //making button bigger 
-        ticketButton.setForeground(Color.WHITE);
-        ticketButton.setBackground(new Color(120, 220, 120));
+        //ticketButton.setForeground(Color.WHITE);
+        //ticketButton.setBackground(new Color(120, 220, 120));
         ticketButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(ticketButton);
         
@@ -50,9 +50,7 @@ public class Buttons {
             public void actionPerformed(ActionEvent e) {
                 ttw.nextPage(new LoginPage(ttw) {}); 
             }
-            
         }); 
-        
         return ticketButton;    
     }    
 }

@@ -36,18 +36,13 @@ public class LoginPage extends JPanel{
         JPanel panel = new JPanel(); 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); 
         
-        JLabel welcome = new JLabel("Welcome to "); 
+        JLabel welcome = new JLabel("Sign in/up here!"); 
         welcome.setFont(new Font("Garamond", Font.BOLD, 26)); 
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT); 
         panel.add(welcome); 
-                
-        JLabel tempoTickets = new JLabel("Tempo Tickets"); 
-        tempoTickets.setFont(new Font("Garamond", Font.BOLD, 26)); 
-        tempoTickets.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        panel.add(tempoTickets); 
         
         //adding sign in test
-        JLabel upcoming = new JLabel("Sign in/up with us to see the upcoming events!"); 
+        JLabel upcoming = new JLabel("Owning an account can help keep track of purchased tickets and new events!"); 
         upcoming.setFont(new Font("Garamond", Font.PLAIN, 18)); 
         upcoming.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalStrut(10)); 
