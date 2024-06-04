@@ -6,13 +6,17 @@ package pdc_GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -44,7 +48,7 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         
         userInputPanel.add(Box.createVerticalStrut(40)); 
         
-        /*JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
+        JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
         userInputPanel.add(numberOfTicketsLabel); 
         
         JComboBox numberOfTickets = new JComboBox();
@@ -54,7 +58,7 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         numberOfTickets.addItem("4");
         numberOfTickets.addItem("5");
         numberOfTickets.addItem("6");
-        userInputPanel.add(numberOfTickets); */
+        userInputPanel.add(numberOfTickets);
 
         return userInputPanel; 
     }
@@ -90,8 +94,90 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         titlePanel.add(Box.createVerticalStrut(20)); 
                
         add(titlePanel, BorderLayout.NORTH);
+        //add(comboBoxOptions(), BorderLayout.CENTER);
         
-        add(comboBoxOptions(), BorderLayout.CENTER);
-
+        JPanel userInputPanel = new JPanel(); 
+        userInputPanel.setLayout(new BoxLayout(userInputPanel, BoxLayout.Y_AXIS));
+        //userInputPanel.add(comboBoxOptions(), BorderLayout.NORTH); 
+        userInputPanel.setLayout(null);
+        
+        //Asking for first name 
+        JLabel fName = new JLabel("First Name:");
+        fName.setBounds(10, 20, 200, 25); 
+        userInputPanel.add(fName); 
+        //Enter first name 
+        JTextField fNameText = new JTextField(20);
+        fNameText.setBounds(150, 20, 200, 25); 
+        userInputPanel.add(fNameText);
+        
+        //Asking for last name 
+        JLabel lName = new JLabel("Last Name:");
+        lName.setBounds(10, 50, 200, 25); 
+        userInputPanel.add(lName); 
+        //Enter last name 
+        JTextField lNameText = new JTextField(20);
+        lNameText.setBounds(150, 50, 200, 25); 
+        userInputPanel.add(lNameText);
+        
+        //Asking for email
+        JLabel email = new JLabel("Email:");
+        email.setBounds(10, 80, 200, 25); 
+        userInputPanel.add(email); 
+        //Enter email 
+        JTextField emailText = new JTextField(20);
+        emailText.setBounds(150, 80, 200, 25); 
+        userInputPanel.add(emailText);
+        
+        //Asking for phone number
+        JLabel phoneNum = new JLabel("Phone number:");
+        phoneNum.setBounds(10, 110, 200, 25); 
+        userInputPanel.add(phoneNum); 
+        //Enter email 
+        JTextField phoneNumText = new JTextField(20);
+        phoneNumText.setBounds(150, 110, 200, 25); 
+        userInputPanel.add(phoneNumText);
+        
+        JButton confirm = new JButton("Click here to confirm details"); 
+        confirm.setBounds(10, 150, 200, 25); 
+        userInputPanel.add(confirm);
+        
+        JLabel recap = new JLabel(""); 
+        recap.setBounds(10, 190, 200, 25);
+        userInputPanel.add(recap); 
+        
+        JLabel artist = new JLabel(""); 
+        artist.setBounds(10, 220, 200, 25);
+        userInputPanel.add(artist); 
+        
+        JLabel ticketType = new JLabel(""); 
+        ticketType.setBounds(10, 250, 200, 25);
+        userInputPanel.add(ticketType); 
+        
+        JLabel numOfTickets = new JLabel(""); 
+        numOfTickets.setBounds(10, 280, 200, 25);
+        userInputPanel.add(numOfTickets); 
+        
+        JLabel totalCost = new JLabel(""); 
+        totalCost.setBounds(10, 310, 200, 25);
+        userInputPanel.add(totalCost); 
+        
+        
+        
+        confirm.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                recap.setText("Confirmation details listed below:");
+                //print artist they are buying for 
+                artist.setText("something");
+                //print tickettype
+                ticketType.setText("something");
+                //print numberOfTickets selected 
+                numOfTickets.setText("something");
+                //print total cost based on artist 
+                totalCost.setText("something"); 
+            }
+        }); 
+        
+        add(userInputPanel, BorderLayout.CENTER);
     }
 }
