@@ -38,7 +38,7 @@ public abstract class BookingPage extends JPanel implements BookingPageInterface
         //adding in homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BorderLayout());
-        JButton homeButton = buttons.homePageButton(ttw); 
+        JButton homeButton = Buttons.homePageButton(ttw); 
         homeButtonPanel.add(homeButton, BorderLayout.WEST); 
         bookingPanel.add(homeButtonPanel); 
         add(bookingPanel, BorderLayout.NORTH);

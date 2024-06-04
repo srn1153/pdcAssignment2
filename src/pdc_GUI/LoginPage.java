@@ -97,7 +97,7 @@ public class LoginPage extends JPanel{
                 String pass = passText.getText(); 
                 
                 Database db = new Database(); 
-                customerUpdate info = db.checkName(user, pass); 
+                CustomerUpdate info = db.checkName(user, pass); 
              
                 if(info.loginFlag) {
                     noSuchUser.setText("Login successful!"); 

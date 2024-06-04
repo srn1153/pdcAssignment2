@@ -77,8 +77,8 @@ public final class Database {
     }
     
     //checking to see if account exists
-    public customerUpdate checkName(String username, String password) {
-        customerUpdate info = new customerUpdate();
+    public CustomerUpdate checkName(String username, String password) {
+        CustomerUpdate info = new CustomerUpdate();
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT userid, password FROM Customer_Login WHERE username = '" + username + "'"); 
@@ -101,8 +101,8 @@ public final class Database {
         return info; // Return the Data object
     }
     
-    public customerUpdate createAccount(String username, String password){
-        customerUpdate info = new customerUpdate(); 
+    public CustomerUpdate createAccount(String username, String password){
+        CustomerUpdate info = new CustomerUpdate(); 
         try {
             Statement statement = conn.createStatement(); 
             System.out.println("Creating account ");
@@ -144,10 +144,5 @@ public final class Database {
                 System.out.println(ex.getMessage());
             }
         }
-    }
-
-    //to be implemented 
-    customerUpdate createAccount(String username, String password, String email, String phone) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
