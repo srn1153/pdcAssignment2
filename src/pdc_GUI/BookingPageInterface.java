@@ -11,5 +11,13 @@ import javax.swing.JPanel;
  * @author nikis
  */
 interface BookingPageInterface {
+    
     JPanel getContent(); 
+    
+    void ticketType(); 
+    
+    void numberOfTickets(); 
+    
+    void detailsPage(); 
+    
 }

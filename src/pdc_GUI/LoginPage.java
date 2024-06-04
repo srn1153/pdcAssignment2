@@ -35,9 +35,7 @@ public class LoginPage extends JPanel{
         //creating panel 
         JPanel panel = new JPanel(); 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); 
-        panel.setAlignmentX(Component.CENTER_ALIGNMENT); 
         
-        //adding the welcome to tempo tickets onto panel 
         JLabel welcome = new JLabel("Welcome to "); 
         welcome.setFont(new Font("Garamond", Font.BOLD, 26)); 
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT); 
@@ -54,8 +52,14 @@ public class LoginPage extends JPanel{
         upcoming.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalStrut(10)); 
         panel.add(upcoming); 
+                
+        //adding in homepage button 
+        JPanel homeButtonPanel = new JPanel();
+        homeButtonPanel.setLayout(new BoxLayout(homeButtonPanel, BoxLayout.Y_AXIS));
+        JButton homeButton = Buttons.homePageButton(ttw); 
+        homeButtonPanel.add(homeButton); 
+        add(homeButtonPanel, BorderLayout.NORTH);  
         
-        add(panel, BorderLayout.NORTH); 
         JPanel loginPanel = new JPanel(); 
         loginPanel.setLayout(null); 
         
@@ -96,6 +100,8 @@ public class LoginPage extends JPanel{
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(10, 170, 100, 25); 
         
+        
+        
         signButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,6 +113,7 @@ public class LoginPage extends JPanel{
              
                 if(info.loginFlag) {//if username and password match
                     noSuchUser.setText("Login successful!"); 
+                    ttw.nextPage(new BookingPage(ttw) {}); 
                 } else{ //if username and password do not match, display messages and register button
                     noSuchUser.setText("Your username or password was incorrect"); 
                     registerText.setText("Sign up by clicking button below!"); 
@@ -127,10 +134,11 @@ public class LoginPage extends JPanel{
                 db.createAccount(user, pass); 
                 System.out.println("Account created");
                 db.printCustomerLoginTable();
-                //add in next page here
+                ttw.nextPage(new BookingPage(ttw){});
             }
         }); 
            
-        add(loginPanel,BorderLayout.CENTER);
+        panel.add(loginPanel,BorderLayout.SOUTH);
+        add(panel, BorderLayout.CENTER); 
     }        
 }

@@ -17,20 +17,30 @@ import javax.swing.JPanel;
  *
  * @author nikis
  */
-public abstract class BookingPage extends JPanel implements BookingPageInterface{    
+public class BookingPage extends JPanel implements BookingPageInterface{    
     protected final TempoTicketsWebsite ttw; 
     
     public BookingPage(TempoTicketsWebsite ttw){
         this.ttw = ttw; 
-        setLayout(new BorderLayout()); 
         detailsPage(); 
     }
     
     public JPanel getContent() {
         return this; 
     }
+    
+    @Override
+    public void ticketType() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-    private void detailsPage() {
+    @Override
+    public void numberOfTickets() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void detailsPage() {
+        setLayout(new BorderLayout()); 
         
         JPanel bookingPanel = new JPanel(); 
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS)); 
@@ -59,4 +69,6 @@ public abstract class BookingPage extends JPanel implements BookingPageInterface
         
         add(bookingPanel, BorderLayout.NORTH);
     }
+
+    
 }

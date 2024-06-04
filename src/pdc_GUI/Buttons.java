@@ -19,6 +19,7 @@ import javax.swing.JPanel;
  * @author nikis
  */
 public class Buttons {
+    
     //homePage button for every stage
     public static JButton homePageButton(TempoTicketsWebsite ttw) {
         JButton homeButton = new JButton("<--- back to HomePage"); 
@@ -32,7 +33,7 @@ public class Buttons {
         return homeButton; 
     }
     
-    //ticketButton for every artist
+    //ticketButton for artist panel
     public static JButton bookingStage(TempoTicketsWebsite ttw, JPanel buttonPanel){
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
     
@@ -53,5 +54,5 @@ public class Buttons {
         }); 
         
         return ticketButton;    
-    }
+    }    
 }
