@@ -11,6 +11,6 @@ package pdc_GUI;
 public class SoulBossaDuo extends ArtistPanel {
     
     public SoulBossaDuo(TempoTicketsWebsite ttw){
-        super(ttw, new Artist("The Terrys","Indie Rock", "Tuning Fork", "27th August 2024", "7pm-10pm", 44.99)); 
+        super(ttw, new Artist("Soul Bossa Duo","Jazz", "Tuning Fork", "28th July 2024", "9pm-12am", 25.00)); 
     }
 }

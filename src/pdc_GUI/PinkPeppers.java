@@ -11,6 +11,6 @@ package pdc_GUI;
 public class PinkPeppers extends ArtistPanel {
     
     public PinkPeppers(TempoTicketsWebsite ttw){
-        super(ttw, new Artist("Pink Peppers", "Kids Musical", "Town Hall", "3rd September 2024", "5pm-7pm", 12.0)); 
+        super(ttw, new Artist("Pink Peppers", "Kids Musical", "Town Hall", "7th September 2024", "4pm-7pm", 12.0)); 
     }
 }

@@ -14,9 +14,7 @@ interface BookingPageInterface {
     
     JPanel getContent(); 
     
-    void ticketType(); 
-    
-    void numberOfTickets(); 
+    JPanel comboBoxOptions(); 
     
     void detailsPage(); 
     

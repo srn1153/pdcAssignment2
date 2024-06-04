@@ -94,9 +94,7 @@ public class LoginPage extends JPanel{
         //creating register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(10, 170, 100, 25); 
-        
-        
-        
+
         signButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

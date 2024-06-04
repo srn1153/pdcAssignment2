@@ -10,6 +10,7 @@ import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,58 +18,80 @@ import javax.swing.JPanel;
  *
  * @author nikis
  */
-public class BookingPage extends JPanel implements BookingPageInterface{    
-    protected final TempoTicketsWebsite ttw; 
-    
-    public BookingPage(TempoTicketsWebsite ttw){
-        this.ttw = ttw; 
-        detailsPage(); 
+public class BookingPage extends JPanel implements BookingPageInterface{
+
+    protected final TempoTicketsWebsite ttw;
+
+    public BookingPage(TempoTicketsWebsite ttw) {
+        this.ttw = ttw;
+        detailsPage();
     }
-    
+
     public JPanel getContent() {
-        return this; 
-    }
-    
-    @Override
-    public void ticketType() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this;
     }
 
     @Override
-    public void numberOfTickets() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public JPanel comboBoxOptions() {
+        JPanel userInputPanel = new JPanel(); 
+        JLabel ticketTypeLabel = new JLabel("Select your ticket type: ");
+        userInputPanel.add(ticketTypeLabel); 
+        
+        JComboBox ticketType = new JComboBox();
+        ticketType.addItem("Standard Ticket");
+        ticketType.addItem("Wheelchair Access Ticket ");
+        userInputPanel.add(ticketType); 
+        
+        userInputPanel.add(Box.createVerticalStrut(40)); 
+        
+        /*JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
+        userInputPanel.add(numberOfTicketsLabel); 
+        
+        JComboBox numberOfTickets = new JComboBox();
+        numberOfTickets.addItem("1");
+        numberOfTickets.addItem("2");
+        numberOfTickets.addItem("3");
+        numberOfTickets.addItem("4");
+        numberOfTickets.addItem("5");
+        numberOfTickets.addItem("6");
+        userInputPanel.add(numberOfTickets); */
+
+        return userInputPanel; 
     }
 
     public void detailsPage() {
+
         setLayout(new BorderLayout()); 
         
-        JPanel bookingPanel = new JPanel(); 
-        bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS)); 
+        JPanel titlePanel = new JPanel(); 
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS)); 
                 
         //adding in homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BorderLayout());
         JButton homeButton = Buttons.homePageButton(ttw); 
         homeButtonPanel.add(homeButton, BorderLayout.WEST); 
-        bookingPanel.add(homeButtonPanel); 
-        add(bookingPanel, BorderLayout.NORTH);
+        titlePanel.add(homeButtonPanel); 
         
         //displaying title (this is the stage after logging in)
         JLabel loggedIn = new JLabel("You have successfully logged in!");
         loggedIn.setFont(new Font("Garamond", Font.BOLD, 28)); 
         loggedIn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bookingPanel.add(loggedIn); 
+        titlePanel.add(loggedIn); 
         
-        bookingPanel.add(Box.createVerticalStrut(20)); 
+        titlePanel.add(Box.createVerticalStrut(20)); 
         
         //adding in text before drop boxes 
         JLabel title = new JLabel("Select from the options below:");
         title.setFont(new Font("Garamond", Font.BOLD, 20)); 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        bookingPanel.add(title);
+        titlePanel.add(title);
         
-        add(bookingPanel, BorderLayout.NORTH);
-    }
+        titlePanel.add(Box.createVerticalStrut(20)); 
+               
+        add(titlePanel, BorderLayout.NORTH);
+        
+        add(comboBoxOptions(), BorderLayout.CENTER);
 
-    
+    }
 }
