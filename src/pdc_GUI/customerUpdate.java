@@ -22,4 +22,5 @@ public class customerUpdate {
     public Date event_date; 
     public String status; 
     public double refund_amount; 
+    
 }

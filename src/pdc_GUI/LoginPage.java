@@ -7,17 +7,15 @@ package pdc_GUI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -25,12 +23,10 @@ import javax.swing.SwingConstants;
  */
 public class LoginPage extends JPanel{
     private TempoTicketsWebsite ttw; 
-    private Database db; 
     private HomepagePanel hpp; 
     
-    public LoginPage(TempoTicketsWebsite ttw, Database db){
+    public LoginPage(TempoTicketsWebsite ttw){
         this.ttw = ttw; 
-        this.db = db; 
         LoginPanel(); 
     }
     
@@ -60,36 +56,61 @@ public class LoginPage extends JPanel{
         panel.add(upcoming); 
         
         add(panel, BorderLayout.NORTH); 
-        
         JPanel loginPanel = new JPanel(); 
-        loginPanel.setLayout(new GridLayout(2, 2, 10, 10)); 
-        loginPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        loginPanel.setLayout(null); 
         
-        JLabel unLabel = new JLabel("Username:"); 
-        unLabel.setHorizontalAlignment(SwingConstants.RIGHT); 
-        loginPanel.add(unLabel); 
+        JLabel user = new JLabel("Username:"); 
+        user.setBounds(10, 20, 80, 25); 
+        loginPanel.add(user); 
         
-        JTextField usernameField = new JTextField(20);
-        loginPanel.add(usernameField);
+        JTextField userText = new JTextField(20);
+        userText.setBounds(100, 20, 165, 25); 
+        loginPanel.add(userText);
 
-        JLabel passLabel = new JLabel("Password:"); 
-        passLabel.setHorizontalAlignment(SwingConstants.RIGHT); 
-        loginPanel.add(passLabel); 
+        JLabel pass = new JLabel("Password:"); 
+        pass.setBounds(10, 50, 80, 25); 
+        loginPanel.add(pass); 
         
-        JTextField passwordField = new JTextField(20);
-        loginPanel.add(passwordField);
+        JPasswordField passText = new JPasswordField(20); 
+        passText.setBounds(100, 50, 165, 25); 
+        loginPanel.add(passText);
         
-        add(loginPanel, BorderLayout.CENTER); 
-
-        JButton loginButton = new JButton("Login/Sign up");
-        loginButton.addActionListener(new ActionListener() {
+        JButton signButton = new JButton("Sign in/up");
+        signButton.setBounds(10, 80, 100, 25); 
+        loginPanel.add(signButton); 
+        
+        JLabel noSuchUser = new JLabel(""); 
+        noSuchUser.setBounds(10, 110, 300, 25); 
+        loginPanel.add(noSuchUser); 
+        
+        JLabel registerText = new JLabel(""); 
+        registerText.setBounds(10, 140, 300, 25); 
+        loginPanel.add(registerText); 
+        
+        JButton registerButton = new JButton("Register");
+        registerButton.setBounds(10, 170, 100, 25); 
+        
+        signButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                String user = userText.getText(); 
+                String pass = passText.getText(); 
+                
+                Database db = new Database(); 
+                customerUpdate info = db.checkName(user, pass); 
+             
+                if(info.loginFlag) {
+                    noSuchUser.setText("Login successful!"); 
+                } else{
+                    noSuchUser.setText("Your username or password was incorrect"); 
+                    registerText.setText("Sign up by clicking button below!"); 
+                    loginPanel.add(registerButton); 
+                    loginPanel.revalidate(); 
+                    loginPanel.repaint(); 
+                }
             }
         }); 
-        loginPanel.add(loginButton); 
-        
+           
         add(loginPanel,BorderLayout.CENTER);
-    }
+    }        
 }

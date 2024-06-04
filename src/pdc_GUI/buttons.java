@@ -48,7 +48,7 @@ class buttons {
         ticketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new BookingPage(ttw) {}); 
+                ttw.nextPage(new LoginPage(ttw) {}); 
             }
             
         }); 

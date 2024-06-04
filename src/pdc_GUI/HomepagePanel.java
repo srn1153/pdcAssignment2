@@ -67,35 +67,35 @@ public class HomepagePanel extends JPanel {
         
         //Artist buttons
         JButton artist1 = new JButton("The Terrys");
-        JButton artist2 = new JButton("Soul Bosssa Duo"); 
+        JButton artist2 = new JButton("Soul Bossa Duo"); 
         JButton artist3 = new JButton("Dylan"); 
         JButton artist4 = new JButton("Pink Peppers"); 
         
         artist1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new theTerrys(ttw).getContent());
+                ttw.nextPage(new TheTerrys(ttw).getContent());
             }
         });
         
         artist2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new soulBossaDuo(ttw).getContent());
+                ttw.nextPage(new SoulBossaDuo(ttw).getContent());
             }
         });
         
         artist3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new dylan(ttw).getContent());
+                ttw.nextPage(new Dylan(ttw).getContent());
             }
         });
         
         artist4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new pinkPeppers(ttw).getContent());
+                ttw.nextPage(new PinkPeppers(ttw).getContent());
             }
         });
         

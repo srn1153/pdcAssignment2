@@ -76,12 +76,12 @@ public final class Database {
         return false;
     }
     
-    //checking to see if account exists, if not create account 
+    //checking to see if account exists
     public customerUpdate checkName(String username, String password) {
         customerUpdate info = new customerUpdate();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM Customer_Login WHERE username = '"+username+"'"); 
+            ResultSet rs = statement.executeQuery("SELECT userid, password FROM Customer_Login WHERE username = '" + username + "'"); 
             if (rs.next()) {
                 String pass = rs.getString("password"); 
                 System.out.println("***" + pass);
@@ -92,19 +92,26 @@ public final class Database {
                 } else {
                     info.loginFlag = false; 
                 }
-            } else {
-                System.out.println("Account created due to inability to find username");
-                statement.executeUpdate("INSERT INTO Customer_Login (userid, username, password, email, phone_number) "
-                        + "VALUES(UUID(), '" + username + "', '" + password + "', '', '')"); 
-                info.loginFlag = true; 
-            }
-
+            } 
             statement.close(); // Close the statement after use
             rs.close();// Close the result set after use
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return info; // Return the Data object
+    }
+    
+    public customerUpdate createAccount(String username, String password){
+        customerUpdate info = new customerUpdate(); 
+        try {
+            Statement statement = conn.createStatement(); 
+            System.out.println("Creating account ");
+            statement.executeUpdate("INSERT INTO Customer_Login (userid, username, password) " + "VALUES(UUID(), '" + username + "', '" + password + "')"); 
+            info.loginFlag = true; 
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+        return info; 
     }
 
     /*public static void main(String[] args) {
