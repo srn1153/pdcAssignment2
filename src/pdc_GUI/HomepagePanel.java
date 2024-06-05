@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 
 public class HomepagePanel extends JPanel {
     private TempoTicketsWebsite ttw; 
-    public CustomerUpdate userInfo; 
 
     
     public HomepagePanel(TempoTicketsWebsite ttw){
@@ -76,28 +75,28 @@ public class HomepagePanel extends JPanel {
         artist1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new TheTerrys(ttw, userInfo).getContent());
+                ttw.nextPage(new TheTerrys(ttw).getContent());
             }
         });
         
         artist2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new SoulBossaDuo(ttw, userInfo).getContent());
+                ttw.nextPage(new SoulBossaDuo(ttw).getContent());
             }
         });
         
         artist3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new Dylan(ttw, userInfo).getContent());
+                ttw.nextPage(new Dylan(ttw).getContent());
             }
         });
         
         artist4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new PinkPeppers(ttw, userInfo).getContent());
+                ttw.nextPage(new PinkPeppers(ttw).getContent());
             }
         });
         

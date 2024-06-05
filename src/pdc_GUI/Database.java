@@ -106,10 +106,10 @@ public final class Database {
                 System.out.println("***" + pass);
                 System.out.println("found user");
                 if (password.compareTo(pass) == 0) {
-                    info.userid = rs.getInt("userid"); 
-                    info.loginFlag = true; 
+                    info.setUserid(rs.getInt("userid")); //does this line set the Userid to what ever number the table is showing with that account?
+                    info.setLoginFlag(true); 
                 } else {
-                    info.loginFlag = false; 
+                    info.setLoginFlag(false); 
                 }
             } 
             statement.close(); // Close the statement after use
@@ -128,7 +128,7 @@ public final class Database {
                         
             statement.executeUpdate("INSERT INTO Customer_Login (username, password, email, phone_number) VALUES('" 
                     + username + "', '" + password + "', '" + email + "', '" + phoneNumber + "')"); 
-            info.loginFlag = true; 
+            info.setLoginFlag(true); 
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
@@ -152,7 +152,7 @@ public final class Database {
                         
             statement.executeUpdate("INSERT INTO Booking_Records (userid, first_name, last_name, artist, ticket_type, number_of_tickets, total_cost) VALUES(" 
                     + userid + ", '" + fName + "', '" + lName + "', '" + artist + "', '" + ticketType + "', " + numOfTickets + ", " + totalCost + ")"); 
-            info.loginFlag = true; 
+            info.setLoginFlag(true); 
         } catch (SQLException e) {
             e.printStackTrace(); 
         }

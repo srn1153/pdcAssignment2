@@ -13,8 +13,8 @@ import java.util.Date;
 public class CustomerUpdate {
     
     //variables for customer login table 
-    public int userid; 
-    boolean loginFlag = false;
+    private int userid; 
+    private boolean loginFlag = false;
     
     //variables for booking records table
     public int booking_id; 
@@ -28,4 +28,32 @@ public class CustomerUpdate {
     public String status; 
     public double refund_amount;    
     public Date refund_date; 
+
+    /**
+     * @return the userid
+     */
+    public int getUserid() {
+        return userid;
+    }
+
+    /**
+     * @param userid the userid to set
+     */
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    /**
+     * @return the loginFlag
+     */
+    public boolean isLoginFlag() {
+        return loginFlag;
+    }
+
+    /**
+     * @param loginFlag the loginFlag to set
+     */
+    public void setLoginFlag(boolean loginFlag) {
+        this.loginFlag = loginFlag;
+    }
 }

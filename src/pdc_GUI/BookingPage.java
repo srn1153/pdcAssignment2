@@ -25,12 +25,11 @@ public class BookingPage extends JPanel implements BookingPageInterface{
 
     protected final TempoTicketsWebsite ttw;
     public Artist aInfo; 
-    public CustomerUpdate userInfo; 
+    //public CustomerUpdate userInfo; 
 
-    public BookingPage(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) {
+    public BookingPage(TempoTicketsWebsite ttw, Artist aInfo) {
         this.ttw = ttw;
         this.aInfo = aInfo; 
-        this.userInfo = userInfo; 
         detailsPage();
     }
 
@@ -172,15 +171,20 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         proceedToPayment.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                        
+                //if (userInfo != null) {
+                //int userid = userInfo.getUserid(); 
+                //} else { 
+                //    System.out.println("user id is null girl");
+                //}
                 
-                int userid = userInfo.userid; 
                 String fName = fNameText.getText(); 
                 String lName = lNameText.getText();
                 String artist = aInfo.getArtistName(); 
                 String ticketTypeRecorded = ticketType.getSelectedItem().toString(); 
                 int intNumberOfTicketsRecorded = Integer.parseInt(numberOfTickets.getSelectedItem().toString()); 
                 double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsRecorded; 
-                ttw.db.insertInfo(userid, fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);
+                //ttw.db.insertInfo(userid, fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);
             }
             
         }); 

@@ -24,12 +24,10 @@ import javax.swing.JTextField;
 public class LoginPage extends JPanel{
     private TempoTicketsWebsite ttw; 
     private Artist artist; 
-    CustomerUpdate userInfo; 
     
-    public LoginPage(TempoTicketsWebsite ttw, Artist artist, CustomerUpdate userInfo){
+    public LoginPage(TempoTicketsWebsite ttw, Artist artist){
         this.ttw = ttw; 
         this.artist = artist; 
-        this.userInfo = userInfo; 
         LoginPanel(); 
     }
     
@@ -122,9 +120,9 @@ public class LoginPage extends JPanel{
                 Database db = new Database(); 
                 CustomerUpdate info = db.checkName(user, pass); 
              
-                if(info.loginFlag) {//if username and password match
+                if(info.isLoginFlag()) {//if username and password match
                     noSuchUser.setText("Login successful!"); 
-                    ttw.nextPage(new BookingPage(ttw, artist, userInfo) {}); 
+                    ttw.nextPage(new BookingPage(ttw, artist) {}); 
                 } else{ //if username and password do not match, display messages and register button
                     noSuchUser.setText("Your username or password was incorrect"); 
                     registerText.setText("Sign up by filling in details below and clicking the 'Register' button!"); 
@@ -153,7 +151,7 @@ public class LoginPage extends JPanel{
                 db.createAccount(user, pass, email, phoneNumber); 
                 System.out.println("Account created");
                 db.printCustomerLoginTable();
-                ttw.nextPage(new BookingPage(ttw,artist,userInfo){});
+                ttw.nextPage(new BookingPage(ttw,artist){});
             }
         }); 
            
