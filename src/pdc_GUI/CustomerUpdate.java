@@ -13,13 +13,19 @@ import java.util.Date;
 public class CustomerUpdate {
     
     //variables for customer login table 
-    public String userid; 
+    public int userid; 
     boolean loginFlag = false;
     
     //variables for booking records table
-    public int ticketid; 
-    public String artist; 
-    public Date event_date; 
+    public int booking_id; 
+    public String fName; 
+    public String lName;
+    public String artist;
+    public String ticket_type; 
+    public int number_of_tickets; 
+    public double total_cost; 
+    public Date booking_date; 
     public String status; 
-    public double refund_amount;     
+    public double refund_amount;    
+    public Date refund_date; 
 }

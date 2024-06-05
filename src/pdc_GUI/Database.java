@@ -37,11 +37,29 @@ public final class Database {
             String BookingRecords = "Booking_Records"; 
                         
             if (!checkTableExisting(customerLoginTable)) {
-                statement.executeUpdate("CREATE TABLE " + customerLoginTable + " (userid VARCHAR(12) PRIMARY KEY, username VARCHAR(30), password VARCHAR(30))");
+                statement.executeUpdate("CREATE TABLE " + customerLoginTable + 
+                        " (userid INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
+                                + "username VARCHAR(30) NOT NULL, "
+                                + "password VARCHAR(30) NOT NULL , "
+                                + "email VARCHAR(100) UNIQUE NOT NULL, "
+                                + "phone_number VARCHAR(15))");
             }
 
             if (!checkTableExisting(BookingRecords)) {
-                statement.executeUpdate("CREATE TABLE " + BookingRecords + " (booking_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, userid VARCHAR(12), first_name VARCHAR(50), last_name VARCHAR(50), artist VARCHAR(100), ticket_type VARCHAR(50), number_of_tickets INT, total_cost DECIMAL(10, 2), booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, status VARCHAR(20) DEFAULT 'Booked', refund_amount DECIMAL(10, 2), refund_date TIMESTAMP)");
+                statement.executeUpdate("CREATE TABLE " + BookingRecords + 
+                        " (booking_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
+                                + "userid INT, "
+                                + "first_name VARCHAR(50), "
+                                + "last_name VARCHAR(50), "
+                                + "artist VARCHAR(50), "
+                                + "ticket_type VARCHAR(50), "
+                                + "number_of_tickets INT, "
+                                + "total_cost DECIMAL(10, 2), "
+                                + "booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                                + "status VARCHAR(20) DEFAULT 'Booked', "
+                                + "refund_amount DECIMAL(10, 2), "
+                                + "refund_date TIMESTAMP, "
+                                + "FOREIGN KEY (userid) REFERENCES Customer_Login(userid))");
             }
 
             statement.close(); 
@@ -88,7 +106,7 @@ public final class Database {
                 System.out.println("***" + pass);
                 System.out.println("found user");
                 if (password.compareTo(pass) == 0) {
-                    info.userid = rs.getString("userid"); 
+                    info.userid = rs.getInt("userid"); 
                     info.loginFlag = true; 
                 } else {
                     info.loginFlag = false; 
@@ -102,26 +120,19 @@ public final class Database {
         return info; // Return the Data object
     }
     
-    public CustomerUpdate createAccount(String username, String password){
+    public CustomerUpdate createAccount(String username, String password, String email, String phoneNumber){
         CustomerUpdate info = new CustomerUpdate(); 
         try {
             Statement statement = conn.createStatement(); 
             System.out.println("Creating account ");
-            
-            String userid = randomCode(); 
-            
-            statement.executeUpdate("INSERT INTO Customer_Login (userid, username, password) " + "VALUES('" + userid + "', '" + username + "', '" + password + "')"); 
+                        
+            statement.executeUpdate("INSERT INTO Customer_Login (username, password, email, phone_number) VALUES('" 
+                    + username + "', '" + password + "', '" + email + "', '" + phoneNumber + "')"); 
             info.loginFlag = true; 
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
         return info; 
-    }
-    
-    private String randomCode() {
-        Random rand = new Random(); 
-        int randNum = rand.nextInt(900000) + 100000;
-        return String.valueOf(randNum); 
     }
 
     /*public static void main(String[] args) {
@@ -133,9 +144,19 @@ public final class Database {
         return this.conn;
     }*/
     
-    public void insertInfo(String fName, String lName, String email, String phoneNum){
-        //Statement statement = conn.createStatement(); 
-        
+    public void insertInfo(int userid, String fName, String lName, String artist, String ticketType, int numOfTickets, double totalCost){
+        CustomerUpdate info = new CustomerUpdate(); 
+        try {
+            Statement statement = conn.createStatement(); 
+            System.out.println("inserting info ");
+                        
+            statement.executeUpdate("INSERT INTO Booking_Records (userid, first_name, last_name, artist, ticket_type, number_of_tickets, total_cost) VALUES(" 
+                    + userid + ", '" + fName + "', '" + lName + "', '" + artist + "', '" + ticketType + "', " + numOfTickets + ", " + totalCost + ")"); 
+            info.loginFlag = true; 
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+        //return info; 
     }
     
     public void printCustomerLoginTable() {
@@ -144,10 +165,12 @@ public final class Database {
             ResultSet rs = statement.executeQuery("SELECT * FROM Customer_Login");
 
             while (rs.next()) {
-                String userid = rs.getString("userid");
+                int userid = rs.getInt("userid");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                System.out.println("userid: " + userid + ", username: " + username + ", password: " + password);
+                String email = rs.getString("email"); 
+                String phoneNumber = rs.getString("phone_number"); 
+                System.out.println("userid: " + userid + ", username: " + username + ", password: " + password + ", email: " + email + ", phone number: " + phoneNumber);
             }
 
             rs.close();
@@ -156,6 +179,48 @@ public final class Database {
             e.printStackTrace();
         }
     }
+    
+    public void printBookingRecordsTable() {
+    try {
+        Statement statement = conn.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM Booking_Records");
+
+        while (rs.next()) {
+            int bookingId = rs.getInt("booking_id");
+            int userId = rs.getInt("userid");
+            String firstName = rs.getString("first_name");
+            String lastName = rs.getString("last_name");
+            String artist = rs.getString("artist");
+            String ticketType = rs.getString("ticket_type");
+            int numberOfTickets = rs.getInt("number_of_tickets");
+            double totalCost = rs.getDouble("total_cost");
+            String bookingDate = rs.getString("booking_date");
+            String status = rs.getString("status");
+            double refundAmount = rs.getDouble("refund_amount");
+            String refundDate = rs.getString("refund_date");
+
+            System.out.println("Booking ID: " + bookingId + ", User ID: " + userId + ", First Name: " + firstName +
+                    ", Last Name: " + lastName + ", Artist: " + artist + ", Ticket Type: " + ticketType +
+                    ", Number of Tickets: " + numberOfTickets + ", Total Cost: " + totalCost +
+                    ", Booking Date: " + bookingDate + ", Status: " + status + ", Refund Amount: " + refundAmount +
+                    ", Refund Date: " + refundDate);
+        }
+
+        rs.close();
+        statement.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+    /*public static void main(String[] args) {
+    Database dbManager = new Database();
+    dbManager.printCustomerLoginTable();
+    dbManager.printBookingRecordsTable();
+    dbManager.closeConnections(); // Close connections after use
+}*/
+
+    
 
     //Establishing connection
     public void establishConnection() {

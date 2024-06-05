@@ -34,7 +34,7 @@ public class Buttons {
     }
     
     //ticketButton for artist panel
-    public static JButton bookingStage(TempoTicketsWebsite ttw, JPanel buttonPanel, Artist artist){
+    public static JButton bookingStage(TempoTicketsWebsite ttw, JPanel buttonPanel, Artist artist, CustomerUpdate userInfo){
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
     
         buttonPanel.add(Box.createVerticalStrut(30));
@@ -48,7 +48,7 @@ public class Buttons {
         ticketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new LoginPage(ttw, artist) {}); 
+                ttw.nextPage(new LoginPage(ttw, artist,userInfo) {}); 
             }
         }); 
         return ticketButton;    

@@ -25,10 +25,12 @@ public class BookingPage extends JPanel implements BookingPageInterface{
 
     protected final TempoTicketsWebsite ttw;
     public Artist aInfo; 
+    public CustomerUpdate userInfo; 
 
-    public BookingPage(TempoTicketsWebsite ttw, Artist aInfo) {
+    public BookingPage(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) {
         this.ttw = ttw;
         this.aInfo = aInfo; 
+        this.userInfo = userInfo; 
         detailsPage();
     }
 
@@ -75,55 +77,37 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         
         //Asking for first name 
         JLabel fName = new JLabel("First Name:");
-        fName.setBounds(50, 20, 200, 25); 
+        fName.setBounds(50, 40, 200, 25); 
         userInputPanel.add(fName); 
         //Enter first name 
         JTextField fNameText = new JTextField(20);
-        fNameText.setBounds(300, 20, 200, 25); 
+        fNameText.setBounds(300, 40, 200, 25); 
         userInputPanel.add(fNameText);
         
         //Asking for last name 
         JLabel lName = new JLabel("Last Name:");
-        lName.setBounds(50, 50, 200, 25); 
+        lName.setBounds(50, 80, 200, 25); 
         userInputPanel.add(lName); 
         //Enter last name 
         JTextField lNameText = new JTextField(20);
-        lNameText.setBounds(300, 50, 200, 25); 
+        lNameText.setBounds(300, 80, 200, 25); 
         userInputPanel.add(lNameText);
-        
-        //Asking for email
-        JLabel email = new JLabel("Email:");
-        email.setBounds(50, 80, 200, 25); 
-        userInputPanel.add(email); 
-        //Enter email 
-        JTextField emailText = new JTextField(20);
-        emailText.setBounds(300, 80, 200, 25); 
-        userInputPanel.add(emailText);
-        
-        //Asking for phone number
-        JLabel phoneNum = new JLabel("Phone number:");
-        phoneNum.setBounds(50, 110, 200, 25); 
-        userInputPanel.add(phoneNum); 
-        //Enter email 
-        JTextField phoneNumText = new JTextField(20);
-        phoneNumText.setBounds(300, 110, 200, 25); 
-        userInputPanel.add(phoneNumText);
         
         //userInputPanel.add(comboBoxOptions(), BorderLayout.NORTH);
         JLabel ticketTypeLabel = new JLabel("Select your ticket type: ");
-        ticketTypeLabel.setBounds(50, 140, 200, 25); 
+        ticketTypeLabel.setBounds(50, 120, 200, 25); 
         userInputPanel.add(ticketTypeLabel); 
         
         JComboBox ticketType = new JComboBox();
         ticketType.addItem("Standard Ticket");
         ticketType.addItem("Wheelchair Access Ticket ");
-        ticketType.setBounds(300, 140, 200, 25); 
+        ticketType.setBounds(300, 120, 200, 25); 
         userInputPanel.add(ticketType); 
         
         //userInputPanel.add(Box.createVerticalStrut(40)); 
         
         JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
-        numberOfTicketsLabel.setBounds(50, 170, 250, 25); 
+        numberOfTicketsLabel.setBounds(50, 160, 250, 25); 
         userInputPanel.add(numberOfTicketsLabel); 
         
         JComboBox numberOfTickets = new JComboBox();
@@ -133,7 +117,7 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         numberOfTickets.addItem(4);
         numberOfTickets.addItem(5);
         numberOfTickets.addItem(6);
-        numberOfTickets.setBounds(300, 170, 200, 25); 
+        numberOfTickets.setBounds(300, 160, 200, 25); 
         userInputPanel.add(numberOfTickets);
 
         JButton confirm = new JButton("Click here to confirm details"); 
@@ -188,12 +172,15 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         proceedToPayment.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fName = fNameText.getText(); 
-                String lName = lNameText.getText(); 
-                String email = emailText.getText(); 
-                String phoneNum = phoneNumText.getText(); 
                 
-                ttw.db.insertInfo(fName, lName, email, phoneNum);                 
+                int userid = userInfo.userid; 
+                String fName = fNameText.getText(); 
+                String lName = lNameText.getText();
+                String artist = aInfo.getArtistName(); 
+                String ticketTypeRecorded = ticketType.getSelectedItem().toString(); 
+                int intNumberOfTicketsRecorded = Integer.parseInt(numberOfTickets.getSelectedItem().toString()); 
+                double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsRecorded; 
+                ttw.db.insertInfo(userid, fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);
             }
             
         }); 

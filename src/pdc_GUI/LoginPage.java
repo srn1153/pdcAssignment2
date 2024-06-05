@@ -24,10 +24,12 @@ import javax.swing.JTextField;
 public class LoginPage extends JPanel{
     private TempoTicketsWebsite ttw; 
     private Artist artist; 
+    CustomerUpdate userInfo; 
     
-    public LoginPage(TempoTicketsWebsite ttw, Artist artist){
+    public LoginPage(TempoTicketsWebsite ttw, Artist artist, CustomerUpdate userInfo){
         this.ttw = ttw; 
         this.artist = artist; 
+        this.userInfo = userInfo; 
         LoginPanel(); 
     }
     
@@ -90,12 +92,26 @@ public class LoginPage extends JPanel{
         
         //creating empty label to display message later
         JLabel registerText = new JLabel(""); 
-        registerText.setBounds(10, 140, 300, 25); 
+        registerText.setBounds(10, 140, 500, 25); 
         loginPanel.add(registerText); 
+        
+        //email text 
+        JLabel email = new JLabel("Email:"); 
+        email.setBounds(10, 170, 80, 25); 
+        //username text field 
+        JTextField emailText = new JTextField(50);
+        emailText.setBounds(150, 170, 200, 25); 
+        
+        //phone number text 
+        JLabel phoneNo = new JLabel("Phone number:"); 
+        phoneNo.setBounds(10, 200, 100, 25); 
+        //phone number text field 
+        JTextField phoneNoText = new JTextField(50);
+        phoneNoText.setBounds(150, 200, 200, 25); 
         
         //creating register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
-        registerButton.setBounds(10, 170, 100, 25); 
+        registerButton.setBounds(10, 230, 100, 25); 
 
         signButton.addActionListener(new ActionListener() {
             @Override
@@ -108,10 +124,16 @@ public class LoginPage extends JPanel{
              
                 if(info.loginFlag) {//if username and password match
                     noSuchUser.setText("Login successful!"); 
-                    ttw.nextPage(new BookingPage(ttw, artist) {}); 
+                    ttw.nextPage(new BookingPage(ttw, artist, userInfo) {}); 
                 } else{ //if username and password do not match, display messages and register button
                     noSuchUser.setText("Your username or password was incorrect"); 
-                    registerText.setText("Sign up by clicking button below!"); 
+                    registerText.setText("Sign up by filling in details below and clicking the 'Register' button!"); 
+                    
+                    loginPanel.add(email); 
+                    loginPanel.add(emailText);
+                    loginPanel.add(phoneNo); 
+                    loginPanel.add(phoneNoText);
+                    
                     loginPanel.add(registerButton); 
                     loginPanel.revalidate(); 
                     loginPanel.repaint(); 
@@ -123,13 +145,15 @@ public class LoginPage extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String user = userText.getText(); 
-                String pass = passText.getText(); 
+                String pass = passText.getText();
+                String email = emailText.getText();  
+                String phoneNumber = phoneNoText.getText();  
                 
                 Database db = new Database(); 
-                db.createAccount(user, pass); 
+                db.createAccount(user, pass, email, phoneNumber); 
                 System.out.println("Account created");
                 db.printCustomerLoginTable();
-                ttw.nextPage(new BookingPage(ttw,artist){});
+                ttw.nextPage(new BookingPage(ttw,artist,userInfo){});
             }
         }); 
            
