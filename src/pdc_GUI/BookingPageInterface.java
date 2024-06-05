@@ -13,9 +13,7 @@ import javax.swing.JPanel;
 interface BookingPageInterface {
     
     JPanel getContent(); 
-    
-    JPanel comboBoxOptions(); 
-    
+        
     void detailsPage(); 
     
 }
