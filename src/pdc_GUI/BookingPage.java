@@ -134,7 +134,7 @@ public class BookingPage extends JPanel implements PanelInterface{
         userInputPanel.add(artist); 
         
         JLabel ticketTypeChosen = new JLabel(""); 
-        ticketTypeChosen.setBounds(50, 300, 200, 25);
+        ticketTypeChosen.setBounds(50, 300, 400, 25);
         userInputPanel.add(ticketTypeChosen); 
         
         JLabel numOfTickets = new JLabel(""); 
@@ -180,6 +180,8 @@ public class BookingPage extends JPanel implements PanelInterface{
                 } else { 
                     System.out.println("user id is null girl");
                 }
+                
+                ttw.nextPage(new PaymentPanel(ttw,aInfo, userInfo){});
                 
                 String fName = fNameText.getText(); 
                 String lName = lNameText.getText();
