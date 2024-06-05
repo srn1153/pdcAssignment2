@@ -21,7 +21,7 @@ import javax.swing.JTextField;
  *
  * @author nikis
  */
-public class BookingPage extends JPanel implements BookingPageInterface{
+public class BookingPage extends JPanel implements PanelInterface{
 
     protected final TempoTicketsWebsite ttw;
     public Artist aInfo; 
@@ -32,14 +32,14 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         this.aInfo = aInfo;
         this.userInfo = userInfo;
         System.out.println("User id is: " + userInfo.getUserid());
-        detailsPage();
+        panelDisplay();
     }
 
     public JPanel getContent() {
         return this;
     }
 
-    public void detailsPage() {
+    public void panelDisplay() {
 
         setLayout(new BorderLayout()); 
         

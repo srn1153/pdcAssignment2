@@ -21,7 +21,7 @@ import javax.swing.JTextField;
  *
  * @author nikis
  */
-public class LoginPage extends JPanel{
+public class LoginPage extends JPanel implements PanelInterface{
     private TempoTicketsWebsite ttw; 
     public Artist artist;
     public CustomerUpdate userInfo; 
@@ -30,10 +30,14 @@ public class LoginPage extends JPanel{
         this.ttw = ttw; 
         this.artist = artist; 
         this.userInfo = userInfo; 
-        LoginPanel(); 
+        panelDisplay(); 
     }
     
-    public void LoginPanel() {
+    public JPanel getContent() {
+        return this; 
+    }
+    
+    public void panelDisplay() {
         setLayout(new BorderLayout()); 
         
         //creating panel 

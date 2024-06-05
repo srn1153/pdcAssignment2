@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  * @author nikis
  */
 
-public class HomepagePanel extends JPanel {
+public class HomepagePanel extends JPanel implements PanelInterface{
     private TempoTicketsWebsite ttw; 
     public CustomerUpdate userInfo; 
 
@@ -30,10 +30,14 @@ public class HomepagePanel extends JPanel {
         this.ttw = ttw; 
         this.userInfo = userInfo; 
         System.out.println("HomePanel user ID: " + userInfo.getUserid());
-        HomePage(); 
+        panelDisplay(); 
     }
     
-    public void HomePage() {
+    public JPanel getContent(){
+        return this; 
+    }
+    
+    public void panelDisplay() {
         setLayout(new BorderLayout()); 
         
         //Homepage Panel 
