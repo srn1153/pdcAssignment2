@@ -9,8 +9,10 @@ package pdc_GUI;
  * @author nikis
  */
 public class TheTerrys extends ArtistPanel {
+    
+    public CustomerUpdate userInfo; 
 
-    public TheTerrys(TempoTicketsWebsite ttw){
-        super(ttw, new Artist("The Terrys","Metal", "The Power Station", "27th August 2024", "7pm-12am", 59.99)); 
+    public TheTerrys(TempoTicketsWebsite ttw, CustomerUpdate userInfo){
+        super(ttw, new Artist("The Terrys","Metal", "The Power Station", "27th August 2024", "7pm-12am", 59.99), userInfo); 
     }
 }

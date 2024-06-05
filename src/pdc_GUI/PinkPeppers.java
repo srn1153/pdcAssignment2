@@ -8,9 +8,11 @@ package pdc_GUI;
  *
  * @author nikis
  */
-public class PinkPeppers extends ArtistPanel {    
+public class PinkPeppers extends ArtistPanel {  
     
-    public PinkPeppers(TempoTicketsWebsite ttw){
-        super(ttw, new Artist("Pink Peppers", "Kids Musical", "Town Hall", "7th September 2024", "4pm-7pm", 12.0)); 
+    public CustomerUpdate userInfo; 
+    
+    public PinkPeppers(TempoTicketsWebsite ttw, CustomerUpdate userInfo){
+        super(ttw, new Artist("Pink Peppers", "Kids Musical", "Town Hall", "7th September 2024", "4pm-7pm", 12.0), userInfo); 
     }
 }

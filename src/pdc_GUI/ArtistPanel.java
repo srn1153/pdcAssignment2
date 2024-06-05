@@ -19,12 +19,14 @@ import javax.swing.JPanel;
  */
 class ArtistPanel extends BookingPage{
     private final TempoTicketsWebsite ttw; 
-    private final Artist artist; 
+    private final Artist artist;
+    public CustomerUpdate userInfo; 
     
-    public ArtistPanel(TempoTicketsWebsite ttw, Artist artist){
-        super(ttw, artist); 
+    public ArtistPanel(TempoTicketsWebsite ttw, Artist artist,CustomerUpdate userInfo){
+        super(ttw, artist, userInfo); 
         this.ttw = ttw; 
         this.artist = artist; 
+        this.userInfo = userInfo; 
         artistInitialScreen(artist); 
     }
 

@@ -23,11 +23,13 @@ import javax.swing.JTextField;
  */
 public class LoginPage extends JPanel{
     private TempoTicketsWebsite ttw; 
-    private Artist artist; 
+    public Artist artist;
+    public CustomerUpdate userInfo; 
     
-    public LoginPage(TempoTicketsWebsite ttw, Artist artist){
+    public LoginPage(TempoTicketsWebsite ttw, Artist artist, CustomerUpdate userInfo){
         this.ttw = ttw; 
         this.artist = artist; 
+        this.userInfo = userInfo; 
         LoginPanel(); 
     }
     
@@ -110,19 +112,18 @@ public class LoginPage extends JPanel{
         //creating register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(10, 230, 100, 25); 
-
+        
         signButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String user = userText.getText(); 
                 String pass = passText.getText(); 
                 
-                Database db = new Database(); 
-                CustomerUpdate info = db.checkName(user, pass); 
+                userInfo = ttw.db.checkName(user, pass); 
              
-                if(info.isLoginFlag()) {//if username and password match
+                if(userInfo.isLoginFlag()) {//if username and password match
                     noSuchUser.setText("Login successful!"); 
-                    ttw.nextPage(new BookingPage(ttw, artist) {}); 
+                    ttw.nextPage(new BookingPage(ttw, artist, userInfo) {}); 
                 } else{ //if username and password do not match, display messages and register button
                     noSuchUser.setText("Your username or password was incorrect"); 
                     registerText.setText("Sign up by filling in details below and clicking the 'Register' button!"); 
@@ -147,11 +148,11 @@ public class LoginPage extends JPanel{
                 String email = emailText.getText();  
                 String phoneNumber = phoneNoText.getText();  
                 
-                Database db = new Database(); 
-                db.createAccount(user, pass, email, phoneNumber); 
+                ttw.db.createAccount(user, pass, email, phoneNumber); 
+                
                 System.out.println("Account created");
-                db.printCustomerLoginTable();
-                ttw.nextPage(new BookingPage(ttw,artist){});
+                ttw.db.printCustomerLoginTable();
+                ttw.nextPage(new BookingPage(ttw,artist, userInfo){});
             }
         }); 
            

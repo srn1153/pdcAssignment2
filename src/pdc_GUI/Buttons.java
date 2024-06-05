@@ -18,15 +18,14 @@ import javax.swing.JPanel;
  *
  * @author nikis
  */
-public class Buttons {
-        
+public class Buttons {        
     //homePage button for every stage
     public static JButton homePageButton(TempoTicketsWebsite ttw) {
         JButton homeButton = new JButton("<--- back to HomePage"); 
         homeButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new HomepagePanel(ttw));
+                ttw.nextPage(new HomepagePanel(ttw, ttw.userInfo));
             }
         }
         );
@@ -48,7 +47,8 @@ public class Buttons {
         ticketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new LoginPage(ttw, artist) {}); 
+                CustomerUpdate cu = ttw.userInfo;  
+                ttw.nextPage(new LoginPage(ttw, artist, cu) {}); 
             }
         }); 
         return ticketButton;    

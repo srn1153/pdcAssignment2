@@ -106,18 +106,23 @@ public final class Database {
                 System.out.println("***" + pass);
                 System.out.println("found user");
                 if (password.compareTo(pass) == 0) {
-                    info.setUserid(rs.getInt("userid")); //does this line set the Userid to what ever number the table is showing with that account?
+                    int userId = rs.getInt("userid"); 
+                    info.setUserid(userId);
+                    System.out.println("User id set to: " + userId);
                     info.setLoginFlag(true); 
                 } else {
                     info.setLoginFlag(false); 
                 }
-            } 
-            statement.close(); // Close the statement after use
-            rs.close();// Close the result set after use
+            } else {
+                System.out.println("User not found ... ");
+            }
+            statement.close();
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return info; // Return the Data object
+        System.out.println("User id is: " + info.getUserid());
+        return info;
     }
     
     public CustomerUpdate createAccount(String username, String password, String email, String phoneNumber){
@@ -128,7 +133,19 @@ public final class Database {
                         
             statement.executeUpdate("INSERT INTO Customer_Login (username, password, email, phone_number) VALUES('" 
                     + username + "', '" + password + "', '" + email + "', '" + phoneNumber + "')"); 
+            
+            ResultSet rs = statement.executeQuery("SELECT userid FROM Customer_Login WHERE username = '" + username + "'"); 
+            
+            if(rs.next()) {
+                int userId = rs.getInt("userid"); 
+                info.setUserid(userId);
+                System.out.println("New user ID: " + userId);
+            } else {
+                System.out.println("No user ID found :( ");
+            }
             info.setLoginFlag(true); 
+            statement.close(); 
+            rs.close(); 
         } catch (SQLException e) {
             e.printStackTrace(); 
         }

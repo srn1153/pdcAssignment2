@@ -23,10 +23,13 @@ import javax.swing.JPanel;
 
 public class HomepagePanel extends JPanel {
     private TempoTicketsWebsite ttw; 
+    public CustomerUpdate userInfo; 
 
     
-    public HomepagePanel(TempoTicketsWebsite ttw){
+    public HomepagePanel(TempoTicketsWebsite ttw, CustomerUpdate userInfo){
         this.ttw = ttw; 
+        this.userInfo = userInfo; 
+        System.out.println("HomePanel user ID: " + userInfo.getUserid());
         HomePage(); 
     }
     
@@ -75,28 +78,28 @@ public class HomepagePanel extends JPanel {
         artist1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new TheTerrys(ttw).getContent());
+                ttw.nextPage(new TheTerrys(ttw, userInfo).getContent());
             }
         });
         
         artist2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new SoulBossaDuo(ttw).getContent());
+                ttw.nextPage(new SoulBossaDuo(ttw, userInfo).getContent());
             }
         });
         
         artist3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new Dylan(ttw).getContent());
+                ttw.nextPage(new Dylan(ttw, userInfo).getContent());
             }
         });
         
         artist4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new PinkPeppers(ttw).getContent());
+                ttw.nextPage(new PinkPeppers(ttw, userInfo).getContent());
             }
         });
         

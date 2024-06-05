@@ -15,16 +15,18 @@ import javax.swing.SwingUtilities;
 public class TempoTicketsWebsite extends JFrame {
     private JPanel currPanel; 
     Database db; 
+    CustomerUpdate userInfo; 
     
-    public TempoTicketsWebsite() {
+    public TempoTicketsWebsite(CustomerUpdate userInfo) {
         setTitle("Tempo Tickets Website!"); 
         setSize(600, 600); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocationRelativeTo(null); 
         
-        db = new Database(); 
+        db = new Database();
+        this.userInfo = userInfo; 
  
-        HomepagePanel hpp = new HomepagePanel(TempoTicketsWebsite.this);
+        HomepagePanel hpp = new HomepagePanel(this, this.userInfo);
         this.nextPage(hpp);
         add(hpp); 
 
@@ -44,7 +46,7 @@ public class TempoTicketsWebsite extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TempoTicketsWebsite(); 
+                new TempoTicketsWebsite(new CustomerUpdate()); 
             }
             
         }); 
