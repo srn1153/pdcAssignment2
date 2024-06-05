@@ -22,7 +22,7 @@ class ArtistPanel extends BookingPage{
     private final Artist artist; 
     
     public ArtistPanel(TempoTicketsWebsite ttw, Artist artist){
-        super(ttw); 
+        super(ttw, artist); 
         this.ttw = ttw; 
         this.artist = artist; 
         artistInitialScreen(artist); 
@@ -119,7 +119,7 @@ class ArtistPanel extends BookingPage{
         //adding in ticket button 
         JPanel bookingPanel = new JPanel();
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
-        JButton bookingButton = Buttons.bookingStage(ttw, bookingPanel); 
+        JButton bookingButton = Buttons.bookingStage(ttw, bookingPanel, artist); 
         bookingPanel.add(bookingButton); 
         artistPanel.add(bookingPanel);
     

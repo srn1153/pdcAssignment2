@@ -133,6 +133,11 @@ public final class Database {
         return this.conn;
     }*/
     
+    public void insertInfo(String fName, String lName, String email, String phoneNum){
+        //Statement statement = conn.createStatement(); 
+        
+    }
+    
     public void printCustomerLoginTable() {
         try {
             Statement statement = conn.createStatement();

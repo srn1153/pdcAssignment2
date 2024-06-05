@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
  */
 public class TempoTicketsWebsite extends JFrame {
     private JPanel currPanel; 
-    private Database db; 
+    Database db; 
     
     public TempoTicketsWebsite() {
         setTitle("Tempo Tickets Website!"); 

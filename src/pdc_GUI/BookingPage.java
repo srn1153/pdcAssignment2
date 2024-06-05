@@ -25,9 +25,11 @@ import javax.swing.JTextField;
 public class BookingPage extends JPanel implements BookingPageInterface{
 
     protected final TempoTicketsWebsite ttw;
+    public Artist aInfo; 
 
-    public BookingPage(TempoTicketsWebsite ttw) {
+    public BookingPage(TempoTicketsWebsite ttw, Artist aInfo) {
         this.ttw = ttw;
+        this.aInfo = aInfo; 
         detailsPage();
     }
 
@@ -161,21 +163,44 @@ public class BookingPage extends JPanel implements BookingPageInterface{
         totalCost.setBounds(10, 310, 200, 25);
         userInputPanel.add(totalCost); 
         
+        JButton proceedToPayment = new JButton("Proceed to payment -->"); 
+        proceedToPayment.setBounds(10, 350, 200, 25); 
+        //userInputPanel.add(proceedToPayment);
+        
+        
+        
         
         
         confirm.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                                
                 recap.setText("Confirmation details listed below:");
                 //print artist they are buying for 
-                artist.setText("something");
+                artist.setText(aInfo.getArtistName());
                 //print tickettype
                 ticketType.setText("something");
                 //print numberOfTickets selected 
                 numOfTickets.setText("something");
                 //print total cost based on artist 
                 totalCost.setText("something"); 
+                userInputPanel.add(proceedToPayment);
+                revalidate(); 
+                repaint(); 
             }
+        }); 
+        
+        proceedToPayment.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String fName = fNameText.getText(); 
+                String lName = lNameText.getText(); 
+                String email = emailText.getText(); 
+                String phoneNum = phoneNumText.getText(); 
+                
+                ttw.db.insertInfo(fName, lName, email, phoneNum);                 
+            }
+            
         }); 
         
         add(userInputPanel, BorderLayout.CENTER);
