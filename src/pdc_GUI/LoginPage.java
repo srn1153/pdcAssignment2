@@ -98,34 +98,38 @@ public class LoginPage extends JPanel implements PanelInterface{
         
         //creating empty label to display messgae later 
         JLabel noSuchUser = new JLabel(""); 
-        noSuchUser.setBounds(10, 110, 300, 25); 
+        noSuchUser.setBounds(10, 110, 500, 25); 
         loginPanel.add(noSuchUser); 
         
         //creating empty label to display message later
+        JLabel or = new JLabel("OR"); 
+        or.setBounds(10, 140, 500, 25); 
+        
+        //creating empty label to display message later
         JLabel registerText = new JLabel(""); 
-        registerText.setBounds(10, 140, 500, 25); 
+        registerText.setBounds(10, 170, 500, 25); 
         loginPanel.add(registerText); 
         
         //email text 
         JLabel email = new JLabel("Email:"); 
-        email.setBounds(10, 170, 80, 25); 
+        email.setBounds(10, 200, 80, 25); 
         //username text field 
         emailText = new JTextField(50);
-        emailText.setBounds(150, 170, 200, 25); 
+        emailText.setBounds(150, 200, 200, 25); 
         
         //phone number text 
         JLabel phoneNo = new JLabel("Phone number:"); 
-        phoneNo.setBounds(10, 200, 100, 25); 
+        phoneNo.setBounds(10, 230, 100, 25); 
         //phone number text field 
         phoneNoText = new JTextField(50);
-        phoneNoText.setBounds(150, 200, 200, 25); 
+        phoneNoText.setBounds(150, 230, 200, 25); 
         
         //creating register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
-        registerButton.setBounds(10, 230, 100, 25); 
+        registerButton.setBounds(10, 260, 100, 25); 
         
         correctUserInput = new JLabel(""); 
-        correctUserInput.setBounds(10, 260, 500, 25); 
+        correctUserInput.setBounds(10, 290, 500, 25); 
         loginPanel.add(correctUserInput); 
               
         signButton.addActionListener(new ActionListener() {
@@ -140,7 +144,8 @@ public class LoginPage extends JPanel implements PanelInterface{
                     noSuchUser.setText("Login successful!"); 
                     ttw.nextPage(new BookingPage(ttw, artist, userInfo) {}); 
                 } else{ //if username and password do not match, display messages and register button
-                    noSuchUser.setText("Your username or password was incorrect"); 
+                    noSuchUser.setText("Your username or password was incorrect, please re-enter"); 
+                    loginPanel.add(or); 
                     registerText.setText("Sign up by filling in details below and clicking the 'Register' button!"); 
                     
                     loginPanel.add(email); 
