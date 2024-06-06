@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -24,7 +26,12 @@ import javax.swing.JTextField;
 public class LoginPage extends JPanel implements PanelInterface{
     private TempoTicketsWebsite ttw; 
     public Artist artist;
-    public CustomerUpdate userInfo; 
+    public CustomerUpdate userInfo;
+    private JTextField userText; 
+    private JTextField passText; 
+    private JLabel correctUserInput; 
+    private JTextField emailText; 
+    private JTextField phoneNoText; 
     
     public LoginPage(TempoTicketsWebsite ttw, Artist artist, CustomerUpdate userInfo){
         this.ttw = ttw; 
@@ -71,7 +78,7 @@ public class LoginPage extends JPanel implements PanelInterface{
         user.setBounds(10, 20, 80, 25); 
         loginPanel.add(user); 
         //username text field 
-        JTextField userText = new JTextField(20);
+        userText = new JTextField(20);
         userText.setBounds(100, 20, 165, 25); 
         loginPanel.add(userText);
 
@@ -80,7 +87,7 @@ public class LoginPage extends JPanel implements PanelInterface{
         pass.setBounds(10, 50, 80, 25); 
         loginPanel.add(pass); 
         //password field 
-        JPasswordField passText = new JPasswordField(20); 
+        passText = new JPasswordField(20); 
         passText.setBounds(100, 50, 165, 25); 
         loginPanel.add(passText);
         
@@ -103,20 +110,24 @@ public class LoginPage extends JPanel implements PanelInterface{
         JLabel email = new JLabel("Email:"); 
         email.setBounds(10, 170, 80, 25); 
         //username text field 
-        JTextField emailText = new JTextField(50);
+        emailText = new JTextField(50);
         emailText.setBounds(150, 170, 200, 25); 
         
         //phone number text 
         JLabel phoneNo = new JLabel("Phone number:"); 
         phoneNo.setBounds(10, 200, 100, 25); 
         //phone number text field 
-        JTextField phoneNoText = new JTextField(50);
+        phoneNoText = new JTextField(50);
         phoneNoText.setBounds(150, 200, 200, 25); 
         
         //creating register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(10, 230, 100, 25); 
         
+        correctUserInput = new JLabel(""); 
+        correctUserInput.setBounds(10, 260, 500, 25); 
+        loginPanel.add(correctUserInput); 
+              
         signButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,21 +157,71 @@ public class LoginPage extends JPanel implements PanelInterface{
         
         registerButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                String user = userText.getText(); 
-                String pass = passText.getText();
-                String email = emailText.getText();  
-                String phoneNumber = phoneNoText.getText();  
+            public void actionPerformed(ActionEvent e) {                
+                if(checkLoginRequirements(true)){
+                    String user = userText.getText(); 
+                    String pass = passText.getText();
+                    String email = emailText.getText();  
+                    String phoneNumber = phoneNoText.getText();  
                 
-                ttw.db.createAccount(user, pass, email, phoneNumber); 
+                    ttw.db.createAccount(user, pass, email, phoneNumber); 
                 
-                System.out.println("Account created");
-                ttw.db.printCustomerLoginTable();
-                ttw.nextPage(new BookingPage(ttw,artist, userInfo){});
+                    System.out.println("Account created");
+                    ttw.db.printCustomerLoginTable();
+                    ttw.nextPage(new BookingPage(ttw,artist, userInfo){});  
+                }
             }
         }); 
-           
+ 
         panel.add(loginPanel,BorderLayout.SOUTH);
         add(panel, BorderLayout.CENTER); 
-    }        
+    }      
+    
+    public boolean checkLoginRequirements(boolean registeringAccount) {
+        String usernameInput = userText.getText().trim(); 
+        String passwordInput = passText.getText().trim(); 
+        String emailInput = emailText.getText().trim(); 
+        String phoneNoInput = phoneNoText.getText().trim(); 
+        
+        //checks that all JTextFields aren't left empty
+        if(usernameInput.isEmpty() || passwordInput.isEmpty() || emailInput.isEmpty() || phoneNoInput.isEmpty()){
+            correctUserInput.setText("Please dont leave any details empty"); 
+            return false; 
+        }
+        
+        //ensures that username and password is more than 8 characters
+        if(usernameInput.length() < 8 || passwordInput.length() < 8){
+            correctUserInput.setText("Ensure you have a minimum of 8 characters for your username and password"); 
+            return false; 
+        }
+        
+        //ensures that the email is valid with "@" sign
+        if (!emailInput.contains("@")){
+            correctUserInput.setText("Ensure email is valid"); 
+            return false; 
+        }
+        
+        //ensures the phone number is 8 or mroe digits 
+        if(phoneNoInput.length() < 8){
+            correctUserInput.setText("Ensure your phone number is 8 or more digits"); 
+            return false; 
+        }
+        
+        //ensures the phone number is 8 or mroe digits 
+        if(phoneNoInput.length() > 13){
+            correctUserInput.setText("Ensure your phone number is less than 13 digits"); 
+            return false; 
+        }
+        
+        
+        //checks that the phone number input can be parsed to an int, this way I know that the phone number is valid (not letters)
+        try {
+            Double.parseDouble(phoneNoInput); 
+        } catch (NumberFormatException ex){
+            correctUserInput.setText("Please enter digits for a valid phone number"); 
+            return false; 
+        }
+        correctUserInput.setText(""); 
+        return true; 
+    }
 }

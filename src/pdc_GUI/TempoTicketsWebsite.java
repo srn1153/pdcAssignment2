@@ -21,7 +21,7 @@ public class TempoTicketsWebsite extends JFrame {
         setTitle("Tempo Tickets Website!"); 
         setSize(600, 600); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
         
         db = new Database();
         this.userInfo = userInfo; 
