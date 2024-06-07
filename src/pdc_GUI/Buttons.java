@@ -20,12 +20,12 @@ import javax.swing.JPanel;
  */
 public class Buttons {        
     //homePage button for every stage
-    public static JButton homePageButton(TempoTicketsWebsite ttw) {
+    public static JButton homePageButton(TempoTicketsWebsite ttw, Artist aInfo) {
         JButton homeButton = new JButton("<--- back to HomePage"); 
         homeButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new HomepagePanel(ttw, ttw.userInfo));
+                ttw.nextPage(new HomepagePanel(ttw, ttw.userInfo, aInfo));
             }
         }
         );

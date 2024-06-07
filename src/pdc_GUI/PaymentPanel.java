@@ -56,7 +56,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         //adding in homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BorderLayout());
-        JButton homeButton = Buttons.homePageButton(ttw);
+        JButton homeButton = Buttons.homePageButton(ttw, aInfo);
         homeButtonPanel.add(homeButton, BorderLayout.WEST);
         titlePanel.add(homeButtonPanel);
 
@@ -131,7 +131,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         successful.setBounds(220, 260, 200, 25);
         paymentPanel.add(successful);
 
-        JButton goBackToHomePage = Buttons.homePageButton(ttw);
+        JButton goBackToHomePage = Buttons.homePageButton(ttw, aInfo);
         goBackToHomePage.setBounds(190, 300, 200, 25);
 
         JButton exitButton = new JButton("Exit the website");

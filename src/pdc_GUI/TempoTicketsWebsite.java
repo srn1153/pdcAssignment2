@@ -15,7 +15,8 @@ import javax.swing.SwingUtilities;
 public class TempoTicketsWebsite extends JFrame {
     private JPanel currPanel; 
     Database db; 
-    CustomerUpdate userInfo; 
+    CustomerUpdate userInfo;
+    Artist aInfo; 
     
     public TempoTicketsWebsite(CustomerUpdate userInfo) {
         setTitle("Tempo Tickets Website!"); 
@@ -26,7 +27,7 @@ public class TempoTicketsWebsite extends JFrame {
         db = new Database();
         this.userInfo = userInfo; 
  
-        HomepagePanel hpp = new HomepagePanel(this, this.userInfo);
+        HomepagePanel hpp = new HomepagePanel(this, this.userInfo, aInfo);
         this.nextPage(hpp);
         add(hpp); 
 

@@ -54,7 +54,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         //adding in homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BorderLayout());
-        JButton homeButton = Buttons.homePageButton(ttw);
+        JButton homeButton = Buttons.homePageButton(ttw, aInfo);
         homeButtonPanel.add(homeButton, BorderLayout.WEST);
         titlePanel.add(homeButtonPanel);
 

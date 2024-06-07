@@ -114,7 +114,7 @@ class ArtistPanel extends BookingPage{
         //adding in homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BoxLayout(homeButtonPanel, BoxLayout.Y_AXIS));
-        JButton homeButton = Buttons.homePageButton(ttw); 
+        JButton homeButton = Buttons.homePageButton(ttw, artist); 
         homeButtonPanel.add(homeButton); 
         add(homeButtonPanel, BorderLayout.NORTH); 
         

@@ -24,11 +24,13 @@ import javax.swing.JPanel;
 public class HomepagePanel extends JPanel implements PanelInterface{
     private TempoTicketsWebsite ttw; 
     public CustomerUpdate userInfo; 
+    public Artist aInfo; 
 
     
-    public HomepagePanel(TempoTicketsWebsite ttw, CustomerUpdate userInfo){
+    public HomepagePanel(TempoTicketsWebsite ttw, CustomerUpdate userInfo, Artist aInfo){
         this.ttw = ttw; 
-        this.userInfo = userInfo; 
+        this.userInfo = userInfo;
+        this.aInfo = aInfo; 
         System.out.println("HomePanel user ID: " + userInfo.getUserid());
         panelDisplay(); 
     }
@@ -67,6 +69,10 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         panel.add(Box.createVerticalStrut(10)); 
         panel.add(upcoming); 
         panel.add(clickArtist); 
+        
+        JButton login = new JButton("Login here!");
+        login.setBounds(483, 5, 100, 25);
+        add(login);
         
         add(panel, BorderLayout.NORTH); 
         
@@ -107,6 +113,14 @@ public class HomepagePanel extends JPanel implements PanelInterface{
             }
         });
         
+        login.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ttw.nextPage(new LoginPage(ttw, aInfo, userInfo) {}); 
+            }
+        
+        }); 
+
         options.add(artist1); 
         options.add(artist2); 
         options.add(artist3); 
