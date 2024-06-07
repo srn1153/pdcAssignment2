@@ -26,9 +26,11 @@ public class BookingPage extends JPanel implements PanelInterface {
     protected final TempoTicketsWebsite ttw;
     public Artist aInfo;
     public CustomerUpdate userInfo;
-    private JTextField fNameText;
-    private JTextField lNameText;
-    private JLabel inputMessage;
+    public JTextField fNameText;
+    public JTextField lNameText;
+    public JLabel inputMessage;
+    public JComboBox ticketType; 
+    public JComboBox numberOfTickets; 
 
     public BookingPage(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) {
         this.ttw = ttw;
@@ -102,7 +104,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         ticketTypeLabel.setBounds(50, 120, 200, 25);
         userInputPanel.add(ticketTypeLabel);
 
-        JComboBox ticketType = new JComboBox();
+        ticketType = new JComboBox();
         ticketType.addItem("Standard Ticket");
         ticketType.addItem("Wheelchair Access Ticket ");
         ticketType.setBounds(300, 120, 200, 25);
@@ -113,7 +115,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         numberOfTicketsLabel.setBounds(50, 160, 250, 25);
         userInputPanel.add(numberOfTicketsLabel);
 
-        JComboBox numberOfTickets = new JComboBox();
+        numberOfTickets = new JComboBox();
         numberOfTickets.addItem(1);
         numberOfTickets.addItem(2);
         numberOfTickets.addItem(3);
