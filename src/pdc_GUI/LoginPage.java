@@ -7,7 +7,6 @@ package pdc_GUI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,19 +19,19 @@ import javax.swing.JTextField;
  *
  * @author nikis
  */
-public class LoginPage extends JPanel implements PanelInterface{
+public abstract class LoginPage extends JPanel implements PanelInterface{
     private TempoTicketsWebsite ttw; 
-    public Artist artist;
+    public Artist aInfo;
     public CustomerUpdate userInfo;
-    private JTextField userText; 
-    private JTextField passText; 
-    private JLabel correctUserInput; 
-    private JTextField emailText; 
-    private JTextField phoneNoText; 
+    public JTextField userText; 
+    public JTextField passText; 
+    public JLabel correctUserInput; 
+    public JTextField emailText; 
+    public JTextField phoneNoText; 
     
-    public LoginPage(TempoTicketsWebsite ttw, Artist artist, CustomerUpdate userInfo){
+    public LoginPage(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo){
         this.ttw = ttw; 
-        this.artist = artist; 
+        this.aInfo = aInfo; 
         this.userInfo = userInfo; 
         panelDisplay(); 
     }
@@ -63,7 +62,7 @@ public class LoginPage extends JPanel implements PanelInterface{
         //adding in homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BoxLayout(homeButtonPanel, BoxLayout.Y_AXIS));
-        JButton homeButton = Buttons.homePageButton(ttw, artist); 
+        JButton homeButton = Buttons.homePageButton(ttw, aInfo); 
         homeButtonPanel.add(homeButton); 
         add(homeButtonPanel, BorderLayout.NORTH);  
         
@@ -128,59 +127,17 @@ public class LoginPage extends JPanel implements PanelInterface{
         correctUserInput = new JLabel(""); 
         correctUserInput.setBounds(90, 350, 500, 25); 
         loginPanel.add(correctUserInput); 
-              
-        signButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String user = userText.getText(); 
-                String pass = passText.getText(); 
-                
-                userInfo = ttw.db.checkName(user, pass); 
-             
-                if(userInfo.isLoginFlag()) {//if username and password match
-                    noSuchUser.setText("Login successful!"); 
-                    ttw.nextPage(new BookingPage(ttw, artist, userInfo) {}); 
-                } else{ //if username and password do not match, display messages and register button
-                    noSuchUser.setText("Your username or password was incorrect, please re-enter"); 
-                    loginPanel.add(or); 
-                    registerText.setText("Sign up by filling in details below and clicking the 'Register' button!"); 
-                    
-                    loginPanel.add(email); 
-                    loginPanel.add(emailText);
-                    loginPanel.add(phoneNo); 
-                    loginPanel.add(phoneNoText);
-                    
-                    loginPanel.add(registerButton); 
-                    loginPanel.revalidate(); 
-                    loginPanel.repaint(); 
-                }
-            }
-        }); 
         
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {                
-                if(checkDetailRequirements()){
-                    String user = userText.getText(); 
-                    String pass = passText.getText();
-                    String email = emailText.getText();  
-                    String phoneNumber = phoneNoText.getText();  
-                
-                    userInfo = ttw.db.createAccount(user, pass, email, phoneNumber); 
-
-                    if(userInfo.isLoginFlag()) {
-                        System.out.println("Account created");
-                        ttw.db.printCustomerLoginTable();
-                        ttw.nextPage(new BookingPage(ttw, artist, userInfo) {}); 
-                    }
-                }
-            }
-        }); 
+        signButton.addActionListener(signInButton(noSuchUser, loginPanel, registerText, or, email, phoneNo, registerButton)); 
+        registerButton.addActionListener(registerButton(signButton, noSuchUser, loginPanel, registerText, or, email, phoneNo, registerButton)); 
  
         panel.add(loginPanel,BorderLayout.SOUTH);
         add(panel, BorderLayout.CENTER); 
-    }      
+    }    
     
+    protected abstract ActionListener signInButton(JLabel noSuchUser, JPanel loginPanel, JLabel registerText, JLabel or, JLabel email, JLabel phoneNo, JButton registerButton); 
+    protected abstract ActionListener registerButton(JButton signButton, JLabel noSuchUser, JPanel loginPanel, JLabel registerText, JLabel or, JLabel email, JLabel phoneNo, JButton registerButton); 
+
     @Override
     public boolean checkDetailRequirements() {
         String usernameInput = userText.getText().trim(); 

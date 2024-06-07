@@ -116,7 +116,7 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         login.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                ttw.nextPage(new LoginPage(ttw, aInfo, userInfo) {}); 
+                ttw.nextPage(new LoginForAccountDetails(ttw, aInfo, userInfo) {}); 
             }
         
         }); 
