@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
 
 /**
  *
@@ -118,7 +117,7 @@ public final class Database {
             }
             statement.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (SQLException e) {  
             e.printStackTrace();
         }
         System.out.println("User id is: " + info.getUserid());
@@ -131,33 +130,31 @@ public final class Database {
             Statement statement = conn.createStatement(); 
             System.out.println("Creating account ");
                         
-            statement.executeUpdate("INSERT INTO Customer_Login (username, password, email, phone_number) VALUES('" 
+            int rowsInserted = statement.executeUpdate("INSERT INTO Customer_Login (username, password, email, phone_number) VALUES('" 
                     + username + "', '" + password + "', '" + email + "', '" + phoneNumber + "')"); 
             
-            ResultSet rs = statement.executeQuery("SELECT userid FROM Customer_Login WHERE username = '" + username + "'"); 
-            
-            if(rs.next()) {
-                int userId = rs.getInt("userid"); 
-                info.setUserid(userId);
-                System.out.println("New user ID: " + userId);
+            if(rowsInserted > 0){
+                ResultSet rs = statement.executeQuery("SELECT userid FROM Customer_Login WHERE username = '" + username + "'"); 
+                if(rs.next()) {
+                    int userId = rs.getInt("userid"); 
+                    info.setUserid(userId);
+                    System.out.println("New user ID: " + userId);
+                } else {
+                    System.out.println("No user ID found :( ");
+                }
+                rs.close(); 
             } else {
-                System.out.println("No user ID found :( ");
+                System.out.println("No rows inserted");
             }
             info.setLoginFlag(true); 
             statement.close(); 
-            rs.close(); 
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
         return info; 
     }
 
-    /*public static void main(String[] args) {
-        Database dbManager = new Database();
-        System.out.println(dbManager.getConnection());
-    }
-
-    public Connection getConnection() {
+    /*public Connection getConnection() {
         return this.conn;
     }*/
     
@@ -175,6 +172,15 @@ public final class Database {
         }
         //return info; 
     }
+    
+    /*public static void main(String[] args) {
+        Database db = new Database(); 
+        System.out.println("CustomerLogin table:");
+        db.printCustomerLoginTable();     
+        System.out.println("\nBooking records:");
+        db.printBookingRecordsTable();
+        
+    }*/
     
     public void printCustomerLoginTable() {
         try {
@@ -229,16 +235,13 @@ public final class Database {
         e.printStackTrace();
     }
 }
-
     /*public static void main(String[] args) {
     Database dbManager = new Database();
     dbManager.printCustomerLoginTable();
     dbManager.printBookingRecordsTable();
     dbManager.closeConnections(); // Close connections after use
 }*/
-
     
-
     //Establishing connection
     public void establishConnection() {
         if (this.conn == null) {

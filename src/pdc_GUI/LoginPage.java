@@ -16,9 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 /**
  *
  * @author nikis
@@ -169,11 +166,13 @@ public class LoginPage extends JPanel implements PanelInterface{
                     String email = emailText.getText();  
                     String phoneNumber = phoneNoText.getText();  
                 
-                    ttw.db.createAccount(user, pass, email, phoneNumber); 
-                
-                    System.out.println("Account created");
-                    ttw.db.printCustomerLoginTable();
-                    ttw.nextPage(new BookingPage(ttw,artist, userInfo){});  
+                    userInfo = ttw.db.createAccount(user, pass, email, phoneNumber); 
+
+                    if(userInfo.isLoginFlag()) {
+                        System.out.println("Account created");
+                        ttw.db.printCustomerLoginTable();
+                        ttw.nextPage(new BookingPage(ttw, artist, userInfo) {}); 
+                    }
                 }
             }
         }); 
