@@ -72,61 +72,61 @@ public class LoginPage extends JPanel implements PanelInterface{
         
         //username text 
         JLabel user = new JLabel("Username:"); 
-        user.setBounds(10, 20, 80, 25); 
+        user.setBounds(90, 35, 80, 25); 
         loginPanel.add(user); 
         //username text field 
         userText = new JTextField(20);
-        userText.setBounds(100, 20, 165, 25); 
+        userText.setBounds(300, 40, 165, 25); 
         loginPanel.add(userText);
 
         //password text
         JLabel pass = new JLabel("Password:"); 
-        pass.setBounds(10, 50, 80, 25); 
+        pass.setBounds(90, 75, 80, 25); 
         loginPanel.add(pass); 
         //password field 
         passText = new JPasswordField(20); 
-        passText.setBounds(100, 50, 165, 25); 
+        passText.setBounds(300, 80, 165, 25); 
         loginPanel.add(passText);
         
         //adding sign in/up button 
         JButton signButton = new JButton("Sign in/up");
-        signButton.setBounds(10, 80, 100, 25); 
+        signButton.setBounds(90, 110, 100, 25); 
         loginPanel.add(signButton); 
         
         //creating empty label to display messgae later 
         JLabel noSuchUser = new JLabel(""); 
-        noSuchUser.setBounds(10, 110, 500, 25); 
+        noSuchUser.setBounds(90, 140, 500, 25); 
         loginPanel.add(noSuchUser); 
         
         //creating empty label to display message later
         JLabel or = new JLabel("OR"); 
-        or.setBounds(10, 140, 500, 25); 
+        or.setBounds(90, 170, 500, 25); 
         
         //creating empty label to display message later
         JLabel registerText = new JLabel(""); 
-        registerText.setBounds(10, 170, 500, 25); 
+        registerText.setBounds(90, 200, 500, 25); 
         loginPanel.add(registerText); 
         
         //email text 
         JLabel email = new JLabel("Email:"); 
-        email.setBounds(10, 200, 80, 25); 
+        email.setBounds(90, 230, 80, 25); 
         //username text field 
         emailText = new JTextField(50);
-        emailText.setBounds(150, 200, 200, 25); 
+        emailText.setBounds(300, 230, 200, 25); 
         
         //phone number text 
         JLabel phoneNo = new JLabel("Phone number:"); 
-        phoneNo.setBounds(10, 230, 100, 25); 
+        phoneNo.setBounds(90, 260, 100, 25); 
         //phone number text field 
         phoneNoText = new JTextField(50);
-        phoneNoText.setBounds(150, 230, 200, 25); 
+        phoneNoText.setBounds(300, 260, 200, 25); 
         
         //creating register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
-        registerButton.setBounds(10, 260, 100, 25); 
+        registerButton.setBounds(90, 290, 100, 25); 
         
         correctUserInput = new JLabel(""); 
-        correctUserInput.setBounds(10, 290, 500, 25); 
+        correctUserInput.setBounds(90, 320, 500, 25); 
         loginPanel.add(correctUserInput); 
               
         signButton.addActionListener(new ActionListener() {
@@ -190,7 +190,7 @@ public class LoginPage extends JPanel implements PanelInterface{
         
         //checks that all JTextFields aren't left empty
         if(usernameInput.isEmpty() || passwordInput.isEmpty() || emailInput.isEmpty() || phoneNoInput.isEmpty()){
-            correctUserInput.setText("Please dont leave any details empty"); 
+            correctUserInput.setText("Please do not leave any details empty"); 
             return false; 
         }
         

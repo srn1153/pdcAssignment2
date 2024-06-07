@@ -26,6 +26,11 @@ public class PaymentPanel extends JPanel implements PanelInterface{
     public Artist aInfo; 
     public CustomerUpdate userInfo; 
     public BookingPage bp; 
+    private JTextField cardNoText; 
+    private JTextField nameOnCardText; 
+    private JTextField expiryText; 
+    private JTextField cvcText; 
+    private JLabel inputMessage; 
     
     public PaymentPanel(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo, BookingPage bp)
     {
@@ -57,10 +62,10 @@ public class PaymentPanel extends JPanel implements PanelInterface{
         titlePanel.add(homeButtonPanel); 
         
         //displaying title after confirming booking details 
-        JLabel loggedIn = new JLabel("Payment Proccess:");
-        loggedIn.setFont(new Font("Garamond", Font.BOLD, 28)); 
-        loggedIn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titlePanel.add(loggedIn); 
+        JLabel paymentProcessText = new JLabel("Payment Proccess:");
+        paymentProcessText.setFont(new Font("Garamond", Font.BOLD, 28)); 
+        paymentProcessText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titlePanel.add(paymentProcessText); 
         
         titlePanel.add(Box.createVerticalStrut(20)); 
         
@@ -83,7 +88,7 @@ public class PaymentPanel extends JPanel implements PanelInterface{
         cardNo.setBounds(50, 40, 200, 25); 
         paymentPanel.add(cardNo); 
         //Enter card number
-        JTextField cardNoText = new JTextField(30);
+        cardNoText = new JTextField(30);
         cardNoText.setBounds(300, 40, 250, 25); 
         paymentPanel.add(cardNoText);
         
@@ -92,7 +97,7 @@ public class PaymentPanel extends JPanel implements PanelInterface{
         nameOnCard.setBounds(50, 80, 200, 25); 
         paymentPanel.add(nameOnCard); 
         //Enter name on card 
-        JTextField nameOnCardText = new JTextField(30);
+        nameOnCardText = new JTextField(30);
         nameOnCardText.setBounds(300, 80, 250, 25); 
         paymentPanel.add(nameOnCardText);
         
@@ -101,30 +106,34 @@ public class PaymentPanel extends JPanel implements PanelInterface{
         expiry.setBounds(50, 120, 200, 25); 
         paymentPanel.add(expiry); 
         //Enter expiry
-        JTextField expiryText = new JTextField(30);
+        expiryText = new JTextField(30);
         expiryText.setBounds(300, 120, 250, 25); 
         paymentPanel.add(expiryText);
         
         //CVC
-        JLabel cvc = new JLabel("Expiry:");
+        JLabel cvc = new JLabel("CVC:");
         cvc.setBounds(50, 160, 200, 25); 
         paymentPanel.add(cvc); 
         //Enter CVC
-        JTextField cvcText = new JTextField(30);
+        cvcText = new JTextField(30);
         cvcText.setBounds(300, 160, 250, 25); 
         paymentPanel.add(cvcText);
+        
+        inputMessage = new JLabel(""); 
+        inputMessage.setBounds(50, 190, 500, 25);
+        paymentPanel.add(inputMessage); 
 
         JButton submitPayment = new JButton("Submit Payment!"); 
-        submitPayment.setBounds(50, 200, 200, 25); 
+        submitPayment.setBounds(50, 220, 200, 25); 
         paymentPanel.add(submitPayment);
         
         //added after button is clicked 
         JLabel successful = new JLabel(""); 
-        successful.setBounds(50, 240, 200, 25);
+        successful.setBounds(220, 260, 200, 25);
         paymentPanel.add(successful); 
                 
         JButton goBackToHomePage = Buttons.homePageButton(ttw); 
-        goBackToHomePage.setBounds(190, 290, 200, 25); 
+        goBackToHomePage.setBounds(190, 300, 200, 25); 
         
         JButton exitButton = new JButton("Exit the website"); 
         exitButton.setBounds(190, 350, 200, 25); 
@@ -133,12 +142,13 @@ public class PaymentPanel extends JPanel implements PanelInterface{
         submitPayment.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                if (userInfo != null) {
-                int userid = userInfo.getUserid(); 
-                    System.out.println("user id is here!" + userid);
-                } else { 
-                    System.out.println("user id is null girl");
+                if(checkDetailRequirements())
+                {
+                    successful.setText("Payment was successful!");
+                    paymentPanel.add(goBackToHomePage); 
+                    paymentPanel.add(exitButton); 
+                    revalidate(); 
+                    repaint(); 
                 }
                 
                 /*String fName = fNameText.getText(); 
@@ -148,11 +158,7 @@ public class PaymentPanel extends JPanel implements PanelInterface{
                     int intNumberOfTicketsRecorded = Integer.parseInt(numberOfTickets.getSelectedItem().toString()); 
                     double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsRecorded; 
                     ttw.db.insertInfo(fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);*/
-                successful.setText("Payment was successful!");
-                paymentPanel.add(goBackToHomePage); 
-                paymentPanel.add(exitButton); 
-                revalidate(); 
-                repaint(); 
+                
             }
         }); 
         
@@ -169,7 +175,42 @@ public class PaymentPanel extends JPanel implements PanelInterface{
 
     @Override
     public boolean checkDetailRequirements() {
-        //override this please hehe
+        String cardNoInput = cardNoText.getText().trim(); 
+        String nameOnCardInput = nameOnCardText.getText().trim(); 
+        String expiryInput = expiryText.getText().trim(); 
+        String cvcInput = cvcText.getText().trim(); 
+        
+        //checks that all JTextFields aren't left empty
+        if(cardNoInput.isEmpty() || nameOnCardInput.isEmpty() || expiryInput.isEmpty() || cvcInput.isEmpty()){
+            inputMessage.setText("Please do not leave any details empty"); 
+            return false; 
+        }
+        
+        //ensures that username and password is more than 8 characters
+        if(cardNoInput.length() != 16){
+            inputMessage.setText("Ensure your card number is 16 digits"); 
+            return false; 
+        }
+        
+        if(nameOnCardInput.matches("-?[0-9]+")){
+            inputMessage.setText("Please enter letters when entering name on card"); 
+            return false; 
+        }
+
+        
+        //ensures the phone number is 8 or mroe digits 
+        if(!(expiryInput.matches("^\\d{2}/\\d{2}$")&& expiryInput.length()== 5)){ //this specific part of code was sourced from chatgpt "\\d(2)/\\d{2}$"
+            inputMessage.setText("Expiry must include '/' between month and year and have a total of 4 digits, e.g. 02/27"); 
+            return false; 
+        }
+        
+        //ensures the cvc is 3 digits in length and includes only digits 
+        if(!(cvcInput.matches("-?[0-9]+") && cvcInput.length() == 3)){
+            inputMessage.setText("Please enter 3 digits"); 
+            return false; 
+        }
+
+        inputMessage.setText(""); 
         return true; 
     }
     

@@ -199,7 +199,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //checks that all JTextFields aren't left empty
         if (fNameInput.isEmpty() || lNameInput.isEmpty()) {
-            inputMessage.setText("Please dont leave any details empty");
+            inputMessage.setText("Please do not leave any details empty");
             return false;
         }
 
