@@ -25,9 +25,9 @@ public class PaymentPanel extends JPanel implements PanelInterface{
     protected final TempoTicketsWebsite ttw; 
     public Artist aInfo; 
     public CustomerUpdate userInfo; 
-    //public BookingPage bp; 
+    public BookingPage bp; 
     
-    public PaymentPanel(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo)
+    public PaymentPanel(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo, BookingPage bp)
     {
         this.ttw = ttw; 
         this.aInfo = aInfo; 
@@ -165,5 +165,12 @@ public class PaymentPanel extends JPanel implements PanelInterface{
         }); 
 
         add(paymentPanel, BorderLayout.CENTER);
-    }    
+    }       
+
+    @Override
+    public boolean checkDetailRequirements() {
+        //override this please hehe
+        return true; 
+    }
+    
 }

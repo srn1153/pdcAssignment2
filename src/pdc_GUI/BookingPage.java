@@ -182,7 +182,7 @@ public class BookingPage extends JPanel implements PanelInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkDetailRequirements()) {
-                    ttw.nextPage(new PaymentPanel(ttw, aInfo, userInfo) {
+                    ttw.nextPage(new PaymentPanel(ttw, aInfo, userInfo, BookingPage.this) {
                     });
                     
                 }

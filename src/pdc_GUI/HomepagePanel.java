@@ -114,4 +114,9 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         
         add(options, BorderLayout.CENTER); 
     }    
+
+    @Override
+    public boolean checkDetailRequirements() {
+        return true; 
+    }
 }

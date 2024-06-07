@@ -160,7 +160,7 @@ public class LoginPage extends JPanel implements PanelInterface{
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {                
-                if(checkLoginRequirements(true)){
+                if(checkDetailRequirements()){
                     String user = userText.getText(); 
                     String pass = passText.getText();
                     String email = emailText.getText();  
@@ -181,7 +181,8 @@ public class LoginPage extends JPanel implements PanelInterface{
         add(panel, BorderLayout.CENTER); 
     }      
     
-    public boolean checkLoginRequirements(boolean registeringAccount) {
+    @Override
+    public boolean checkDetailRequirements() {
         String usernameInput = userText.getText().trim(); 
         String passwordInput = passText.getText().trim(); 
         String emailInput = emailText.getText().trim(); 

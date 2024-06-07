@@ -16,4 +16,6 @@ interface PanelInterface {
         
     void panelDisplay(); 
     
+    boolean checkDetailRequirements(); 
+    
 }
