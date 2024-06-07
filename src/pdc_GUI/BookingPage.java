@@ -155,7 +155,6 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         JButton proceedToPayment = new JButton("Proceed to payment -->");
         proceedToPayment.setBounds(50, 400, 200, 25);
-        //userInputPanel.add(proceedToPayment);
 
         confirm.addActionListener(new ActionListener() {
             @Override
