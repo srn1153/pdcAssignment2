@@ -95,38 +95,38 @@ public class LoginPage extends JPanel implements PanelInterface{
         
         //creating empty label to display messgae later 
         JLabel noSuchUser = new JLabel(""); 
-        noSuchUser.setBounds(90, 140, 500, 25); 
+        noSuchUser.setBounds(90, 150, 500, 25); 
         loginPanel.add(noSuchUser); 
         
         //creating empty label to display message later
         JLabel or = new JLabel("OR"); 
-        or.setBounds(90, 170, 500, 25); 
+        or.setBounds(90, 180, 500, 25); 
         
         //creating empty label to display message later
         JLabel registerText = new JLabel(""); 
-        registerText.setBounds(90, 200, 500, 25); 
+        registerText.setBounds(90, 210, 500, 25); 
         loginPanel.add(registerText); 
         
         //email text 
         JLabel email = new JLabel("Email:"); 
-        email.setBounds(90, 230, 80, 25); 
+        email.setBounds(90, 240, 80, 25); 
         //username text field 
         emailText = new JTextField(50);
-        emailText.setBounds(300, 230, 200, 25); 
+        emailText.setBounds(300, 240, 200, 25); 
         
         //phone number text 
         JLabel phoneNo = new JLabel("Phone number:"); 
-        phoneNo.setBounds(90, 260, 100, 25); 
+        phoneNo.setBounds(90, 280, 100, 25); 
         //phone number text field 
         phoneNoText = new JTextField(50);
-        phoneNoText.setBounds(300, 260, 200, 25); 
+        phoneNoText.setBounds(300, 280, 200, 25); 
         
         //creating register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
-        registerButton.setBounds(90, 290, 100, 25); 
+        registerButton.setBounds(90, 320, 100, 25); 
         
         correctUserInput = new JLabel(""); 
-        correctUserInput.setBounds(90, 320, 500, 25); 
+        correctUserInput.setBounds(90, 350, 500, 25); 
         loginPanel.add(correctUserInput); 
               
         signButton.addActionListener(new ActionListener() {
