@@ -6,6 +6,8 @@ package pdc_GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -49,8 +51,12 @@ public class LoginForAccountDetails extends LoginPage implements PanelInterface 
 
         viewMyTickets.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //takes user to view my tickets panel, where their details are listed 
-                ttw.nextPage(new ViewMyTickets(ttw, aInfo, userInfo));
+                try {
+                    //takes user to view my tickets panel, where their details are listed
+                    ttw.nextPage(new ViewMyTickets(ttw, aInfo, userInfo));
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(LoginForAccountDetails.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 

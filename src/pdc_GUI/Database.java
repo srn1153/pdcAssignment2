@@ -33,7 +33,7 @@ public final class Database {
         try {
             conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
             Statement statement = conn.createStatement();
-            String customerLoginTable = "Customer_Login"; 
+            String customerLoginTable = "Customer_Login";
             String BookingRecords = "Booking_Records";
 
             if (!checkTableExisting(customerLoginTable)) { //creates table if table does not exist
@@ -156,7 +156,6 @@ public final class Database {
     /*public Connection getConnection() {
         return this.conn;
     }*/
-    
     //when user has made a booking/purchase
     public void insertInfo(int userId, String fName, String lName, String artist, String ticketType, int numOfTickets, double totalCost) {
         CustomerUpdate info = new CustomerUpdate();
@@ -172,6 +171,34 @@ public final class Database {
         }
     }
 
+    public CustomerUpdate retrieveBookings(int userId) {
+        CustomerUpdate userInfo = new CustomerUpdate();
+        userInfo.setUserId(userId);
+
+        try {
+            Statement statement = conn.createStatement();
+            System.out.println("Retrieving bookings using userId: " + userId);
+            //retrieving information based on userId 
+            ResultSet rs = statement.executeQuery("SELECT booking_id, artist, ticket_type, number_of_tickets, total_cost FROM Booking_Records WHERE userId = " + userId);
+            while (rs.next()) {
+                int bookingId = rs.getInt("booking_id");
+                String artist = rs.getString("artist");
+                String ticketType = rs.getString("ticket_type");
+                int numOfTickets = rs.getInt("number_of_tickets");
+                Double totalCost = rs.getDouble("total_cost");
+                           
+                userInfo.addBookingDetails(bookingId, artist, ticketType, numOfTickets, totalCost);
+
+            }
+            userInfo.setLoginFlag(true);
+            rs.close();
+            statement.close(); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userInfo;
+    }
+
     //main used to view table data 
     public static void main(String[] args) {
         Database db = new Database();
@@ -181,7 +208,7 @@ public final class Database {
         db.printBookingRecordsTable();
 
     }
-    
+
     //used to print customer table
     public void printCustomerLoginTable() {
         try {

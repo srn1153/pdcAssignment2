@@ -7,6 +7,9 @@ package pdc_GUI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,21 +24,22 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
     private TempoTicketsWebsite ttw;
     public Artist aInfo;
-    public CustomerUpdate userInfo;
-    public JLabel userBookingId; 
-    public JLabel artistChosen; 
-    public JLabel venue; 
-    public JLabel date; 
-    public JLabel time; 
-    public JLabel ticketTypeChosen; 
+    private CustomerUpdate userInfo;
+    public JLabel userBookingId;
+    public JLabel artistChosen;
+    public JLabel venue;
+    public JLabel date;
+    public JLabel time;
+    public JLabel ticketTypeChosen;
     public JLabel numOfTicketsChosen;
-    public JLabel totalCost; 
+    public JLabel totalCost;
 
-    public ViewMyTickets(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) {
+    public ViewMyTickets(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) throws InterruptedException {
         this.ttw = ttw;
         this.aInfo = aInfo;
         this.userInfo = userInfo;
-        panelDisplay(); 
+        this.userInfo = ttw.db.retrieveBookings(userInfo.getUserId());
+        panelDisplay();
     }
 
     @Override
@@ -69,39 +73,27 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         homeButtonPanel.setLayout(new BoxLayout(homeButtonPanel, BoxLayout.Y_AXIS));
         JButton homeButton = Buttons.homePageButton(ttw, aInfo);
         homeButtonPanel.add(homeButton);
-        
+
         add(homeButtonPanel, BorderLayout.NORTH);
 
         //creates new panel 
         JPanel ticketDisplayPanel = new JPanel();
         ticketDisplayPanel.setLayout(null);
-        
+
         //booking id text 
         JLabel bookingId = new JLabel("Booking ID: ");
         bookingId.setBounds(90, 40, 200, 25);
         ticketDisplayPanel.add(bookingId);
-        //retrieves user's booking id
-        userBookingId = new JLabel("");
-        userBookingId.setBounds(200, 40, 200, 25);
-        ticketDisplayPanel.add(userBookingId);
 
         //artist text 
         JLabel artist = new JLabel("Artist: ");
         artist.setBounds(90, 70, 200, 25);
         ticketDisplayPanel.add(artist);
-        //retrieves user's artist
-        artistChosen = new JLabel("");
-        artistChosen.setBounds(200, 70, 200, 25);
-        ticketDisplayPanel.add(artistChosen);
-        
+
         //venue text 
-        JLabel venueText = new JLabel("Event venue: ");
+        JLabel venueText = new JLabel("Event venue:");
         venueText.setBounds(90, 100, 200, 25);
         ticketDisplayPanel.add(venueText);
-        //retrieves user's artist's venue
-        venue = new JLabel("");
-        venue.setBounds(200, 100, 400, 25);
-        ticketDisplayPanel.add(venue);
 
         //date text 
         JLabel dateText = new JLabel("Event Date: ");
@@ -120,52 +112,120 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         time = new JLabel("");
         time.setBounds(200, 160, 200, 25);
         ticketDisplayPanel.add(time);
-        
+
         //ticketType text 
         JLabel ticketType = new JLabel("Ticket type selected: ");
         ticketType.setBounds(90, 190, 200, 25);
         ticketDisplayPanel.add(ticketType);
-        //retrieves user's ticket type 
-        ticketTypeChosen = new JLabel("");
-        ticketTypeChosen.setBounds(200, 190, 400, 25);
-        ticketDisplayPanel.add(ticketTypeChosen);
 
         //number of tickets text 
         JLabel numOfTickets = new JLabel("Number of tickets purchased: ");
         numOfTickets.setBounds(90, 220, 200, 25);
         ticketDisplayPanel.add(numOfTickets);
-        //retrieves user's number of tickets 
-        numOfTicketsChosen = new JLabel("");
-        numOfTicketsChosen.setBounds(200, 220, 200, 25);
-        ticketDisplayPanel.add(numOfTicketsChosen);
 
         //total cost text 
         JLabel totalCostText = new JLabel("Total Cost: $");
         totalCostText.setBounds(90, 250, 200, 25);
         ticketDisplayPanel.add(totalCostText);
-        //retrieves user's total cost
-        totalCost = new JLabel("");
-        totalCost.setBounds(200, 250, 200, 25);
-        ticketDisplayPanel.add(totalCost);
+        
+        System.out.println(userInfo.getBookingIds());
 
+        List<Integer> bookingIds = userInfo.getBookingIds(); 
+        List<String> artists = userInfo.getArtists(); 
+        List<String> ticketTypes = userInfo.getTicketTypes(); 
+        List<Integer> numberOfTickets = userInfo.getNumberOfTickets(); 
+        List<Double> totalCosts = userInfo.getTotalCosts();
+        
+        System.out.println(bookingIds);
+        System.out.println(artists);
+        System.out.println(ticketTypes);
+        System.out.println(numberOfTickets);
+        System.out.println(totalCosts);
+
+       /*for (int i = 0; i < bookingIds.size(); i++){
+            //JPanel for booking details 
+            JPanel bookingDetails = new JPanel(); 
+            bookingDetails.setLayout(null); 
+                    
+            //booking id text 
+            JLabel bookingId = new JLabel("Booking ID: " + bookingIds.get(i));
+            //bookingId.setBounds(90, 40, 200, 25);
+            bookingDetails.add(bookingId);
+
+            //artist text 
+            JLabel artist = new JLabel("Artist: " + artists.get(i));
+            //artist.setBounds(90, 70, 200, 25);
+            bookingDetails.add(artist);
+
+            //venue text 
+            JLabel venueText = new JLabel("Event venue:");
+            //venueText.setBounds(90, 100, 200, 25);
+            bookingDetails.add(venueText);
+
+            //date text 
+            JLabel dateText = new JLabel("Event Date: ");
+            //dateText.setBounds(90, 130, 200, 25);
+            bookingDetails.add(dateText);
+            //retrieves user's artist's date 
+            date = new JLabel("");
+            //date.setBounds(200, 130, 200, 25);
+            bookingDetails.add(date);
+
+            //time text 
+            JLabel timeText = new JLabel("Event Time: ");
+            //timeText.setBounds(90, 160, 200, 25);
+            bookingDetails.add(timeText);
+            //retrieves user's artist's time 
+            time = new JLabel("");
+            //time.setBounds(200, 160, 200, 25);
+            bookingDetails.add(time);
+
+            //ticketType text 
+            JLabel ticketType = new JLabel("Ticket type selected: " + ticketTypes.get(i));
+            //ticketType.setBounds(90, 190, 200, 25);
+            bookingDetails.add(ticketType);
+
+            //number of tickets text 
+            JLabel numOfTickets = new JLabel("Number of tickets purchased: " + numberOfTickets.get(i));
+            //numOfTickets.setBounds(90, 220, 200, 25);
+            bookingDetails.add(numOfTickets);
+
+            //total cost text 
+            JLabel totalCostText = new JLabel("Total Cost: $" + totalCosts.get(i));
+            //totalCostText.setBounds(90, 250, 200, 25);
+            bookingDetails.add(totalCostText);
+            
+            ticketDisplayPanel.add(bookingDetails); 
+            ticketDisplayPanel.add(Box.createVerticalStrut(20)); 
+        }*/
         //adds another homepage button if they want to return after checking details 
         JButton goBackToHomePage = Buttons.homePageButton(ttw, aInfo);
         goBackToHomePage.setBounds(190, 290, 200, 25);
-        ticketDisplayPanel.add(goBackToHomePage); 
-        
+        ticketDisplayPanel.add(goBackToHomePage);
+
         //creates exit button for the user to exit the website after looking at details 
         JButton exitButton = new JButton("Exit the website");
         exitButton.setBounds(190, 340, 200, 25);
-        ticketDisplayPanel.add(exitButton); 
-        
+        ticketDisplayPanel.add(exitButton);
+
         //adding components to panel 
-        panel.add(ticketDisplayPanel,BorderLayout.SOUTH);
-        add(panel, BorderLayout.CENTER); 
+        panel.add(ticketDisplayPanel, BorderLayout.SOUTH);
+        add(panel, BorderLayout.CENTER);
+        
+        exitButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0); 
+            }
+        
+        }); 
     }
+    
+    
 
     @Override
     public boolean checkDetailRequirements() {
-        return true; 
+        return true;
     }
 
 }
