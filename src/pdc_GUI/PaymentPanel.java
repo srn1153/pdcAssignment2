@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,12 +25,14 @@ public class PaymentPanel extends JPanel implements PanelInterface{
     protected final TempoTicketsWebsite ttw; 
     public Artist aInfo; 
     public CustomerUpdate userInfo; 
+    //public BookingPage bp; 
     
     public PaymentPanel(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo)
     {
         this.ttw = ttw; 
         this.aInfo = aInfo; 
-        this.userInfo = userInfo; 
+        this.userInfo = userInfo;
+        //this.bp = bp; 
         System.out.println("Userid is: " + userInfo.getUserid());
         panelDisplay(); 
     }
@@ -141,13 +142,12 @@ public class PaymentPanel extends JPanel implements PanelInterface{
                 }
                 
                 /*String fName = fNameText.getText(); 
-                String lName = lNameText.getText();
-                String artist = aInfo.getArtistName(); 
-                String ticketTypeRecorded = ticketType.getSelectedItem().toString(); 
-                int intNumberOfTicketsRecorded = Integer.parseInt(numberOfTickets.getSelectedItem().toString()); 
-                double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsRecorded; 
-                ttw.db.insertInfo(userid, fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);*/
-                
+                    String lName = lNameText.getText();
+                    String artist = aInfo.getArtistName(); 
+                    String ticketTypeRecorded = ticketType.getSelectedItem().toString(); 
+                    int intNumberOfTicketsRecorded = Integer.parseInt(numberOfTickets.getSelectedItem().toString()); 
+                    double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsRecorded; 
+                    ttw.db.insertInfo(fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);*/
                 successful.setText("Payment was successful!");
                 paymentPanel.add(goBackToHomePage); 
                 paymentPanel.add(exitButton); 

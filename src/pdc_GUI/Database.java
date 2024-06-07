@@ -68,7 +68,6 @@ public final class Database {
             e.printStackTrace(); 
         }
     } 
-
     
     //checking if table already exists 
     private boolean checkTableExisting(String tableName) {
@@ -158,24 +157,23 @@ public final class Database {
         return this.conn;
     }*/
     
-    public void insertInfo(int userid, String fName, String lName, String artist, String ticketType, int numOfTickets, double totalCost){
+    public void insertInfo(String fName, String lName, String artist, String ticketType, int numOfTickets, double totalCost){
         CustomerUpdate info = new CustomerUpdate(); 
         try {
             Statement statement = conn.createStatement(); 
             System.out.println("inserting info ");
                         
-            statement.executeUpdate("INSERT INTO Booking_Records (userid, first_name, last_name, artist, ticket_type, number_of_tickets, total_cost) VALUES(" 
-                    + userid + ", '" + fName + "', '" + lName + "', '" + artist + "', '" + ticketType + "', " + numOfTickets + ", " + totalCost + ")"); 
+            statement.executeUpdate("INSERT INTO Booking_Records (first_name, last_name, artist, ticket_type, number_of_tickets, total_cost) VALUES("
+                    + "'" + fName + "', '" + lName + "', '" + artist + "', '" + ticketType + "', " + numOfTickets + ", " + totalCost + ")"); 
             info.setLoginFlag(true); 
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
-        //return info; 
     }
     
     /*public static void main(String[] args) {
         Database db = new Database(); 
-        System.out.println("CustomerLogin table:");
+        System.out.println("\nCustomerLogin table:");
         db.printCustomerLoginTable();     
         System.out.println("\nBooking records:");
         db.printBookingRecordsTable();
