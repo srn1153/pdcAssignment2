@@ -8,7 +8,7 @@ package pdc_GUI;
  *
  * @author nikis
  */
-public class Artist {
+public class Artist { //this class gets and sets the artist's information
 
     private String artistName;
     private String genre;

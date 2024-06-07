@@ -37,7 +37,6 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         this.aInfo = aInfo;
         this.userInfo = userInfo;
         this.bp = bp; 
-        System.out.println("Userid is: " + userInfo.getUserid());
         panelDisplay();
     }
 
@@ -53,14 +52,14 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
 
-        //adding in homepage button 
+        //adding homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BorderLayout());
         JButton homeButton = Buttons.homePageButton(ttw, aInfo);
         homeButtonPanel.add(homeButton, BorderLayout.WEST);
         titlePanel.add(homeButtonPanel);
 
-        //displaying title after confirming booking details 
+        //adding title 
         JLabel paymentProcessText = new JLabel("Payment Proccess:");
         paymentProcessText.setFont(new Font("Garamond", Font.BOLD, 28));
         paymentProcessText.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -74,8 +73,10 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         titlePanel.add(title);
 
+        //adding gap between text 
         titlePanel.add(Box.createVerticalStrut(20));
 
+        //adds components to panel 
         add(titlePanel, BorderLayout.NORTH);
 
         JPanel paymentPanel = new JPanel();
@@ -100,16 +101,16 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         nameOnCardText.setBounds(300, 80, 250, 25);
         paymentPanel.add(nameOnCardText);
 
-        //expiry date
+        //Asking for expiry date
         JLabel expiry = new JLabel("Expiry:");
         expiry.setBounds(50, 120, 200, 25);
         paymentPanel.add(expiry);
-        //Enter expiry
+        //Enter expiry date 
         expiryText = new JTextField(30);
         expiryText.setBounds(300, 120, 250, 25);
         paymentPanel.add(expiryText);
 
-        //CVC
+        //Asking for CVC
         JLabel cvc = new JLabel("CVC:");
         cvc.setBounds(50, 160, 200, 25);
         paymentPanel.add(cvc);
@@ -118,107 +119,103 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         cvcText.setBounds(300, 160, 250, 25);
         paymentPanel.add(cvcText);
 
+        //blank message to be set if user enters invalid input 
         inputMessage = new JLabel("");
         inputMessage.setBounds(50, 190, 500, 25);
         paymentPanel.add(inputMessage);
 
+        //creates submit payment button
         JButton submitPayment = new JButton("Submit Payment!");
         submitPayment.setBounds(50, 220, 200, 25);
         paymentPanel.add(submitPayment);
 
-        //added after button is clicked 
+        //will set successful message once the button triggers it 
         JLabel successful = new JLabel("");
         successful.setBounds(220, 260, 200, 25);
         paymentPanel.add(successful);
 
+        //adds another back to homepage button that is more visuable for the user
         JButton goBackToHomePage = Buttons.homePageButton(ttw, aInfo);
         goBackToHomePage.setBounds(190, 300, 200, 25);
 
+        //creates a button for the user to exit the website 
         JButton exitButton = new JButton("Exit the website");
         exitButton.setBounds(190, 350, 200, 25);
 
         submitPayment.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //if user inputs are all valid and requirements are met 
                 if (checkDetailRequirements()) {
-                    successful.setText("Payment was successful!");
+                    //sets successful message for user
+                    successful.setText("Payment was successful!"); 
+                    //adds both buttons to screen for user
                     paymentPanel.add(goBackToHomePage);
                     paymentPanel.add(exitButton);
                     revalidate();
                     repaint();
 
-                    //debugging null issue:
-                    if (bp == null) {
-                        System.out.println("bp is null");
-                    } else if (bp.fNameText == null) {
-                        System.out.println("bp.fNameText is null");
-                    } else if (ttw == null) {
-                        System.out.println("ttw is null");
-                    } else if (ttw.db == null) {
-                        System.out.println("ttw.db is null");
-                    }
-
+                    //gets info about booking and user to insert into table 
                     String fName = bp.fNameText.getText();
                     String lName = bp.lNameText.getText();
                     String artist = aInfo.getArtistName();
                     String ticketTypeRecorded = bp.ticketType.getSelectedItem().toString();
                     int intNumberOfTicketsRecorded = Integer.parseInt(bp.numberOfTickets.getSelectedItem().toString());
                     double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsRecorded;
-                    ttw.db.insertInfo(userInfo.getUserid(), fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);
+                    //inserts data into Booking_Records table
+                    ttw.db.insertInfo(userInfo.getUserId(), fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);
                 }
-
             }
         });
 
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //exit button exits the program
                 System.exit(0);
             }
-
         });
-
         add(paymentPanel, BorderLayout.CENTER);
     }
 
     @Override
-    public boolean checkDetailRequirements() {
+    public boolean checkDetailRequirements() { //ensures all user's input is correct 
         String cardNoInput = cardNoText.getText().trim();
         String nameOnCardInput = nameOnCardText.getText().trim();
         String expiryInput = expiryText.getText().trim();
         String cvcInput = cvcText.getText().trim();
 
-        //checks that all JTextFields aren't left empty
+        //ensures that all JTextFields aren't left empty
         if (cardNoInput.isEmpty() || nameOnCardInput.isEmpty() || expiryInput.isEmpty() || cvcInput.isEmpty()) {
             inputMessage.setText("Please do not leave any details empty");
             return false;
         }
 
-        //ensures that username and password is more than 8 characters
+        //ensures that card number length is exactly 16 digits 
         if (cardNoInput.length() != 16) {
             inputMessage.setText("Ensure your card number is 16 digits");
             return false;
         }
 
+        //ensures the name is letters only (not digits)
         if (nameOnCardInput.matches("-?[0-9]+")) {
             inputMessage.setText("Please enter letters when entering name on card");
             return false;
         }
 
-        //ensures the phone number is 8 or mroe digits 
+        //ensures the expiry date matches this format  
         if (!(expiryInput.matches("^\\d{2}/\\d{2}$") && expiryInput.length() == 5)) { //this specific part of code was sourced from chatgpt "\\d(2)/\\d{2}$"
             inputMessage.setText("Expiry must include '/' between month and year and have a total of 4 digits, e.g. 02/27");
             return false;
         }
 
-        //ensures the cvc is 3 digits in length and includes only digits 
+        //ensures the cvc includes digits only and has a length of exactly 3 digits
         if (!(cvcInput.matches("-?[0-9]+") && cvcInput.length() == 3)) {
             inputMessage.setText("Please enter 3 digits");
             return false;
         }
-
+        //sets the correction message to nothing as all information is valid 
         inputMessage.setText("");
         return true;
     }
-
 }

@@ -10,10 +10,10 @@ import java.util.Date;
  *
  * @author nikis
  */
-public class CustomerUpdate {
+public class CustomerUpdate { //this class gets and sets important customer details
     
     //variables for customer login table 
-    private int userid; 
+    private int userId; 
     private boolean loginFlag = false;
     
     //variables for booking records table
@@ -30,17 +30,17 @@ public class CustomerUpdate {
     public Date refund_date; 
 
     /**
-     * @return the userid
+     * @return the userId
      */
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
     /**
-     * @param userid the userid to set
+     * @param userId the userId to set
      */
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     /**

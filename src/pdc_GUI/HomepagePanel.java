@@ -6,7 +6,6 @@ package pdc_GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,7 +31,6 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         this.ttw = ttw; 
         this.userInfo = userInfo;
         this.aInfo = aInfo; 
-        System.out.println("HomePanel user ID: " + userInfo.getUserid());
         panelDisplay(); 
     }
     
@@ -43,17 +41,16 @@ public class HomepagePanel extends JPanel implements PanelInterface{
     public void panelDisplay() {
         setLayout(new BorderLayout()); 
         
-        //Homepage Panel 
+        //homepage Panel 
         JPanel panel = new JPanel(); 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT); 
         
-        //Adding the welcome to tempo tickets onto panel 
+        //adding welcome title to panel 
         JLabel welcome = new JLabel("Welcome to"); 
         welcome.setFont(new Font("Garamond", Font.BOLD, 30)); 
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT); 
         panel.add(welcome); 
-                
         JLabel tempoTickets = new JLabel("Tempo Tickets"); 
         tempoTickets.setFont(new Font("Garamond", Font.BOLD, 30)); 
         tempoTickets.setAlignmentX(Component.CENTER_ALIGNMENT); 
@@ -66,18 +63,18 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         JLabel clickArtist = new JLabel("Click on an artist to see more details!"); 
         clickArtist.setFont(new Font("Garamond", Font.PLAIN, 20)); 
         clickArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
         panel.add(Box.createVerticalStrut(10)); 
         panel.add(upcoming); 
         panel.add(clickArtist); 
         
+        //manage account button in top corner
         JButton manageAccount = new JButton("Manage account here");
         manageAccount.setBounds(422, 5, 160, 25);
         add(manageAccount);
         
         add(panel, BorderLayout.NORTH); 
         
-        //Artist options
+        //artist options
         JPanel options = new JPanel(new GridLayout(2, 2)); 
         
         //Artist buttons
@@ -89,6 +86,7 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         artist1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //displays artist panel with The Terrys info
                 ttw.nextPage(new TheTerrys(ttw, userInfo).getContent());
             }
         });
@@ -96,6 +94,7 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         artist2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //displays artist panel with Soul Bossa Duo info
                 ttw.nextPage(new SoulBossaDuo(ttw, userInfo).getContent());
             }
         });
@@ -103,6 +102,7 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         artist3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //displays artist panel with Dylan info
                 ttw.nextPage(new Dylan(ttw, userInfo).getContent());
             }
         });
@@ -110,6 +110,7 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         artist4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //displays artist panel with PinkPeppers info
                 ttw.nextPage(new PinkPeppers(ttw, userInfo).getContent());
             }
         });
@@ -117,16 +118,17 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         manageAccount.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                //goes to login page for further account details 
                 ttw.nextPage(new LoginForAccountDetails(ttw, aInfo, userInfo) {}); 
             }
-        
         }); 
 
+        //adds artist buttons to gridlayout 
         options.add(artist1); 
         options.add(artist2); 
         options.add(artist3); 
         options.add(artist4); 
-        
+        //adds to panel 
         add(options, BorderLayout.CENTER); 
     }    
 

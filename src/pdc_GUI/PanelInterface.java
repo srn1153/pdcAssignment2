@@ -10,12 +10,15 @@ import javax.swing.JPanel;
  *
  * @author nikis
  */
-interface PanelInterface {
+interface PanelInterface { //interface used by most panels
     
+    //gets content 
     JPanel getContent(); 
         
+    //how it displays components
     void panelDisplay(); 
     
+    //ensures user enters valid input
     boolean checkDetailRequirements(); 
     
 }

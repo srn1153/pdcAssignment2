@@ -28,27 +28,27 @@ public final class Database {
         dbSetup();
     }
 
-    //initial db setup (creating tables to insert data in later on)
+    //initial db setup (creating tables for program)
     public void dbSetup() {
         try {
             conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
             Statement statement = conn.createStatement();
-            String customerLoginTable = "Customer_Login";
+            String customerLoginTable = "Customer_Login"; 
             String BookingRecords = "Booking_Records";
 
-            if (!checkTableExisting(customerLoginTable)) {
+            if (!checkTableExisting(customerLoginTable)) { //creates table if table does not exist
                 statement.executeUpdate("CREATE TABLE " + customerLoginTable
-                        + " (userid INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
+                        + " (userId INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
                         + "username VARCHAR(30) NOT NULL, "
                         + "password VARCHAR(30) NOT NULL , "
                         + "email VARCHAR(100) UNIQUE NOT NULL, "
                         + "phone_number VARCHAR(15))");
             }
 
-            if (!checkTableExisting(BookingRecords)) {
+            if (!checkTableExisting(BookingRecords)) { //creates table if table does not exist
                 statement.executeUpdate("CREATE TABLE " + BookingRecords
                         + " (booking_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
-                        + "userid INT, "
+                        + "userId INT, "
                         + "first_name VARCHAR(50), "
                         + "last_name VARCHAR(50), "
                         + "artist VARCHAR(50), "
@@ -59,11 +59,9 @@ public final class Database {
                         + "status VARCHAR(20) DEFAULT 'Booked', "
                         + "refund_amount DECIMAL(10, 2), "
                         + "refund_date TIMESTAMP, "
-                        + "FOREIGN KEY (userid) REFERENCES Customer_Login(userid))");
+                        + "FOREIGN KEY (userId) REFERENCES Customer_Login(userId))");
             }
-
             statement.close();
-
         } catch (Throwable e) {
             System.out.println("Error when trying to setup DB");
             e.printStackTrace();
@@ -80,7 +78,7 @@ public final class Database {
 
             while (rsDBMeta.next()) {
                 String existingTableName = rsDBMeta.getString("TABLE_NAME");
-                if (existingTableName.compareToIgnoreCase(tableName) == 0) {
+                if (existingTableName.compareToIgnoreCase(tableName) == 0) {//compares table name with existing table names 
                     System.out.println(tableName + "  is there");
                     return true;
                 }
@@ -94,21 +92,21 @@ public final class Database {
         return false;
     }
 
-    //checking to see if account exists
+    //checks to see if account exists
     public CustomerUpdate checkName(String username, String password) {
         CustomerUpdate info = new CustomerUpdate();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userid, password FROM Customer_Login WHERE username = '" + username + "'");
+            ResultSet rs = statement.executeQuery("SELECT userId, password FROM Customer_Login WHERE username = '" + username + "'");
             if (rs.next()) {
                 String pass = rs.getString("password");
                 System.out.println("***" + pass);
                 System.out.println("found user");
-                if (password.compareTo(pass) == 0) {
-                    int userId = rs.getInt("userid");
-                    info.setUserid(userId);
+                if (password.compareTo(pass) == 0) { //if password matches corrrect password this will run
+                    int userId = rs.getInt("userId"); ///gets userId to use in booking process 
+                    info.setUserId(userId); //sets userId to use for booking process 
                     System.out.println("User id set to: " + userId);
-                    info.setLoginFlag(true);
+                    info.setLoginFlag(true); //changes flag to true
                 } else {
                     info.setLoginFlag(false);
                 }
@@ -120,33 +118,34 @@ public final class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("User id is: " + info.getUserid());
+        System.out.println("User id is: " + info.getUserId());
         return info;
     }
 
+    //creating an account
     public CustomerUpdate createAccount(String username, String password, String email, String phoneNumber) {
         CustomerUpdate info = new CustomerUpdate();
         try {
             Statement statement = conn.createStatement();
             System.out.println("Creating account ");
-
+            //creates a new row of information for Customer_Login 
             int rowsInserted = statement.executeUpdate("INSERT INTO Customer_Login (username, password, email, phone_number) VALUES('"
                     + username + "', '" + password + "', '" + email + "', '" + phoneNumber + "')");
 
             if (rowsInserted > 0) {
-                ResultSet rs = statement.executeQuery("SELECT userid FROM Customer_Login WHERE username = '" + username + "'");
+                ResultSet rs = statement.executeQuery("SELECT userId FROM Customer_Login WHERE username = '" + username + "'");
                 if (rs.next()) {
-                    int userId = rs.getInt("userid");
-                    info.setUserid(userId);
+                    int userId = rs.getInt("userId"); //finds userId to use in booking process 
+                    info.setUserId(userId); //sets userId to use for booking process 
                     System.out.println("New user ID: " + userId);
                 } else {
-                    System.out.println("No user ID found :( ");
+                    System.out.println("No user ID found");
                 }
                 rs.close();
             } else {
                 System.out.println("No rows inserted");
             }
-            info.setLoginFlag(true);
+            info.setLoginFlag(true); //changes flag to true
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,20 +156,23 @@ public final class Database {
     /*public Connection getConnection() {
         return this.conn;
     }*/
-    public void insertInfo(int userid, String fName, String lName, String artist, String ticketType, int numOfTickets, double totalCost) {
+    
+    //when user has made a booking/purchase
+    public void insertInfo(int userId, String fName, String lName, String artist, String ticketType, int numOfTickets, double totalCost) {
         CustomerUpdate info = new CustomerUpdate();
         try {
             Statement statement = conn.createStatement();
             System.out.println("inserting info ");
-
-            statement.executeUpdate("INSERT INTO Booking_Records (userid, first_name, last_name, artist, ticket_type, number_of_tickets, total_cost) VALUES(" + userid + ","
+            //inserts row of data 
+            statement.executeUpdate("INSERT INTO Booking_Records (userId, first_name, last_name, artist, ticket_type, number_of_tickets, total_cost) VALUES(" + userId + ","
                     + "'" + fName + "', '" + lName + "', '" + artist + "', '" + ticketType + "', " + numOfTickets + ", " + totalCost + ")");
-            info.setLoginFlag(true);
+            info.setLoginFlag(true);//changes flag to true
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    //main used to view table data 
     public static void main(String[] args) {
         Database db = new Database();
         System.out.println("\nCustomerLogin table:");
@@ -180,18 +182,19 @@ public final class Database {
 
     }
     
+    //used to print customer table
     public void printCustomerLoginTable() {
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Customer_Login");
 
             while (rs.next()) {
-                int userid = rs.getInt("userid");
+                int userId = rs.getInt("userId");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 String email = rs.getString("email");
                 String phoneNumber = rs.getString("phone_number");
-                System.out.println("userid: " + userid + ", username: " + username + ", password: " + password + ", email: " + email + ", phone number: " + phoneNumber);
+                System.out.println("userId: " + userId + ", username: " + username + ", password: " + password + ", email: " + email + ", phone number: " + phoneNumber);
             }
 
             rs.close();
@@ -201,6 +204,7 @@ public final class Database {
         }
     }
 
+    //used to print booking records table 
     public void printBookingRecordsTable() {
         try {
             Statement statement = conn.createStatement();
@@ -208,7 +212,7 @@ public final class Database {
 
             while (rs.next()) {
                 int bookingId = rs.getInt("booking_id");
-                int userId = rs.getInt("userid");
+                int userId = rs.getInt("userId");
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 String artist = rs.getString("artist");
@@ -234,14 +238,7 @@ public final class Database {
         }
     }
 
-    /*public static void main(String[] args) {
-    Database dbManager = new Database();
-    dbManager.printCustomerLoginTable();
-    dbManager.printBookingRecordsTable();
-    dbManager.closeConnections(); // Close connections after use
-}*/
-
-    //Establishing connection
+    //establishing connection
     public void establishConnection() {
         if (this.conn == null) {
             try {

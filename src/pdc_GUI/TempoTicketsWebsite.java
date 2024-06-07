@@ -19,14 +19,20 @@ public class TempoTicketsWebsite extends JFrame {
     Artist aInfo; 
     
     public TempoTicketsWebsite(CustomerUpdate userInfo) {
+        //sets title to name of website!
         setTitle("Tempo Tickets Website!"); 
+        //sets size of frame
         setSize(600, 600); 
+        //ensure user can exit program at any time
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocationRelativeTo(null);
         
+        //starts the connection for the database
         db = new Database();
+        //initialises userInfo
         this.userInfo = userInfo; 
  
+        //goes to Homepage panel first 
         HomepagePanel hpp = new HomepagePanel(this, this.userInfo, aInfo);
         this.nextPage(hpp);
         add(hpp); 
@@ -34,7 +40,7 @@ public class TempoTicketsWebsite extends JFrame {
         setVisible(true); 
     }
     
-    //go to new page
+    //goes to new page without creating a new window
     public void nextPage(JPanel newPanel){
         getContentPane().removeAll(); 
         currPanel = newPanel; 
@@ -43,13 +49,13 @@ public class TempoTicketsWebsite extends JFrame {
         repaint(); 
     }
     
+    //the main
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new TempoTicketsWebsite(new CustomerUpdate()); 
             }
-            
         }); 
     }
 }

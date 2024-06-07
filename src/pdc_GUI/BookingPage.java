@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  */
 public class BookingPage extends JPanel implements PanelInterface {
 
-    protected final TempoTicketsWebsite ttw;
+    protected TempoTicketsWebsite ttw;
     public Artist aInfo;
     public CustomerUpdate userInfo;
     public JTextField fNameText;
@@ -36,7 +36,6 @@ public class BookingPage extends JPanel implements PanelInterface {
         this.ttw = ttw;
         this.aInfo = aInfo;
         this.userInfo = userInfo;
-        System.out.println("User id is: " + userInfo.getUserid());
         panelDisplay();
     }
 
@@ -51,7 +50,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
 
-        //adding in homepage button 
+        //adding homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BorderLayout());
         JButton homeButton = Buttons.homePageButton(ttw, aInfo);
@@ -64,57 +63,60 @@ public class BookingPage extends JPanel implements PanelInterface {
         loggedIn.setAlignmentX(Component.CENTER_ALIGNMENT);
         titlePanel.add(loggedIn);
 
+        //adding gap between info 
         titlePanel.add(Box.createVerticalStrut(20));
 
-        //adding in text before drop boxes 
+        //text for user
         JLabel title = new JLabel("Select from the options below:");
         title.setFont(new Font("Garamond", Font.BOLD, 20));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         titlePanel.add(title);
 
+        //adding gap between info 
         titlePanel.add(Box.createVerticalStrut(20));
-
+        //adding to title panel 
         add(titlePanel, BorderLayout.NORTH);
 
+        //creating new panel for user input 
         JPanel userInputPanel = new JPanel();
         userInputPanel.setLayout(new BoxLayout(userInputPanel, BoxLayout.Y_AXIS));
-        //userInputPanel.add(comboBoxOptions(), BorderLayout.NORTH); 
         userInputPanel.setLayout(null);
 
-        //Asking for first name 
+        //asking for first name 
         JLabel fName = new JLabel("First Name:");
         fName.setBounds(50, 40, 200, 25);
         userInputPanel.add(fName);
-        //Enter first name 
+        //enter first name 
         fNameText = new JTextField(20);
         fNameText.setBounds(300, 40, 200, 25);
         userInputPanel.add(fNameText);
 
-        //Asking for last name 
+        //asking for last name 
         JLabel lName = new JLabel("Last Name:");
         lName.setBounds(50, 80, 200, 25);
         userInputPanel.add(lName);
-        //Enter last name 
+        //enter last name 
         lNameText = new JTextField(20);
         lNameText.setBounds(300, 80, 200, 25);
         userInputPanel.add(lNameText);
 
-        //userInputPanel.add(comboBoxOptions(), BorderLayout.NORTH);
+        //asking for ticket type 
         JLabel ticketTypeLabel = new JLabel("Select your ticket type: ");
         ticketTypeLabel.setBounds(50, 120, 200, 25);
         userInputPanel.add(ticketTypeLabel);
-
+        //using combo box for them to select 
         ticketType = new JComboBox();
         ticketType.addItem("Standard Ticket");
         ticketType.addItem("Wheelchair Access Ticket ");
         ticketType.setBounds(300, 120, 200, 25);
         userInputPanel.add(ticketType);
 
-        //userInputPanel.add(Box.createVerticalStrut(40)); 
+        //asking to select number of tickets (max of 6 tickets per purchase)
         JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
         numberOfTicketsLabel.setBounds(50, 160, 250, 25);
         userInputPanel.add(numberOfTicketsLabel);
 
+        //giving combo box so they can choose 
         numberOfTickets = new JComboBox();
         numberOfTickets.addItem(1);
         numberOfTickets.addItem(2);
@@ -125,34 +127,43 @@ public class BookingPage extends JPanel implements PanelInterface {
         numberOfTickets.setBounds(300, 160, 200, 25);
         userInputPanel.add(numberOfTickets);
 
+        //invisible message that displays when input is incorrect
+        //the message is a friendly prompt on what the correct input should be 
         inputMessage = new JLabel("");
         inputMessage.setBounds(50, 190, 500, 25);
         userInputPanel.add(inputMessage);
 
+        //confirmation button to view detials before payment 
         JButton confirm = new JButton("Click here to confirm details");
         confirm.setBounds(50, 220, 200, 25);
         userInputPanel.add(confirm);
 
+        //recap message, displays once button is clicked
         JLabel recap = new JLabel("");
         recap.setBounds(50, 250, 200, 25);
         userInputPanel.add(recap);
-
+        
+        //the artist chosen, displays once button is clicked
         JLabel artist = new JLabel("");
         artist.setBounds(50, 280, 200, 25);
         userInputPanel.add(artist);
 
+        //the ticket type chosen, displays once button is clicked
         JLabel ticketTypeChosen = new JLabel("");
         ticketTypeChosen.setBounds(50, 310, 400, 25);
         userInputPanel.add(ticketTypeChosen);
 
+        //the number of tickets chosen, displays once button is clicked
         JLabel numOfTickets = new JLabel("");
         numOfTickets.setBounds(50, 340, 200, 25);
         userInputPanel.add(numOfTickets);
 
+        //what their total cost will be displays once button is clicked
         JLabel totalCost = new JLabel("");
         totalCost.setBounds(50, 370, 200, 25);
         userInputPanel.add(totalCost);
 
+        //proceed to payment button
         JButton proceedToPayment = new JButton("Proceed to payment -->");
         proceedToPayment.setBounds(50, 400, 200, 25);
 
@@ -160,19 +171,19 @@ public class BookingPage extends JPanel implements PanelInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (checkDetailRequirements()) {
+                if (checkDetailRequirements()) { //this runs if user's input meets all requirements
                     recap.setText("Confirmation details listed below:");
-                    //print artist they are buying for 
+                    //prints artist they are seeing
                     artist.setText("Artist: " + aInfo.getArtistName());
-                    //print tickettype
+                    //prints ticket type
                     ticketTypeChosen.setText("Ticket type: " + ticketType.getSelectedItem().toString());
-                    //print numberOfTickets selected 
+                    //print number of tickets selected 
                     numOfTickets.setText("Number of tickets: " + numberOfTickets.getSelectedItem().toString());
-                    //print total cost based on artist 
+                    //prints total cost based on artist 
                     int intNumberOfTicketsChosen = Integer.parseInt(numberOfTickets.getSelectedItem().toString());
                     double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsChosen;
                     totalCost.setText("Total cost: $" + doubleTotalCost);
-                    userInputPanel.add(proceedToPayment);
+                    userInputPanel.add(proceedToPayment); //adds to panel 
                     revalidate();
                     repaint();
                 }
@@ -182,20 +193,21 @@ public class BookingPage extends JPanel implements PanelInterface {
         proceedToPayment.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkDetailRequirements()) {
+                if (checkDetailRequirements()) { //this runs if user's input meets all requirements
+                    //proceeds to payment panel 
                     ttw.nextPage(new PaymentPanel(ttw, aInfo, userInfo, BookingPage.this) {
                     });
-                    
                 }
             }
-
         });
-
         add(userInputPanel, BorderLayout.CENTER);
     }
 
-    public boolean checkDetailRequirements() {
+    //ensures all input is correct 
+    public boolean checkDetailRequirements() { 
+        //gets first name input 
         String fNameInput = fNameText.getText().trim();
+        //gets last name input 
         String lNameInput = lNameText.getText().trim();
 
         //checks that all JTextFields aren't left empty
@@ -209,7 +221,7 @@ public class BookingPage extends JPanel implements PanelInterface {
             inputMessage.setText("Please enter your first and last name using letters only");
             return false;
         }
-        
+        //if the requirements are meet then there is no message displayed 
         inputMessage.setText("");
         return true;
     }

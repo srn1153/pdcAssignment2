@@ -17,27 +17,33 @@ import javax.swing.JPanel;
  *
  * @author nikis
  */
-class ArtistPanel extends BookingPage{
+public class ArtistPanel extends JPanel implements PanelInterface{
     private final TempoTicketsWebsite ttw; 
-    private final Artist artist;
+    private final Artist aInfo;
     public CustomerUpdate userInfo; 
     
-    public ArtistPanel(TempoTicketsWebsite ttw, Artist artist,CustomerUpdate userInfo){
-        super(ttw, artist, userInfo); 
+    public ArtistPanel(TempoTicketsWebsite ttw, Artist aInfo,CustomerUpdate userInfo){
         this.ttw = ttw; 
-        this.artist = artist; 
+        this.aInfo = aInfo; 
         this.userInfo = userInfo; 
-        artistInitialScreen(artist); 
+        panelDisplay(); 
+    }
+    
+    @Override
+    public JPanel getContent() {
+        return this; 
     }
 
-    private void artistInitialScreen(Artist artist) {
+    @Override
+    public void panelDisplay() {
         setLayout(new BorderLayout()); 
         
+        //creating an panel for artist's info
         JPanel artistPanel = new JPanel(); 
         artistPanel.setLayout(new BoxLayout(artistPanel, BoxLayout.Y_AXIS)); 
         
-        //displaying artist name
-        JLabel name = new JLabel(artist.getArtistName());
+        //displays artist's name
+        JLabel name = new JLabel(aInfo.getArtistName());
         name.setFont(new Font("Garamond", Font.BOLD, 40)); 
         name.setAlignmentX(Component.CENTER_ALIGNMENT);
         artistPanel.add(name); 
@@ -45,17 +51,17 @@ class ArtistPanel extends BookingPage{
         //adding gaps between info 
         artistPanel.add(Box.createVerticalStrut(30)); 
         
-        //displaying genre
-        JLabel genre = new JLabel("Genre: " + artist.getGenre());
+        //displaying artist's genre
+        JLabel genre = new JLabel("Genre: " + aInfo.getGenre());
         genre.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         genre.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(genre);
         
-        //adding gaps between info 
+        //adding gaps between info
         artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying location
-        JLabel loc = new JLabel("Location: " + artist.getLoc());
+        JLabel loc = new JLabel("Location: " + aInfo.getLoc());
         loc.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         loc.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(loc);
@@ -64,7 +70,7 @@ class ArtistPanel extends BookingPage{
         artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying date
-        JLabel date = new JLabel("Date: " + artist.getDate());
+        JLabel date = new JLabel("Date: " + aInfo.getDate());
         date.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         date.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(date);
@@ -73,7 +79,7 @@ class ArtistPanel extends BookingPage{
         artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying time
-        JLabel time = new JLabel("Time: " + artist.getTime());
+        JLabel time = new JLabel("Time: " + aInfo.getTime());
         time.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         time.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(time);
@@ -82,7 +88,7 @@ class ArtistPanel extends BookingPage{
         artistPanel.add(Box.createVerticalStrut(15)); 
         
         //displaying price
-        JLabel price = new JLabel("Price: $" + artist.getPrice());
+        JLabel price = new JLabel("Price: $" + aInfo.getPrice());
         price.setFont(new Font("Garamond", Font.PLAIN, 30)); 
         price.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(price);
@@ -95,6 +101,7 @@ class ArtistPanel extends BookingPage{
         fyi.setFont(new Font("Garamond", Font.PLAIN, 18)); 
         fyi.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         artistPanel.add(fyi);
+        
         JLabel fyi2 = new JLabel("However, we do provide wheelchair-accessible sections.");
         fyi2.setFont(new Font("Garamond", Font.PLAIN, 18)); 
         fyi2.setAlignmentX(JLabel.CENTER_ALIGNMENT);
@@ -114,16 +121,16 @@ class ArtistPanel extends BookingPage{
         //adding in homepage button 
         JPanel homeButtonPanel = new JPanel();
         homeButtonPanel.setLayout(new BoxLayout(homeButtonPanel, BoxLayout.Y_AXIS));
-        JButton homeButton = Buttons.homePageButton(ttw, artist); 
+        JButton homeButton = Buttons.homePageButton(ttw, aInfo); 
         homeButtonPanel.add(homeButton); 
         add(homeButtonPanel, BorderLayout.NORTH); 
         
-        //adding in ticket button 
-        JPanel bookingPanel = new JPanel();
-        bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
-        JButton bookingButton = Buttons.bookingStage(ttw, bookingPanel, artist); 
-        bookingPanel.add(bookingButton); 
-        artistPanel.add(bookingPanel);
-    
+        //adds booking button 
+        Buttons.bookingStage(ttw, artistPanel, aInfo);
+    }
+
+    @Override
+    public boolean checkDetailRequirements() {
+        return true; 
     }
 }
