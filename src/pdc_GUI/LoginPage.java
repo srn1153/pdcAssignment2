@@ -36,10 +36,12 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         panelDisplay(); 
     }
     
+    @Override
     public JPanel getContent() {
         return this; 
     }
     
+    @Override
     public void panelDisplay() {
         setLayout(new BorderLayout()); 
         

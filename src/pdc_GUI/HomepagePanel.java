@@ -6,6 +6,7 @@ package pdc_GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -70,9 +71,9 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         panel.add(upcoming); 
         panel.add(clickArtist); 
         
-        JButton login = new JButton("Login here!");
-        login.setBounds(483, 5, 100, 25);
-        add(login);
+        JButton manageAccount = new JButton("Manage account here");
+        manageAccount.setBounds(422, 5, 160, 25);
+        add(manageAccount);
         
         add(panel, BorderLayout.NORTH); 
         
@@ -113,7 +114,7 @@ public class HomepagePanel extends JPanel implements PanelInterface{
             }
         });
         
-        login.addActionListener(new ActionListener(){
+        manageAccount.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 ttw.nextPage(new LoginForAccountDetails(ttw, aInfo, userInfo) {}); 
