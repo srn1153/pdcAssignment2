@@ -67,7 +67,7 @@ public class LoginForAccountDetails extends LoginPage implements PanelInterface 
         return (ActionEvent e) -> {
             String user = userText.getText();
             String pass = passText.getText();
-            
+
             //checks if user already exists 
             userInfo = ttw.db.checkName(user, pass);
 
@@ -76,8 +76,18 @@ public class LoginForAccountDetails extends LoginPage implements PanelInterface 
                 //adds buttons to panel if login is successful
                 loginPanel.add(viewMyTickets);
                 loginPanel.add(refundTickets);
+
+                //remove components from screen when login is successful
+                loginPanel.remove(or);
+                loginPanel.remove(email);
+                loginPanel.remove(emailText);
+                loginPanel.remove(phoneNo);
+                loginPanel.remove(phoneNoText);
+                loginPanel.remove(registerButton);
+                registerText.setText("");
                 loginPanel.revalidate();
                 loginPanel.repaint();
+
             } else { //if username and password do not match, display messages and register button
                 noSuchUser.setText("Your username or password was incorrect, please re-enter");
                 loginPanel.add(or);
@@ -114,6 +124,17 @@ public class LoginForAccountDetails extends LoginPage implements PanelInterface 
                     //adds buttons for user to choose from
                     loginPanel.add(viewMyTickets);
                     loginPanel.add(refundTickets);
+                    
+                    //remove components from screen when login is successful
+                    loginPanel.remove(or);
+                    loginPanel.remove(email);
+                    loginPanel.remove(emailText);
+                    loginPanel.remove(phoneNo);
+                    loginPanel.remove(phoneNoText);
+                    loginPanel.remove(registerButton);
+                    registerText.setText("");
+                    loginPanel.revalidate();
+                    loginPanel.repaint();
                     loginPanel.revalidate();
                     loginPanel.repaint();
                 }
