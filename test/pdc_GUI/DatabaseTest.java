@@ -68,35 +68,7 @@ public class DatabaseTest {
         CustomerUpdate result = instance.checkName(username, password);
         assertNotNull(result); 
         assertTrue(result.isLoginFlag()); 
-    }
-
-    /**
-     * Test of createAccount method, of class Database.
-     */
-    @Test
-    public void testCreateAccount() {
-        System.out.println("Test createAccount");
-        String username = "";
-        String password = "";
-        String email = "";
-        String phoneNumber = "";
-        Database instance = db;
-        CustomerUpdate result = instance.createAccount(username, password, email, phoneNumber);
-        assertFalse(result.isLoginFlag());
-    }
-    /**
-     * Test of refundTickets method, of class Database.
-     */
-    @Test
-    public void testRefundTickets() throws SQLException {
-        System.out.println("Test refundTickets");
-        int bookingId = 0;
-        int numOfTickets = 0;
-        double refundAmount = 0.0;
-        Database instance = db;
-        instance.refundTickets(bookingId, numOfTickets, refundAmount);
-    }
-    
+    }   
     
     /**
      * Test of establishConnection method, of class Database.

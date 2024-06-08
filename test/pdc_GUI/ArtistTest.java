@@ -53,10 +53,43 @@ public class ArtistTest {
     
     @Test 
     public void testGetAndSetArtistName() {
-        System.out.println("Testing get and set for Artist name");
+        System.out.println("Testing get and set for artist name");
         Artist instance = artistTest; 
         instance.setArtistName("PinkPeppers"); 
         assertEquals("PinkPeppers", instance.getArtistName()); 
+    }
+    
+    @Test 
+    public void testGetAndSetGenre() {
+        System.out.println("Testing get and set for genre");
+        Artist instance = artistTest; 
+        instance.setGenre("Metal"); 
+        assertEquals("Metal", instance.getGenre()); 
+    }
+    
+    @Test 
+    public void testGetAndSetLoc() {
+        System.out.println("Testing get and set for location");
+        Artist instance = artistTest; 
+        instance.setLoc("At Home"); 
+        assertEquals("At Home", instance.getLoc()); 
+    }
+    
+    
+    @Test 
+    public void testGetAndSetDate() {
+        System.out.println("Testing get and set for date");
+        Artist instance = artistTest; 
+        instance.setDate("tomorrow"); 
+        assertEquals("tomorrow", instance.getDate()); 
+    }
+    
+    @Test 
+    public void testGetAndSetTime() {
+        System.out.println("Testing get and set for time");
+        Artist instance = artistTest; 
+        instance.setTime("7pm-7am"); 
+        assertEquals("7pm-7am", instance.getTime()); 
     }
     
     @Test 
