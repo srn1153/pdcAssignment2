@@ -58,7 +58,7 @@ public class RefundPage extends JPanel implements PanelInterface {
 
 
         //adding title 
-        JLabel title = new JLabel("Lets refund your tickets!");
+        JLabel title = new JLabel("Let's refund your tickets!");
         title.setFont(new Font("Garamond", Font.BOLD, 26));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setForeground(new Color(118, 149, 182)); //dark blue 
@@ -240,7 +240,7 @@ public class RefundPage extends JPanel implements PanelInterface {
         refundInput.add(success);
         
         //creates an exit button for user
-        JButton exitButton = new JButton("Exit Webiste");
+        JButton exitButton = new JButton("Exit Website");
         exitButton.setFont(new Font("Garamond", Font.BOLD, 16)); 
         exitButton.setBackground(new Color(163, 194, 227)); //light blue 
         exitButton.setForeground(Color.WHITE); //white text
@@ -362,8 +362,8 @@ public class RefundPage extends JPanel implements PanelInterface {
             correctionInput.setText("Please do not leave text field empty");
             return false;
         }
-        //ensures the name is letters only (not digits)
-        if (!(userBookingIdInput.matches("-?[0-9]+"))) {
+        //ensures the id is only digits
+        if (!(userBookingIdInput.matches("-?\\d+"))) {
             correctionInput.setText("Please enter digits when entering your booking ID");
             return false;
         }

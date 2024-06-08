@@ -62,7 +62,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         titlePanel.add(homeButtonPanel);
 
         //adding title 
-        JLabel paymentProcessText = new JLabel("Payment Proccess:");
+        JLabel paymentProcessText = new JLabel("Payment Process:");
         paymentProcessText.setFont(new Font("Garamond", Font.BOLD, 28));
         paymentProcessText.setAlignmentX(Component.CENTER_ALIGNMENT);
         paymentProcessText.setForeground(new Color(118, 149, 182)); //dark blue 
@@ -233,7 +233,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
 
         //ensures the expiry date matches this format  
         if (!(expiryInput.matches("^\\d{2}/\\d{2}$") && expiryInput.length() == 5)) { //this specific part of code was sourced from chatgpt "\\d(2)/\\d{2}$"
-            inputMessage.setText("Expiry must include '/' between month and year and have a total of 4 digits, e.g. 02/27");
+            inputMessage.setText("Expiry must include '/' between month and year, e.g. 02/27");
             return false;
         }
 
