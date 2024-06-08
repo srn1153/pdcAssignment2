@@ -182,7 +182,7 @@ public final class Database {
             Statement statement = conn.createStatement();
             System.out.println("Retrieving bookings using userId: " + userId);
             //retrieving information based on userId 
-            ResultSet rs = statement.executeQuery("SELECT booking_id, artist, location, date, time, ticket_type, number_of_tickets, total_cost FROM Booking_Records WHERE userId = " + userId);
+            ResultSet rs = statement.executeQuery("SELECT booking_id, artist, location, date, time, ticket_type, number_of_tickets, total_cost, status, refund_amount FROM Booking_Records WHERE userId = " + userId);
             while (rs.next()) {
                 int bookingId = rs.getInt("booking_id");
                 String artist = rs.getString("artist");
@@ -192,8 +192,10 @@ public final class Database {
                 String ticketType = rs.getString("ticket_type");
                 int numOfTickets = rs.getInt("number_of_tickets");
                 Double totalCost = rs.getDouble("total_cost");
+                String status = rs.getString("status"); 
+                Double refundAmount = rs.getDouble("refund_amount"); 
                 
-                userInfo.addBookingDetails(bookingId, artist, location, date, time, ticketType, numOfTickets, totalCost);
+                userInfo.addBookingDetails(bookingId, artist, location, date, time, ticketType, numOfTickets, totalCost, status, refundAmount);
             }
             userInfo.setLoginFlag(true);
             rs.close();

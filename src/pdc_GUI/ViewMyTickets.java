@@ -97,10 +97,12 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         List<String> ticketTypes = userInfo.getTicketTypes();
         List<Integer> numberOfTickets = userInfo.getNumberOfTickets();
         List<Double> totalCosts = userInfo.getTotalCosts();
+        List<String> refundStatus = userInfo.getRefundStatus();
+        List<Double> refundAmounts= userInfo.getRefundAmount(); 
 
         //specifically this 'for' loop is sourced from chatgpt this accounts for users with multiple bookings
         for (int i = 0; i < bookingIds.size(); i++) {
-            JPanel bookingPanel = createBookingPanel(bookingIds.get(i), artists.get(i), locations.get(i), dates.get(i), times.get(i), ticketTypes.get(i), numberOfTickets.get(i), totalCosts.get(i));
+            JPanel bookingPanel = createBookingPanel(bookingIds.get(i), artists.get(i), locations.get(i), dates.get(i), times.get(i), ticketTypes.get(i), numberOfTickets.get(i), totalCosts.get(i), refundStatus.get(i), refundAmounts.get(i));
             bookingPanel.setBackground(new Color(235, 239, 242)); //light blue background
             bookingsPanel.add(bookingPanel);
             bookingsPanel.add(Box.createVerticalStrut(10));
@@ -130,7 +132,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
     }
 
     //this method is sourced from chatgpt, however I changed the components within the method to make the bookings presentable
-    public JPanel createBookingPanel(int bookingId, String artist, String location, String date, String time, String ticketType, int numberOfTickets, double totalCost) {
+    public JPanel createBookingPanel(int bookingId, String artist, String location, String date, String time, String ticketType, int numberOfTickets, double totalCost, String status, double refundAmount) {
         JPanel bookingPanel = new JPanel();
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
         bookingPanel.setBackground(new Color(235, 239, 242)); //light blue background
@@ -204,6 +206,24 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         //adding gaps between each row for readability
         bookingPanel.add(Box.createVerticalStrut(10));
         bookingPanel.add(totalCostLabel);
+        
+        //displaying refund status
+        JLabel statusLabel = new JLabel("Status: " + status);
+        statusLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        //centering information
+        statusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(statusLabel);
+        
+        //displaying refund amount
+        JLabel refundAmountLabel = new JLabel("Refund amount: $" + refundAmount);
+        refundAmountLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        //centering information
+        refundAmountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(refundAmountLabel);
 
         //adding divider in between different bookings 
         JLabel divider = new JLabel("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");

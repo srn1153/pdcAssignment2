@@ -32,8 +32,8 @@ public class CustomerUpdate {
     private int number_of_tickets; 
     private double total_cost; 
     public Date booking_date; 
-    public String status; 
-    public double refund_amount;    
+    private String status; 
+    private double refund_amount;    
     public Date refund_date; 
     
     private List<Integer> bookingIds = new ArrayList<>(); 
@@ -44,9 +44,11 @@ public class CustomerUpdate {
     private List<String> ticketTypes = new ArrayList<>(); 
     private List<Integer> numberOfTickets = new ArrayList<>(); 
     private List<Double> totalCosts = new ArrayList<>(); 
+    private List<String> refundStatus = new ArrayList<>(); 
+    private List<Double> refundAmount = new ArrayList<>(); 
 
     
-    public void addBookingDetails(int bookingId, String artist,String location, String date, String time, String ticketType, int numberOfTickets, double totalCost){
+    public void addBookingDetails(int bookingId, String artist,String location, String date, String time, String ticketType, int numberOfTickets, double totalCost, String status, double refundAmount){
         this.getBookingIds().add(bookingId); 
         this.getArtists().add(artist); 
         this.getLocations().add(location); 
@@ -55,6 +57,8 @@ public class CustomerUpdate {
         this.getTicketTypes().add(ticketType); 
         this.getNumberOfTickets().add(numberOfTickets); 
         this.getTotalCosts().add(totalCost); 
+        this.getRefundStatus().add(status); 
+        this.getRefundAmount().add(refundAmount); 
     }
     
     /**
@@ -252,5 +256,61 @@ public class CustomerUpdate {
      */
     public List<Double> getTotalCosts() {
         return totalCosts;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the refund_amount
+     */
+    public double getRefund_amount() {
+        return refund_amount;
+    }
+
+    /**
+     * @param refund_amount the refund_amount to set
+     */
+    public void setRefund_amount(double refund_amount) {
+        this.refund_amount = refund_amount;
+    }
+
+    /**
+     * @return the refundStatus
+     */
+    public List<String> getRefundStatus() {
+        return refundStatus;
+    }
+
+    /**
+     * @param refundStatus the refundStatus to set
+     */
+    public void setRefundStatus(List<String> refundStatus) {
+        this.refundStatus = refundStatus;
+    }
+
+    /**
+     * @return the refundAmount
+     */
+    public List<Double> getRefundAmount() {
+        return refundAmount;
+    }
+
+    /**
+     * @param refundAmount the refundAmount to set
+     */
+    public void setRefundAmount(List<Double> refundAmount) {
+        this.refundAmount = refundAmount;
     }
 }
