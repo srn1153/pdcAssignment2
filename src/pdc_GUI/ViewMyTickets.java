@@ -136,6 +136,30 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         //adding gaps between each row for readability
         bookingPanel.add(Box.createVerticalStrut(10));
         bookingPanel.add(artistLabel);
+        
+        //displaying artist venue
+        JLabel artistVenueLabel = new JLabel("Venue: " + this.aInfo.getLoc());
+        //centering information
+        artistVenueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(artistVenueLabel);
+        
+        //displaying artist date
+        JLabel artistDateLabel = new JLabel("Date: " + this.aInfo.getDate());
+        //centering information
+        artistDateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(artistDateLabel);
+        
+        //displaying artist time
+        JLabel artistTimeLabel = new JLabel("Time: " + this.aInfo.getTime());
+        //centering information
+        artistTimeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(artistTimeLabel);
 
         //display ticket type selected 
         JLabel ticketTypeLabel = new JLabel("Ticket Type: " + ticketType);

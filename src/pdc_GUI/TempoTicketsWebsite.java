@@ -18,7 +18,7 @@ public class TempoTicketsWebsite extends JFrame {
     CustomerUpdate userInfo;
     Artist aInfo; 
     
-    public TempoTicketsWebsite(CustomerUpdate userInfo) {
+    public TempoTicketsWebsite(CustomerUpdate userInfo, Artist aInfo) {
         //sets title to name of website!
         setTitle("Tempo Tickets Website!"); 
         //sets size of frame
@@ -31,9 +31,10 @@ public class TempoTicketsWebsite extends JFrame {
         db = new Database();
         //initialises userInfo
         this.userInfo = userInfo; 
+        this.aInfo = aInfo;
  
         //goes to Homepage panel first 
-        HomepagePanel hpp = new HomepagePanel(this, this.userInfo, aInfo);
+        HomepagePanel hpp = new HomepagePanel(this, this.userInfo, this.aInfo);
         this.nextPage(hpp);
         add(hpp); 
 
@@ -54,7 +55,7 @@ public class TempoTicketsWebsite extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TempoTicketsWebsite(new CustomerUpdate()); 
+                new TempoTicketsWebsite(new CustomerUpdate(), new Artist("Artist Name", "Genre", "Location", "Date", "Time", 50.0)); 
             }
         }); 
     }

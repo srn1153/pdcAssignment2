@@ -230,6 +230,8 @@ public final class Database {
             e.printStackTrace();
         }
     }
+    
+    
 
     //used to print booking records table 
     public void printBookingRecordsTable() {
