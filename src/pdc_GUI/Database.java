@@ -258,74 +258,7 @@ public final class Database {
     public Connection getConnection() {
         return this.conn;
     }
-
-    //main used to view table data 
-    public static void main(String[] args) throws SQLException {
-        Database db = new Database();
-        System.out.println("\nCustomerLogin table:");
-        db.printCustomerLoginTable();
-        System.out.println("\nBooking records:");
-        db.printBookingRecordsTable();
-    }
-
-    //used to print customer table
-    public void printCustomerLoginTable() {
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Customer_Login");
-
-            while (rs.next()) {
-                int userId = rs.getInt("userId");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String email = rs.getString("email");
-                String phoneNumber = rs.getString("phone_number");
-                System.out.println("userId: " + userId + ", username: " + username + ", password: " + password + ", email: " + email + ", phone number: " + phoneNumber);
-            }
-            rs.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //used to print booking records table 
-    public void printBookingRecordsTable() {
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Booking_Records");
-
-            while (rs.next()) {
-                int bookingId = rs.getInt("booking_id");
-                int userId = rs.getInt("userId");
-                String firstName = rs.getString("first_name");
-                String lastName = rs.getString("last_name");
-                String artist = rs.getString("artist");
-                String location = rs.getString("location");
-                String date = rs.getString("date");
-                String time = rs.getString("time");
-                String ticketType = rs.getString("ticket_type");
-                int numberOfTickets = rs.getInt("number_of_tickets");
-                double totalCost = rs.getDouble("total_cost");
-                String bookingDate = rs.getString("booking_date");
-                String status = rs.getString("status");
-                double refundAmount = rs.getDouble("refund_amount");
-                String refundDate = rs.getString("refund_date");
-
-                System.out.println("Booking ID: " + bookingId + ", User ID: " + userId + ", First Name: " + firstName
-                        + ", Last Name: " + lastName + ", Artist: " + artist + ", Location: " + location
-                        + ", Date: " + date + ", Time: " + time + ", Ticket Type: " + ticketType
-                        + ", Number of Tickets: " + numberOfTickets + ", Total Cost: " + totalCost
-                        + ", Booking Date: " + bookingDate + ", Status: " + status + ", Refund Amount: " + refundAmount
-                        + ", Refund Date: " + refundDate);
-            }
-            rs.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     //establishes connection
     public void establishConnection() {
         try {
