@@ -4,6 +4,9 @@
  */
 package pdc_GUI;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -18,7 +21,7 @@ public class TempoTicketsWebsite extends JFrame {
     CustomerUpdate userInfo;
     Artist aInfo; 
     
-    public TempoTicketsWebsite(CustomerUpdate userInfo, Artist aInfo) {
+    public TempoTicketsWebsite(CustomerUpdate userInfo, Artist aInfo) throws SQLException {
         //sets title to name of website!
         setTitle("Tempo Tickets Website!"); 
         //sets size of frame
@@ -55,7 +58,11 @@ public class TempoTicketsWebsite extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TempoTicketsWebsite(new CustomerUpdate(), new Artist("Artist Name", "Genre", "Location", "Date", "Time", 50.0)); 
+                try { 
+                    new TempoTicketsWebsite(new CustomerUpdate(), new Artist("Artist Name", "Genre", "Location", "Date", "Time", 50.0));
+                } catch (SQLException ex) {
+                    Logger.getLogger(TempoTicketsWebsite.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }); 
     }

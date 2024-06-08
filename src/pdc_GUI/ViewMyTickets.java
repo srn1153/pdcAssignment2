@@ -69,7 +69,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         //describing purpose of this page 
         JLabel purpose = new JLabel("Below displays all details relating to events you have booked!");
-        purpose.setFont(new Font("Garamond", Font.PLAIN, 18));
+        purpose.setFont(new Font("Garamond", Font.BOLD, 18));
         purpose.setAlignmentX(Component.CENTER_ALIGNMENT);
         purpose.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         panel.add(Box.createVerticalStrut(10));
@@ -115,6 +115,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         //creates exit button for the user to exit the website after looking at details 
         JButton backToLogin = new JButton("Back to Login Management");
+        backToLogin.setFont(new Font("Garamond", Font.BOLD, 16)); 
         backToLogin.setBackground(new Color(163, 194, 227)); //light blue 
         backToLogin.setForeground(Color.WHITE); //white text
         panel.add(backToLogin, BorderLayout.SOUTH);
@@ -139,6 +140,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         //displaying booking id 
         JLabel bookingIdLabel = new JLabel("Booking ID: " + bookingId);
+        bookingIdLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         bookingIdLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         bookingIdLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -146,6 +148,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         //displaying artist 
         JLabel artistLabel = new JLabel("Artist: " + artist);
+        artistLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         artistLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         artistLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -155,6 +158,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         
         //displaying artist venue
         JLabel artistVenueLabel = new JLabel("Location: " + location);
+        artistVenueLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         artistVenueLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         artistVenueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -164,6 +168,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         
         //displaying artist date
         JLabel artistDateLabel = new JLabel("Date: " + date);
+        artistDateLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         artistDateLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         artistDateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -173,6 +178,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         
         //displaying artist time
         JLabel artistTimeLabel = new JLabel("Time: " + time);
+        artistTimeLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         artistTimeLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         artistTimeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -182,6 +188,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         //display ticket type selected 
         JLabel ticketTypeLabel = new JLabel("Ticket Type: " + ticketType);
+        ticketTypeLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         ticketTypeLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         ticketTypeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -191,6 +198,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         //displaying number of tickets 
         JLabel numOfTicketsLabel = new JLabel("Number of Tickets: " + numberOfTickets);
+        numOfTicketsLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         numOfTicketsLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         numOfTicketsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -200,6 +208,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         //displaying total cost
         JLabel totalCostLabel = new JLabel("Total Cost: $" + totalCost);
+        totalCostLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         totalCostLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         totalCostLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -209,6 +218,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         
         //displaying refund status
         JLabel statusLabel = new JLabel("Status: " + status);
+        statusLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         statusLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         statusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -218,6 +228,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         
         //displaying refund amount
         JLabel refundAmountLabel = new JLabel("Refund amount: $" + refundAmount);
+        refundAmountLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         refundAmountLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         refundAmountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -226,7 +237,8 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         bookingPanel.add(refundAmountLabel);
 
         //adding divider in between different bookings 
-        JLabel divider = new JLabel("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+        JLabel divider = new JLabel("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+        divider.setFont(new Font("Garamond", Font.BOLD, 16)); 
         divider.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //centering information
         divider.setAlignmentX(Component.CENTER_ALIGNMENT);

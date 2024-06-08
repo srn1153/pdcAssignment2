@@ -57,7 +57,7 @@ public class ArtistPanel extends JPanel implements PanelInterface{
         
         //displaying artist's genre
         JLabel genre = new JLabel("Genre: " + aInfo.getGenre());
-        genre.setFont(new Font("Garamond", Font.PLAIN, 30)); 
+        genre.setFont(new Font("Garamond", Font.BOLD, 30)); 
         genre.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         genre.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(genre);
@@ -67,7 +67,7 @@ public class ArtistPanel extends JPanel implements PanelInterface{
         
         //displaying location
         JLabel loc = new JLabel("Location: " + aInfo.getLoc());
-        loc.setFont(new Font("Garamond", Font.PLAIN, 30)); 
+        loc.setFont(new Font("Garamond", Font.BOLD, 30)); 
         loc.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         loc.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(loc);
@@ -77,7 +77,7 @@ public class ArtistPanel extends JPanel implements PanelInterface{
         
         //displaying date
         JLabel date = new JLabel("Date: " + aInfo.getDate());
-        date.setFont(new Font("Garamond", Font.PLAIN, 30)); 
+        date.setFont(new Font("Garamond", Font.BOLD, 30)); 
         date.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         date.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(date);
@@ -87,7 +87,7 @@ public class ArtistPanel extends JPanel implements PanelInterface{
         
         //displaying time
         JLabel time = new JLabel("Time: " + aInfo.getTime());
-        time.setFont(new Font("Garamond", Font.PLAIN, 30)); 
+        time.setFont(new Font("Garamond", Font.BOLD, 30)); 
         time.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         time.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(time);
@@ -97,7 +97,7 @@ public class ArtistPanel extends JPanel implements PanelInterface{
         
         //displaying price
         JLabel price = new JLabel("Price: $" + aInfo.getPrice());
-        price.setFont(new Font("Garamond", Font.PLAIN, 30)); 
+        price.setFont(new Font("Garamond", Font.BOLD, 30)); 
         price.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         price.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(price);
@@ -107,19 +107,19 @@ public class ArtistPanel extends JPanel implements PanelInterface{
         
         //displaying disclaimer
         JLabel fyi = new JLabel("Disclaimer: All tickets sold are for standing areas.");
-        fyi.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        fyi.setFont(new Font("Garamond", Font.BOLD, 18)); 
         fyi.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         fyi.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(fyi);
         
         JLabel fyi2 = new JLabel("However, we do provide wheelchair-accessible sections.");
-        fyi2.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        fyi2.setFont(new Font("Garamond", Font.BOLD, 18)); 
         fyi2.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         fyi2.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(fyi2);
         
         JLabel fyi3 = new JLabel("We apologise for any inconvenience");
-        fyi3.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        fyi3.setFont(new Font("Garamond", Font.BOLD, 18)); 
         fyi3.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         fyi3.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artistPanel.add(fyi3);

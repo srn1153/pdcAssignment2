@@ -7,6 +7,7 @@ package pdc_GUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
@@ -24,6 +25,7 @@ public class Buttons {
     public static JButton homePageButton(TempoTicketsWebsite ttw, Artist aInfo) {
         //creates button
         JButton homeButton = new JButton("<--- back to HomePage");
+        homeButton.setFont(new Font("Garamond", Font.BOLD, 16)); 
         homeButton.setBackground(new Color(163, 194, 227)); //blue button
         homeButton.setForeground(Color.WHITE); 
         homeButton.addActionListener(new ActionListener(){
@@ -46,6 +48,7 @@ public class Buttons {
         //making button larger
         ticketButton.setPreferredSize(new Dimension(200, 50));
         ticketButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        ticketButton.setFont(new Font("Garamond", Font.BOLD, 16)); 
         ticketButton.setBackground(new Color(163, 194, 227)); //blue button
         ticketButton.setForeground(Color.WHITE); 
         buttonPanel.add(ticketButton); //adds button to given panel in parameter

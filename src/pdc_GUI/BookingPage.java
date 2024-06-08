@@ -90,39 +90,43 @@ public class BookingPage extends JPanel implements PanelInterface {
         //asking for first name 
         JLabel fName = new JLabel("First Name:");
         fName.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        fName.setFont(new Font("Garamond", Font.BOLD, 16)); 
         fName.setBounds(50, 40, 200, 25);
         userInputPanel.add(fName);
         //enter first name 
         fNameText = new JTextField(20);
-        fNameText.setBounds(300, 40, 200, 25);
+        fNameText.setBounds(320, 40, 200, 25);
         userInputPanel.add(fNameText);
 
         //asking for last name 
         JLabel lName = new JLabel("Last Name:");
         lName.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        lName.setFont(new Font("Garamond", Font.BOLD, 16)); 
         lName.setBounds(50, 80, 200, 25);
         userInputPanel.add(lName);
         //enter last name 
         lNameText = new JTextField(20);
-        lNameText.setBounds(300, 80, 200, 25);
+        lNameText.setBounds(320, 80, 200, 25);
         userInputPanel.add(lNameText);
 
         //asking for ticket type 
         JLabel ticketTypeLabel = new JLabel("Select your ticket type: ");
-        ticketTypeLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        ticketTypeLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button
+        ticketTypeLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         ticketTypeLabel.setBounds(50, 120, 200, 25);
         userInputPanel.add(ticketTypeLabel);
         //using combo box for them to select 
         ticketType = new JComboBox();
         ticketType.addItem("Standard Ticket");
         ticketType.addItem("Wheelchair Access Ticket");
-        ticketType.setBounds(300, 120, 200, 25);
+        ticketType.setBounds(320, 120, 200, 25);
         userInputPanel.add(ticketType);
 
         //asking to select number of tickets (max of 6 tickets per purchase)
         JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
         numberOfTicketsLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
-        numberOfTicketsLabel.setBounds(50, 160, 250, 25);
+        numberOfTicketsLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
+        numberOfTicketsLabel.setBounds(50, 160, 300, 25);
         userInputPanel.add(numberOfTicketsLabel);
 
         //giving combo box so they can choose 
@@ -133,51 +137,57 @@ public class BookingPage extends JPanel implements PanelInterface {
         numberOfTickets.addItem(4);
         numberOfTickets.addItem(5);
         numberOfTickets.addItem(6);
-        numberOfTickets.setBounds(300, 160, 200, 25);
+        numberOfTickets.setBounds(320, 160, 200, 25);
         userInputPanel.add(numberOfTickets);
 
         //invisible message that displays when input is incorrect
         //the message is a friendly prompt on what the correct input should be 
         inputMessage = new JLabel("");
         inputMessage.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        inputMessage.setFont(new Font("Garamond", Font.BOLD, 16)); 
         inputMessage.setBounds(50, 190, 500, 25);
         userInputPanel.add(inputMessage);
 
         //confirmation button to view detials before payment 
         JButton confirm = new JButton("Click here to confirm details");
-        confirm.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         confirm.setBackground(new Color(163, 194, 227)); //light blue 
-        confirm.setForeground(Color.WHITE); //white text        
-        confirm.setBounds(50, 220, 200, 25);
+        confirm.setForeground(Color.WHITE); //white text  
+        confirm.setFont(new Font("Garamond", Font.BOLD, 16)); 
+        confirm.setBounds(50, 220, 250, 25);
         userInputPanel.add(confirm);
 
         //recap message, displays once button is clicked
         JLabel recap = new JLabel("");
         recap.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
-        recap.setBounds(50, 250, 200, 25);
+        recap.setFont(new Font("Garamond", Font.BOLD, 16)); 
+        recap.setBounds(50, 250, 250, 25);
         userInputPanel.add(recap);
         
         //the artist chosen, displays once button is clicked
         JLabel artist = new JLabel("");
         artist.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        artist.setFont(new Font("Garamond", Font.BOLD, 16)); 
         artist.setBounds(50, 280, 200, 25);
         userInputPanel.add(artist);
 
         //the ticket type chosen, displays once button is clicked
         JLabel ticketTypeChosen = new JLabel("");
         ticketTypeChosen.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        ticketTypeChosen.setFont(new Font("Garamond", Font.BOLD, 16)); 
         ticketTypeChosen.setBounds(50, 310, 400, 25);
         userInputPanel.add(ticketTypeChosen);
 
         //the number of tickets chosen, displays once button is clicked
         JLabel numOfTickets = new JLabel("");
         numOfTickets.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        numOfTickets.setFont(new Font("Garamond", Font.BOLD, 16)); 
         numOfTickets.setBounds(50, 340, 200, 25);
         userInputPanel.add(numOfTickets);
 
         //what their total cost will be displays once button is clicked
         JLabel totalCost = new JLabel("");
         totalCost.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        totalCost.setFont(new Font("Garamond", Font.BOLD, 16)); 
         totalCost.setBounds(50, 370, 200, 25);
         userInputPanel.add(totalCost);
 
@@ -185,7 +195,8 @@ public class BookingPage extends JPanel implements PanelInterface {
         JButton proceedToPayment = new JButton("Proceed to payment -->");
         proceedToPayment.setBackground(new Color(163, 194, 227)); //light blue 
         proceedToPayment.setForeground(Color.WHITE); //white text        
-        proceedToPayment.setBounds(50, 400, 200, 25);
+        proceedToPayment.setFont(new Font("Garamond", Font.BOLD, 16)); 
+        proceedToPayment.setBounds(50, 400, 300, 25);
 
         confirm.addActionListener(new ActionListener() {
             @Override

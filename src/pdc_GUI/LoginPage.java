@@ -59,8 +59,8 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         panel.add(title); 
         
         //prompts user to create an account 
-        JLabel account = new JLabel("Owning an account can help keep track of purchased tickets and new events!"); 
-        account.setFont(new Font("Garamond", Font.PLAIN, 18)); 
+        JLabel account = new JLabel("An account helps keep track of purchased tickets and new events!"); 
+        account.setFont(new Font("Garamond", Font.BOLD, 18)); 
         account.setAlignmentX(Component.CENTER_ALIGNMENT);
         account.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         panel.add(Box.createVerticalStrut(10)); 
@@ -79,7 +79,8 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         loginPanel.setLayout(null); 
         
         //asks for username
-        JLabel user = new JLabel("Username:"); 
+        JLabel user = new JLabel("Username:");
+        user.setFont(new Font("Garamond", Font.BOLD, 16)); 
         user.setBounds(90, 35, 80, 25); 
         user.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(user); 
@@ -89,7 +90,8 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         loginPanel.add(userText);
 
         //asks for password
-        JLabel pass = new JLabel("Password:"); 
+        JLabel pass = new JLabel("Password:");
+        pass.setFont(new Font("Garamond", Font.BOLD, 16)); 
         pass.setBounds(90, 75, 80, 25); 
         pass.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(pass); 
@@ -100,30 +102,35 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         
         //adding sign in/up button 
         JButton signButton = new JButton("Sign in/up");
-        signButton.setBounds(90, 110, 100, 25);
+        signButton.setFont(new Font("Garamond", Font.BOLD, 16)); 
+        signButton.setBounds(90, 110, 150, 25);
         signButton.setBackground(new Color(163, 194, 227)); //light blue 
         signButton.setForeground(Color.WHITE); //light blue 
         loginPanel.add(signButton); 
         
         //creating empty label to display messgae later 
         JLabel noSuchUser = new JLabel(""); 
-        noSuchUser.setBounds(90, 150, 500, 25); 
+        noSuchUser.setFont(new Font("Garamond", Font.BOLD, 16)); 
+        noSuchUser.setBounds(90, 140, 500, 25); 
         noSuchUser.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(noSuchUser); 
         
         //creating empty label to display message later
         JLabel or = new JLabel("OR"); 
+        or.setFont(new Font("Garamond", Font.BOLD, 16)); 
         or.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         or.setBounds(90, 180, 500, 25); 
         
         //creating empty label to display message later
-        JLabel registerText = new JLabel(""); 
+        JLabel registerText = new JLabel("");
+        registerText.setFont(new Font("Garamond", Font.BOLD, 16)); 
         registerText.setBounds(90, 210, 500, 25); 
         registerText.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(registerText); 
         
         //asks for email
         JLabel email = new JLabel("Email:"); 
+        email.setFont(new Font("Garamond", Font.BOLD, 16)); 
         email.setBounds(90, 240, 80, 25); 
         email.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //email text field 
@@ -132,7 +139,8 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         
         //asks for phone number
         JLabel phoneNo = new JLabel("Phone number:"); 
-        phoneNo.setBounds(90, 280, 100, 25); 
+        phoneNo.setFont(new Font("Garamond", Font.BOLD, 16)); 
+        phoneNo.setBounds(90, 280, 150, 25); 
         phoneNo.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //phone number text field 
         phoneNoText = new JTextField(50);
@@ -140,6 +148,7 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         
         //creates register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
+        registerButton.setFont(new Font("Garamond", Font.BOLD, 16)); 
         registerButton.setBounds(90, 320, 100, 25); 
         registerButton.setBackground(new Color(163, 194, 227)); //light blue
         registerButton.setForeground(Color.WHITE); //light blue 
@@ -147,6 +156,7 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         
         //message that will be set of user's input is incorrect 
         correctUserInput = new JLabel(""); 
+        correctUserInput.setFont(new Font("Garamond", Font.BOLD, 16)); 
         correctUserInput.setBounds(90, 350, 500, 25);
         correctUserInput.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(correctUserInput); 

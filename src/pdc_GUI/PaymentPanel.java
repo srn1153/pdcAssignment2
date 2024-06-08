@@ -91,6 +91,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         //Asking for card number
         JLabel cardNo = new JLabel("Card Number:");
         cardNo.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        cardNo.setFont(new Font("Garamond", Font.BOLD, 16)); 
         cardNo.setBounds(50, 40, 200, 25);
         paymentPanel.add(cardNo);
         //Enter card number
@@ -101,6 +102,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         //Asking for name on card 
         JLabel nameOnCard = new JLabel("Name on card:");
         nameOnCard.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        nameOnCard.setFont(new Font("Garamond", Font.BOLD, 16)); 
         nameOnCard.setBounds(50, 80, 200, 25);
         paymentPanel.add(nameOnCard);
         //Enter name on card 
@@ -111,6 +113,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         //Asking for expiry date
         JLabel expiry = new JLabel("Expiry:");
         expiry.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        expiry.setFont(new Font("Garamond", Font.BOLD, 16)); 
         expiry.setBounds(50, 120, 200, 25);
         paymentPanel.add(expiry);
         //Enter expiry date 
@@ -121,6 +124,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         //Asking for CVC
         JLabel cvc = new JLabel("CVC:");
         cvc.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        cvc.setFont(new Font("Garamond", Font.BOLD, 16)); 
         cvc.setBounds(50, 160, 200, 25);
         paymentPanel.add(cvc);
         //Enter CVC
@@ -131,11 +135,13 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         //blank message to be set if user enters invalid input 
         inputMessage = new JLabel("");
         inputMessage.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        inputMessage.setFont(new Font("Garamond", Font.BOLD, 16)); 
         inputMessage.setBounds(50, 190, 500, 25);
         paymentPanel.add(inputMessage);
 
         //creates submit payment button
         JButton submitPayment = new JButton("Submit Payment!");
+        submitPayment.setFont(new Font("Garamond", Font.BOLD, 16)); 
         submitPayment.setBackground(new Color(163, 194, 227)); //light blue 
         submitPayment.setForeground(Color.WHITE); //white text
         submitPayment.setBounds(50, 220, 200, 25);
@@ -144,6 +150,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
         //will set successful message once the button triggers it 
         JLabel successful = new JLabel("");
         successful.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        successful.setFont(new Font("Garamond", Font.BOLD, 16)); 
         successful.setBounds(180, 270, 400, 25);
         successful.setFont(new Font("Garamond", Font.BOLD, 20));
         paymentPanel.add(successful);
@@ -154,6 +161,7 @@ public class PaymentPanel extends JPanel implements PanelInterface {
 
         //creates a button for the user to exit the website 
         JButton exitButton = new JButton("Exit the website");
+        exitButton.setFont(new Font("Garamond", Font.BOLD, 16)); 
         exitButton.setBackground(new Color(163, 194, 227)); //light blue 
         exitButton.setForeground(Color.WHITE); //white text
         exitButton.setBounds(190, 360, 200, 25);

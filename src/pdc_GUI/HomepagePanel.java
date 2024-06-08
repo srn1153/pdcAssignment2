@@ -61,10 +61,10 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         
         //adding text 
         JLabel upcoming = new JLabel("Here are the upcoming events:"); 
-        upcoming.setFont(new Font("Garamond", Font.PLAIN, 20)); 
+        upcoming.setFont(new Font("Garamond", Font.BOLD, 20)); 
         upcoming.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel clickArtist = new JLabel("Click on an artist to see more details!"); 
-        clickArtist.setFont(new Font("Garamond", Font.PLAIN, 20)); 
+        clickArtist.setFont(new Font("Garamond", Font.BOLD, 20)); 
         clickArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalStrut(10)); 
         upcoming.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
