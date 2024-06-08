@@ -26,6 +26,7 @@ public class RefundPage extends JPanel implements PanelInterface {
     public Artist aInfo;
     private CustomerUpdate userInfo;
     public JTextField userBookingId; 
+    public JLabel correctionInput; 
 
     public RefundPage(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) {
         this.ttw = ttw;
@@ -57,7 +58,7 @@ public class RefundPage extends JPanel implements PanelInterface {
         panel.add(title);
 
         //describing purpose of this page 
-        JLabel purpose = new JLabel("Enter your booking id below to refund your tickets");
+        JLabel purpose = new JLabel("Enter your booking ID below to refund your tickets");
         purpose.setFont(new Font("Garamond", Font.PLAIN, 18));
         purpose.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalStrut(10));
@@ -78,19 +79,11 @@ public class RefundPage extends JPanel implements PanelInterface {
         refundInput.setLayout(null);
         
         //go view ticket details 
-        JButton viewMyTickets = new JButton("Can't remember your booking id? Click here!");
+        JButton viewMyTickets = new JButton("Can't remember your booking ID? Click here!");
         viewMyTickets.setBounds(150, 20, 300, 25);
         refundInput.add(viewMyTickets);
-
-        //asking for booking id
-        JLabel bookingIdText = new JLabel("Booking Id:");
-        bookingIdText.setBounds(100, 70, 200, 25);
-        refundInput.add(bookingIdText);
-        //enter first name 
-        userBookingId = new JTextField(20);
-        userBookingId.setBounds(300, 70, 200, 25);
-        refundInput.add(userBookingId);
         
+        //actionlistener to go back
         viewMyTickets.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,13 +91,117 @@ public class RefundPage extends JPanel implements PanelInterface {
             }
         }); 
         
-        panel.add(refundInput, BorderLayout.SOUTH); 
+        //asking for booking id
+        JLabel bookingIdText = new JLabel("Booking Id:");
+        bookingIdText.setBounds(100, 70, 200, 25);
+        refundInput.add(bookingIdText);
+        //text field 
+        userBookingId = new JTextField(20);
+        userBookingId.setBounds(300, 70, 200, 25);
+        refundInput.add(userBookingId);
+        
+        //confirmation 
+        correctionInput = new JLabel("");
+        correctionInput.setBounds(150, 100, 500, 25);
+        refundInput.add(correctionInput);
+
+        //confirmation 
+        JButton comfirmation = new JButton("Confirm booking ID");
+        comfirmation.setBounds(150, 130, 150, 25);
+        refundInput.add(comfirmation);
+
+        //recap message, displays once button is clicked
+        JLabel recap = new JLabel("");
+        recap.setBounds(50, 170, 200, 25);
+        refundInput.add(recap);
+        
+        //the artist chosen, displays once button is clicked
+        JLabel artist = new JLabel("");
+        artist.setBounds(50, 200, 200, 25);
+        refundInput.add(artist);
+        
+        //
+        JLabel location = new JLabel("");
+        location.setBounds(50, 230, 200, 25);
+        refundInput.add(location);
+        
+        //the artist chosen, displays once button is clicked
+        JLabel date = new JLabel("");
+        date.setBounds(50, 260, 200, 25);
+        refundInput.add(date);
+        
+        //the artist chosen, displays once button is clicked
+        JLabel time = new JLabel("");
+        time.setBounds(50, 290, 200, 25);
+        refundInput.add(time);
+
+        //the ticket type chosen, displays once button is clicked
+        JLabel ticketTypeChosen = new JLabel("");
+        ticketTypeChosen.setBounds(50, 320, 400, 25);
+        refundInput.add(ticketTypeChosen);
+
+        //the number of tickets chosen, displays once button is clicked
+        JLabel numOfTickets = new JLabel("");
+        numOfTickets.setBounds(50, 350, 200, 25);
+        refundInput.add(numOfTickets);
+
+        //what their total cost will be displays once button is clicked
+        JLabel totalCost = new JLabel("");
+        totalCost.setBounds(50, 380, 200, 25);
+        refundInput.add(totalCost); 
+        
+        //actionlistener to confirm booking id
+        comfirmation.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(checkDetailRequirements()){
+                    String userBookingIdInput = userBookingId.getText().trim(); 
+                    int intBookingIdInput = Integer.parseInt(userBookingIdInput); 
+                    CustomerUpdate bookingIdInfo = ttw.db.retrieveBookingId(intBookingIdInput); 
+                    
+                    recap.setText("Ticket details listed below:");
+                    //prints artist they are seeing
+                    artist.setText("Artist: " + bookingIdInfo.getArtist());
+                    //prints location
+                    location.setText("Location: " + bookingIdInfo.getLocation());
+                    //prints date
+                    date.setText("Date: " + bookingIdInfo.getDate());
+                    //prints time
+                    time.setText("Time: " + bookingIdInfo.getTime());
+                    //prints ticket type
+                    ticketTypeChosen.setText("Ticket type: " + bookingIdInfo.getTicket_type());
+                    //print number of tickets selected 
+                    numOfTickets.setText("Number of tickets: " + bookingIdInfo.getNumber_of_tickets());
+                    //prints total cost based on artist 
+                     totalCost.setText("Total cost: $" + bookingIdInfo.getTotal_cost());
+                    
+                    revalidate();
+                    repaint();
+                    
+                }
+            }
+        });
+        
+        panel.add(refundInput, BorderLayout.SOUTH);  //adds to panel 
         //adding components to panel 
         add(panel, BorderLayout.CENTER);
     }
 
     @Override
     public boolean checkDetailRequirements() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }   
+        String userBookingIdInput = userBookingId.getText().trim(); 
+        
+        //ensures that all JTextFields aren't left empty
+        if(userBookingIdInput.isEmpty()){
+            correctionInput.setText("Please do not leave text field empty"); 
+            return false; 
+        }
+        //ensures the name is letters only (not digits)
+        if (!(userBookingIdInput.matches("-?[0-9]+"))) {
+            correctionInput.setText("Please enter digits when entering your booking ID");
+            return false;
+        }
+        correctionInput.setText("");
+        return true; 
+    }
 }

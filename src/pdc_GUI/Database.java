@@ -204,6 +204,41 @@ public final class Database {
         return userInfo;
     }
     
+    public CustomerUpdate retrieveBookingId(int bookingId) {
+        CustomerUpdate userInfo = new CustomerUpdate();
+        userInfo.setBooking_id(bookingId);
+
+        try {
+            Statement statement = conn.createStatement();
+            System.out.println("Retrieving booking id: " + bookingId);
+            //retrieving information based on userId 
+            ResultSet rs = statement.executeQuery("SELECT artist, location, date, time, ticket_type, number_of_tickets, total_cost FROM Booking_Records WHERE  booking_id  = " + bookingId);
+            while (rs.next()) {
+                String artist = rs.getString("artist");
+                String location = rs.getString("location"); 
+                String date = rs.getString("date"); 
+                String time = rs.getString("time"); 
+                String ticketType = rs.getString("ticket_type");
+                int numOfTickets = rs.getInt("number_of_tickets");
+                Double totalCost = rs.getDouble("total_cost");
+                
+                userInfo.setArtist(artist); 
+                userInfo.setLocation(location); 
+                userInfo.setDate(date); 
+                userInfo.setTime(time); 
+                userInfo.setTicket_type(ticketType); 
+                userInfo.setNumber_of_tickets(numOfTickets); 
+                userInfo.setTotal_cost(totalCost); 
+            }
+            userInfo.setLoginFlag(true);
+            rs.close();
+            statement.close(); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userInfo;
+    }
+    
     //main used to view table data 
     public static void main(String[] args) {
         Database db = new Database();
@@ -234,8 +269,6 @@ public final class Database {
             e.printStackTrace();
         }
     }
-    
-    
 
     //used to print booking records table 
     public void printBookingRecordsTable() {
@@ -267,7 +300,6 @@ public final class Database {
                         + ", Booking Date: " + bookingDate + ", Status: " + status + ", Refund Amount: " + refundAmount
                         + ", Refund Date: " + refundDate);
             }
-
             rs.close();
             statement.close();
         } catch (SQLException e) {

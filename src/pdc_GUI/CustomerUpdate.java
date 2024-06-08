@@ -45,6 +45,18 @@ public class CustomerUpdate {
     private List<Integer> numberOfTickets = new ArrayList<>(); 
     private List<Double> totalCosts = new ArrayList<>(); 
 
+    
+    public void addBookingDetails(int bookingId, String artist,String location, String date, String time, String ticketType, int numberOfTickets, double totalCost){
+        this.getBookingIds().add(bookingId); 
+        this.getArtists().add(artist); 
+        this.getLocations().add(location); 
+        this.getDates().add(date); 
+        this.getTimes().add(time); 
+        this.getTicketTypes().add(ticketType); 
+        this.getNumberOfTickets().add(numberOfTickets); 
+        this.getTotalCosts().add(totalCost); 
+    }
+    
     /**
      * @return the userId
      */
@@ -186,17 +198,6 @@ public class CustomerUpdate {
         this.total_cost = total_cost;
     }
     
-    public void addBookingDetails(int bookingId, String artist,String location, String date, String time, String ticketType, int numberOfTickets, double totalCost){
-        this.getBookingIds().add(bookingId); 
-        this.getArtists().add(artist); 
-        this.getLocations().add(location); 
-        this.getDates().add(date); 
-        this.getTimes().add(time); 
-        this.getTicketTypes().add(ticketType); 
-        this.getNumberOfTickets().add(numberOfTickets); 
-        this.getTotalCosts().add(totalCost); 
-    }
-
     /**
      * @return the bookingIds
      */

@@ -86,13 +86,16 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         //retrieving lists from CustomerUpdate
         List<Integer> bookingIds = userInfo.getBookingIds();
         List<String> artists = userInfo.getArtists();
+        List<String> locations = userInfo.getLocations();
+        List<String> dates = userInfo.getDates();
+        List<String> times = userInfo.getTimes();
         List<String> ticketTypes = userInfo.getTicketTypes();
         List<Integer> numberOfTickets = userInfo.getNumberOfTickets();
         List<Double> totalCosts = userInfo.getTotalCosts();
 
         //specifically this 'for' loop is sourced from chatgpt this accounts for users with multiple bookings
         for (int i = 0; i < bookingIds.size(); i++) {
-            JPanel bookingPanel = createBookingPanel(bookingIds.get(i), artists.get(i), ticketTypes.get(i), numberOfTickets.get(i), totalCosts.get(i));
+            JPanel bookingPanel = createBookingPanel(bookingIds.get(i), artists.get(i), locations.get(i), dates.get(i), times.get(i), ticketTypes.get(i), numberOfTickets.get(i), totalCosts.get(i));
             bookingsPanel.add(bookingPanel);
             bookingsPanel.add(Box.createVerticalStrut(10));
         }
@@ -119,7 +122,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
     }
 
     //this method is sourced from chatgpt, however I changed the components within the method to make the bookings presentable
-    public JPanel createBookingPanel(int bookingId, String artist, String ticketType, int numberOfTickets, double totalCost) {
+    public JPanel createBookingPanel(int bookingId, String artist, String location, String date, String time, String ticketType, int numberOfTickets, double totalCost) {
         JPanel bookingPanel = new JPanel();
         bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
 
@@ -138,7 +141,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         bookingPanel.add(artistLabel);
         
         //displaying artist venue
-        JLabel artistVenueLabel = new JLabel("Venue: " + this.aInfo.getLoc());
+        JLabel artistVenueLabel = new JLabel("Location: " + location);
         //centering information
         artistVenueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //adding gaps between each row for readability
@@ -146,7 +149,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         bookingPanel.add(artistVenueLabel);
         
         //displaying artist date
-        JLabel artistDateLabel = new JLabel("Date: " + this.aInfo.getDate());
+        JLabel artistDateLabel = new JLabel("Date: " + date);
         //centering information
         artistDateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //adding gaps between each row for readability
@@ -154,7 +157,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         bookingPanel.add(artistDateLabel);
         
         //displaying artist time
-        JLabel artistTimeLabel = new JLabel("Time: " + this.aInfo.getTime());
+        JLabel artistTimeLabel = new JLabel("Time: " + time);
         //centering information
         artistTimeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //adding gaps between each row for readability
