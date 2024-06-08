@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
  * @author nikis
  */
 public class BookingPageTest {
+    //this is important to test as invalid input can cause lots of errors in the database section
     
     private BookingPage bookingPage; 
     private Artist aInfo;
@@ -43,7 +44,7 @@ public class BookingPageTest {
     }
     
     @Test 
-    public void testEmptyInput(){
+    public void testEmptyInput(){//tests for empty or partially empty test fields 
         System.out.println("Testing if input is empty");
         BookingPage instance = bookingPage; 
         instance.fNameText.setText(""); 
@@ -60,7 +61,7 @@ public class BookingPageTest {
     }
     
     @Test 
-    public void testDigitsInNameArea(){
+    public void testDigitsInNameArea(){ // testings for digits in incorrect area
         System.out.println("Testing input as digits");
         BookingPage instance = bookingPage; 
         instance.fNameText.setText("Luk3"); 
@@ -77,7 +78,7 @@ public class BookingPageTest {
     }
     
     @Test 
-    public void testGetArtistName(){
+    public void testGetArtistName(){ // tests the get method for artistname 
         System.out.println("Testing get for artist name");
         BookingPage instance = bookingPage; 
         String expectedResult = instance.aInfo.getArtistName(); 
@@ -86,7 +87,7 @@ public class BookingPageTest {
     }
     
     @Test 
-    public void testComboBoxSelection(){
+    public void testComboBoxSelection(){//tests the selection on the combo boxes are efficient
         System.out.println("Testing combo box selection");
         BookingPage instance = bookingPage; 
         

@@ -15,7 +15,8 @@ import static org.junit.Assert.*;
  *
  * @author nikis
  */
-public class ArtistTest {
+public class ArtistTest { 
+//this class is important to test as it's referenced multiple times in different classes to access information about the user 
     
     private Artist artistTest; 
     
@@ -41,7 +42,7 @@ public class ArtistTest {
     }
     
     @Test 
-    public void testConstructor(){
+    public void testConstructor(){ //testing constructor
         Artist instance = artistTest; 
         assertEquals("Soul Bossa Duo", instance.getArtistName()); 
         assertEquals("Jazz", instance.getGenre()); 
@@ -52,7 +53,7 @@ public class ArtistTest {
     }
     
     @Test 
-    public void testGetAndSetArtistName() {
+    public void testGetAndSetArtistName() {//testing both get and set methods for artist name
         System.out.println("Testing get and set for artist name");
         Artist instance = artistTest; 
         instance.setArtistName("PinkPeppers"); 
@@ -60,7 +61,7 @@ public class ArtistTest {
     }
     
     @Test 
-    public void testGetAndSetGenre() {
+    public void testGetAndSetGenre() {//testing both get and set methods for genre
         System.out.println("Testing get and set for genre");
         Artist instance = artistTest; 
         instance.setGenre("Metal"); 
@@ -68,7 +69,7 @@ public class ArtistTest {
     }
     
     @Test 
-    public void testGetAndSetLoc() {
+    public void testGetAndSetLoc() {//testing both get and set methods for location
         System.out.println("Testing get and set for location");
         Artist instance = artistTest; 
         instance.setLoc("At Home"); 
@@ -77,7 +78,7 @@ public class ArtistTest {
     
     
     @Test 
-    public void testGetAndSetDate() {
+    public void testGetAndSetDate() {//testing both get and set methods for date
         System.out.println("Testing get and set for date");
         Artist instance = artistTest; 
         instance.setDate("tomorrow"); 
@@ -85,7 +86,7 @@ public class ArtistTest {
     }
     
     @Test 
-    public void testGetAndSetTime() {
+    public void testGetAndSetTime() {//testing both get and set methods for time
         System.out.println("Testing get and set for time");
         Artist instance = artistTest; 
         instance.setTime("7pm-7am"); 
@@ -93,7 +94,7 @@ public class ArtistTest {
     }
     
     @Test 
-    public void testGetAndSetPrice() {
+    public void testGetAndSetPrice() {//testing both get and set methods for price
         System.out.println("Testing get and set for price");
         Artist instance = artistTest; 
         instance.setPrice(44.55); 

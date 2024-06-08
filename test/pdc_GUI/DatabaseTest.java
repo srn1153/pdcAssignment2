@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
  * @author nikis
  */
 public class DatabaseTest {
+    //this is important to test as we must ensure the Database connection is working efficiently
     
     Database db; 
     private Connection conn;
@@ -36,7 +37,7 @@ public class DatabaseTest {
     }
     
     @Before
-    public void setUp() throws SQLException {
+    public void setUp() throws SQLException { 
         conn = DriverManager.getConnection("jdbc:derby:CustomerLogin_Ebd; create=true", "pdc", "123");
         db = new Database(); 
     }
@@ -49,7 +50,7 @@ public class DatabaseTest {
      * Test of dbSetup method, of class Database.
      */
     @Test
-    public void testDbSetup() {
+    public void testDbSetup() {//ensures the setUp for the database is done correctly 
         System.out.println("Test dbSetup");
         Database instance = db; 
         assertTrue(instance.checkTableExisting("Customer_Login")); 
@@ -60,10 +61,10 @@ public class DatabaseTest {
      * Test of checkName method, of class Database.
      */
     @Test
-    public void testCheckName() {
+    public void testCheckName() {//ensures that we are able to effectively check for current users 
         System.out.println("Test checkName");
-        String username = "Nikisha123";
-        String password = "ilovepdc";
+        String username = "lisa.wilson";
+        String password = "happy123";
         Database instance = db;
         CustomerUpdate result = instance.checkName(username, password);
         assertNotNull(result); 
@@ -74,14 +75,18 @@ public class DatabaseTest {
      * Test of establishConnection method, of class Database.
      */
     @Test
-    public void testEstablishConnection() {
+    public void testEstablishConnection() { //ensures an established connection
         System.out.println("Test establishConnection");
         Database instance = db; 
-        try {
-            instance.establishConnection();
-            assertTrue(true); 
-        } catch (SQLException e){
-            fail("Connection failed " + e.getMessage()); 
-        }
+        instance.establishConnection();
+        assertTrue(true); 
     }    
+    
+    @Test 
+    public void testCloseConnection() throws SQLException{ //ensures the connection is closed
+        System.out.println("Test closeConncetion");
+        Database instance = db; 
+        instance.closeConnections(); 
+        assertTrue(instance.getConnection().isClosed()); 
+    }
 }
