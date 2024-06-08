@@ -4,6 +4,7 @@
  */
 package pdc_GUI;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,9 @@ public class Buttons {
     //homePage button for every panel/page
     public static JButton homePageButton(TempoTicketsWebsite ttw, Artist aInfo) {
         //creates button
-        JButton homeButton = new JButton("<--- back to HomePage"); 
+        JButton homeButton = new JButton("<--- back to HomePage");
+        homeButton.setBackground(new Color(163, 194, 227)); //blue button
+        homeButton.setForeground(Color.WHITE); 
         homeButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,6 +46,8 @@ public class Buttons {
         //making button larger
         ticketButton.setPreferredSize(new Dimension(200, 50));
         ticketButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        ticketButton.setBackground(new Color(163, 194, 227)); //blue button
+        ticketButton.setForeground(Color.WHITE); 
         buttonPanel.add(ticketButton); //adds button to given panel in parameter
         
         ticketButton.addActionListener(new ActionListener() {

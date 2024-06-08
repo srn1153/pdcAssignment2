@@ -4,6 +4,7 @@
  */
 package pdc_GUI;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -43,10 +44,14 @@ public class LoginForAccountDetails extends LoginPage implements PanelInterface 
 
         //creates view my tickets button 
         viewMyTickets = new JButton("View my Tickets");
+        viewMyTickets.setBackground(new Color(163, 194, 227)); //light blue 
+        viewMyTickets.setForeground(Color.WHITE); //white text        
         viewMyTickets.setBounds(190, 250, 200, 25);
 
         //creates refund/cancel booking button 
         refundTickets = new JButton("Refund/Cancel Booking");
+        refundTickets.setBackground(new Color(163, 194, 227)); //light blue 
+        refundTickets.setForeground(Color.WHITE); //white text        
         refundTickets.setBounds(190, 320, 200, 25);
 
         viewMyTickets.addActionListener(new ActionListener() {

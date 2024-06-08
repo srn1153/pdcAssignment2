@@ -5,6 +5,7 @@
 package pdc_GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -53,17 +54,21 @@ public class RefundPage extends JPanel implements PanelInterface {
         //creating panel 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(new Color(235, 239, 242)); //light blue background
+
 
         //adding title 
         JLabel title = new JLabel("Lets refund your tickets!");
         title.setFont(new Font("Garamond", Font.BOLD, 26));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         panel.add(title);
 
         //describing purpose of this page 
         JLabel purpose = new JLabel("Enter your booking ID below to refund your tickets");
         purpose.setFont(new Font("Garamond", Font.PLAIN, 18));
         purpose.setAlignmentX(Component.CENTER_ALIGNMENT);
+        purpose.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         panel.add(Box.createVerticalStrut(10));
         panel.add(purpose);
 
@@ -79,10 +84,13 @@ public class RefundPage extends JPanel implements PanelInterface {
         //creating new panel for user input 
         JPanel refundInput = new JPanel();
         refundInput.setLayout(new BoxLayout(refundInput, BoxLayout.Y_AXIS));
+        refundInput.setBackground(new Color(235, 239, 242)); //light blue background
         refundInput.setLayout(null);
 
         //go view ticket details 
         JButton viewMyTickets = new JButton("Can't remember your booking ID? Click here!");
+        viewMyTickets.setBackground(new Color(163, 194, 227)); //light blue 
+        viewMyTickets.setForeground(Color.WHITE); //white text
         viewMyTickets.setBounds(150, 20, 300, 25);
         refundInput.add(viewMyTickets);
 
@@ -96,6 +104,7 @@ public class RefundPage extends JPanel implements PanelInterface {
 
         //asking for booking id
         JLabel bookingIdText = new JLabel("Booking Id:");
+        bookingIdText.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         bookingIdText.setBounds(100, 70, 200, 25);
         refundInput.add(bookingIdText);
         //text field 
@@ -105,56 +114,68 @@ public class RefundPage extends JPanel implements PanelInterface {
 
         //confirmation 
         correctionInput = new JLabel("");
+        correctionInput.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         correctionInput.setBounds(150, 100, 500, 25);
         refundInput.add(correctionInput);
 
         //confirmation 
         JButton comfirmation = new JButton("Confirm booking ID");
+        comfirmation.setBackground(new Color(163, 194, 227)); //light blue 
+        comfirmation.setForeground(Color.WHITE); //white text
         comfirmation.setBounds(50, 130, 150, 25);
         refundInput.add(comfirmation);
 
         //recap message, displays once button is clicked
         JLabel recap = new JLabel("");
+        recap.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         recap.setBounds(50, 170, 200, 25);
         refundInput.add(recap);
 
         //the artist chosen, displays once button is clicked
         JLabel artist = new JLabel("");
+        artist.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artist.setBounds(50, 200, 200, 25);
         refundInput.add(artist);
 
         //
         JLabel location = new JLabel("");
+        location.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         location.setBounds(50, 230, 200, 25);
         refundInput.add(location);
 
         //the artist chosen, displays once button is clicked
         JLabel date = new JLabel("");
+        date.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         date.setBounds(50, 260, 200, 25);
         refundInput.add(date);
 
         //the artist chosen, displays once button is clicked
         JLabel time = new JLabel("");
+        time.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         time.setBounds(50, 290, 200, 25);
         refundInput.add(time);
 
         //the ticket type chosen, displays once button is clicked
         JLabel ticketTypeChosen = new JLabel("");
+        ticketTypeChosen.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         ticketTypeChosen.setBounds(50, 320, 400, 25);
         refundInput.add(ticketTypeChosen);
 
         //the number of tickets chosen, displays once button is clicked
         JLabel numOfTickets = new JLabel("");
+        numOfTickets.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         numOfTickets.setBounds(50, 350, 200, 25);
         refundInput.add(numOfTickets);
 
         //what their total cost will be displays once button is clicked
         JLabel totalCost = new JLabel("");
+        totalCost.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         totalCost.setBounds(50, 380, 200, 25);
         refundInput.add(totalCost);
 
         //asking to select number of tickets (max is their original pruchase amount)
         JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to refund: ");
+        numberOfTicketsLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         numberOfTicketsLabel.setBounds(290, 130, 250, 25);
 
         refundNumOfTickets = new JComboBox<>();
@@ -162,30 +183,40 @@ public class RefundPage extends JPanel implements PanelInterface {
 
         //refund message
         JLabel refundMessage = new JLabel("Refunds will be sent to the card");
+        refundMessage.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         refundMessage.setBounds(320, 170, 500, 25);
 
         JLabel refundMessage1 = new JLabel("used for original purchase.");
+        refundMessage1.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         refundMessage1.setBounds(340, 190, 500, 25);
 
         JLabel refundMessage2 = new JLabel("Please allow for up to 3 business");
+        refundMessage2.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         refundMessage2.setBounds(320, 210, 500, 25);
 
         JLabel refundMessage3 = new JLabel("days for the refund to process!");
+        refundMessage3.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         refundMessage3.setBounds(330, 230, 500, 25);
 
         JLabel refundAmount = new JLabel("");
+        refundAmount.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         refundAmount.setBounds(340, 270, 500, 25);
         refundInput.add(refundAmount);
 
         JButton submitRefund = new JButton("Submit Refund");
+        submitRefund.setBackground(new Color(163, 194, 227)); //light blue 
+        submitRefund.setForeground(Color.WHITE); //white text
         submitRefund.setBounds(340, 310, 150, 25);
         
         JLabel success = new JLabel("");
+        success.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         success.setBounds(340, 350, 500, 25);
         success.setFont(new Font("Garamond", Font.BOLD, 20));
         refundInput.add(success);
         
         JButton exitButton = new JButton("Exit Webiste");
+        exitButton.setBackground(new Color(163, 194, 227)); //light blue 
+        exitButton.setForeground(Color.WHITE); //white text
         exitButton.setBounds(340, 390, 150, 25);
         
 

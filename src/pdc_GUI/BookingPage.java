@@ -5,6 +5,7 @@
 package pdc_GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -49,6 +50,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+        titlePanel.setBackground(new Color(235, 239, 242)); //light blue background
 
         //adding homepage button 
         JPanel homeButtonPanel = new JPanel();
@@ -61,6 +63,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         JLabel loggedIn = new JLabel("You have successfully logged in!");
         loggedIn.setFont(new Font("Garamond", Font.BOLD, 28));
         loggedIn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loggedIn.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         titlePanel.add(loggedIn);
 
         //adding gap between info 
@@ -70,6 +73,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         JLabel title = new JLabel("Select from the options below:");
         title.setFont(new Font("Garamond", Font.BOLD, 20));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         titlePanel.add(title);
 
         //adding gap between info 
@@ -80,10 +84,12 @@ public class BookingPage extends JPanel implements PanelInterface {
         //creating new panel for user input 
         JPanel userInputPanel = new JPanel();
         userInputPanel.setLayout(new BoxLayout(userInputPanel, BoxLayout.Y_AXIS));
+        userInputPanel.setBackground(new Color(235, 239, 242)); //light blue background
         userInputPanel.setLayout(null);
 
         //asking for first name 
         JLabel fName = new JLabel("First Name:");
+        fName.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         fName.setBounds(50, 40, 200, 25);
         userInputPanel.add(fName);
         //enter first name 
@@ -93,6 +99,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //asking for last name 
         JLabel lName = new JLabel("Last Name:");
+        lName.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         lName.setBounds(50, 80, 200, 25);
         userInputPanel.add(lName);
         //enter last name 
@@ -102,6 +109,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //asking for ticket type 
         JLabel ticketTypeLabel = new JLabel("Select your ticket type: ");
+        ticketTypeLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         ticketTypeLabel.setBounds(50, 120, 200, 25);
         userInputPanel.add(ticketTypeLabel);
         //using combo box for them to select 
@@ -113,6 +121,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //asking to select number of tickets (max of 6 tickets per purchase)
         JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
+        numberOfTicketsLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         numberOfTicketsLabel.setBounds(50, 160, 250, 25);
         userInputPanel.add(numberOfTicketsLabel);
 
@@ -130,41 +139,52 @@ public class BookingPage extends JPanel implements PanelInterface {
         //invisible message that displays when input is incorrect
         //the message is a friendly prompt on what the correct input should be 
         inputMessage = new JLabel("");
+        inputMessage.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         inputMessage.setBounds(50, 190, 500, 25);
         userInputPanel.add(inputMessage);
 
         //confirmation button to view detials before payment 
         JButton confirm = new JButton("Click here to confirm details");
+        confirm.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        confirm.setBackground(new Color(163, 194, 227)); //light blue 
+        confirm.setForeground(Color.WHITE); //white text        
         confirm.setBounds(50, 220, 200, 25);
         userInputPanel.add(confirm);
 
         //recap message, displays once button is clicked
         JLabel recap = new JLabel("");
+        recap.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         recap.setBounds(50, 250, 200, 25);
         userInputPanel.add(recap);
         
         //the artist chosen, displays once button is clicked
         JLabel artist = new JLabel("");
+        artist.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         artist.setBounds(50, 280, 200, 25);
         userInputPanel.add(artist);
 
         //the ticket type chosen, displays once button is clicked
         JLabel ticketTypeChosen = new JLabel("");
+        ticketTypeChosen.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         ticketTypeChosen.setBounds(50, 310, 400, 25);
         userInputPanel.add(ticketTypeChosen);
 
         //the number of tickets chosen, displays once button is clicked
         JLabel numOfTickets = new JLabel("");
+        numOfTickets.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         numOfTickets.setBounds(50, 340, 200, 25);
         userInputPanel.add(numOfTickets);
 
         //what their total cost will be displays once button is clicked
         JLabel totalCost = new JLabel("");
+        totalCost.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         totalCost.setBounds(50, 370, 200, 25);
         userInputPanel.add(totalCost);
 
         //proceed to payment button
         JButton proceedToPayment = new JButton("Proceed to payment -->");
+        proceedToPayment.setBackground(new Color(163, 194, 227)); //light blue 
+        proceedToPayment.setForeground(Color.WHITE); //white text        
         proceedToPayment.setBounds(50, 400, 200, 25);
 
         confirm.addActionListener(new ActionListener() {

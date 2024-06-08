@@ -5,6 +5,7 @@
 package pdc_GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -48,17 +49,20 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         //creates panel 
         JPanel panel = new JPanel(); 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); 
+        panel.setBackground(new Color(235, 239, 242)); //light blue background
         
         //adds title 
         JLabel title = new JLabel("Sign in/up here!"); 
         title.setFont(new Font("Garamond", Font.BOLD, 26)); 
         title.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        title.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         panel.add(title); 
         
         //prompts user to create an account 
         JLabel account = new JLabel("Owning an account can help keep track of purchased tickets and new events!"); 
         account.setFont(new Font("Garamond", Font.PLAIN, 18)); 
         account.setAlignmentX(Component.CENTER_ALIGNMENT);
+        account.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         panel.add(Box.createVerticalStrut(10)); 
         panel.add(account); 
                 
@@ -71,11 +75,13 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         
         //makes new Login panel
         JPanel loginPanel = new JPanel(); 
+        loginPanel.setBackground(new Color(235, 239, 242)); //light blue background
         loginPanel.setLayout(null); 
         
         //asks for username
         JLabel user = new JLabel("Username:"); 
         user.setBounds(90, 35, 80, 25); 
+        user.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(user); 
         //username text field 
         userText = new JTextField(20);
@@ -85,6 +91,7 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         //asks for password
         JLabel pass = new JLabel("Password:"); 
         pass.setBounds(90, 75, 80, 25); 
+        pass.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(pass); 
         //password field 
         passText = new JPasswordField(20); 
@@ -93,26 +100,32 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         
         //adding sign in/up button 
         JButton signButton = new JButton("Sign in/up");
-        signButton.setBounds(90, 110, 100, 25); 
+        signButton.setBounds(90, 110, 100, 25);
+        signButton.setBackground(new Color(163, 194, 227)); //light blue 
+        signButton.setForeground(Color.WHITE); //light blue 
         loginPanel.add(signButton); 
         
         //creating empty label to display messgae later 
         JLabel noSuchUser = new JLabel(""); 
         noSuchUser.setBounds(90, 150, 500, 25); 
+        noSuchUser.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(noSuchUser); 
         
         //creating empty label to display message later
         JLabel or = new JLabel("OR"); 
+        or.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         or.setBounds(90, 180, 500, 25); 
         
         //creating empty label to display message later
         JLabel registerText = new JLabel(""); 
         registerText.setBounds(90, 210, 500, 25); 
+        registerText.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(registerText); 
         
         //asks for email
         JLabel email = new JLabel("Email:"); 
         email.setBounds(90, 240, 80, 25); 
+        email.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //email text field 
         emailText = new JTextField(50);
         emailText.setBounds(300, 240, 200, 25); 
@@ -120,6 +133,7 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         //asks for phone number
         JLabel phoneNo = new JLabel("Phone number:"); 
         phoneNo.setBounds(90, 280, 100, 25); 
+        phoneNo.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         //phone number text field 
         phoneNoText = new JTextField(50);
         phoneNoText.setBounds(300, 280, 200, 25); 
@@ -127,10 +141,14 @@ public abstract class LoginPage extends JPanel implements PanelInterface{
         //creates register button but not displaying it yet 
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(90, 320, 100, 25); 
+        registerButton.setBackground(new Color(163, 194, 227)); //light blue
+        registerButton.setForeground(Color.WHITE); //light blue 
+
         
         //message that will be set of user's input is incorrect 
         correctUserInput = new JLabel(""); 
-        correctUserInput.setBounds(90, 350, 500, 25); 
+        correctUserInput.setBounds(90, 350, 500, 25);
+        correctUserInput.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
         loginPanel.add(correctUserInput); 
         
         //adding actionlistener for sign in button
