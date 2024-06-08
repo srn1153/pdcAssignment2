@@ -23,7 +23,7 @@ public final class Database {
 
     private Connection conn;
 
-    public Database() {
+    public Database() throws SQLException {
         establishConnection();
         dbSetup();
     }
@@ -72,7 +72,7 @@ public final class Database {
     }
 
     //checking if table already exists 
-    private boolean checkTableExisting(String tableName) {
+    public boolean checkTableExisting(String tableName) {
         try {
 
             System.out.println("check existing tables.... ");
@@ -259,7 +259,7 @@ public final class Database {
     }
     
     //main used to view table data 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Database db = new Database();
         System.out.println("\nCustomerLogin table:");
         db.printCustomerLoginTable();
@@ -327,16 +327,12 @@ public final class Database {
     }
 
     //establishing connection
-    public void establishConnection() {
+    public void establishConnection() throws SQLException {
         if (this.conn == null) {
-            try {
                 conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
                 System.out.println(URL + " Get Connected Successfully ....");
-            } catch (SQLException ex) {
-                System.out.println("Database connection failed " + ex.getMessage());
             }
         }
-    }
 
     //closing connection 
     public void closeConnections() {

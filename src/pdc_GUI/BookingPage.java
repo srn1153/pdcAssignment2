@@ -115,7 +115,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         //using combo box for them to select 
         ticketType = new JComboBox();
         ticketType.addItem("Standard Ticket");
-        ticketType.addItem("Wheelchair Access Ticket ");
+        ticketType.addItem("Wheelchair Access Ticket");
         ticketType.setBounds(300, 120, 200, 25);
         userInputPanel.add(ticketType);
 
@@ -237,7 +237,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         }
 
         //checks that first and last name fields are string inputs (not digits)
-        if (lNameInput.matches("-?[0-9]+") || fNameInput.matches("-?[0-9]+")) {
+        if(!lNameInput.matches("[a-zA-Z]+") || !fNameInput.matches("[a-zA-Z]+")) {
             inputMessage.setText("Please enter your first and last name using letters only");
             return false;
         }

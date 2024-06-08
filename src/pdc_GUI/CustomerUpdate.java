@@ -305,7 +305,7 @@ public class CustomerUpdate {
      */
     public List<Double> getRefundAmount() {
         return refundAmount;
-    }
+    } 
 
     /**
      * @param refundAmount the refundAmount to set
