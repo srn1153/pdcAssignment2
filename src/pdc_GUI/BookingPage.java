@@ -63,17 +63,17 @@ public class BookingPage extends JPanel implements PanelInterface {
         JLabel loggedIn = new JLabel("You have successfully logged in!");
         loggedIn.setFont(new Font("Garamond", Font.BOLD, 28));
         loggedIn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loggedIn.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        loggedIn.setForeground(new Color(118, 149, 182)); //dark blue 
         titlePanel.add(loggedIn);
 
         //adding gap between info 
         titlePanel.add(Box.createVerticalStrut(20));
 
-        //text for user
+        //prompt for user
         JLabel title = new JLabel("Select from the options below:");
         title.setFont(new Font("Garamond", Font.BOLD, 20));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        title.setForeground(new Color(118, 149, 182)); //dark blue 
         titlePanel.add(title);
 
         //adding gap between info 
@@ -89,7 +89,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //asking for first name 
         JLabel fName = new JLabel("First Name:");
-        fName.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        fName.setForeground(new Color(118, 149, 182)); //dark blue 
         fName.setFont(new Font("Garamond", Font.BOLD, 16)); 
         fName.setBounds(50, 40, 200, 25);
         userInputPanel.add(fName);
@@ -100,7 +100,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //asking for last name 
         JLabel lName = new JLabel("Last Name:");
-        lName.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        lName.setForeground(new Color(118, 149, 182)); //dark blue 
         lName.setFont(new Font("Garamond", Font.BOLD, 16)); 
         lName.setBounds(50, 80, 200, 25);
         userInputPanel.add(lName);
@@ -111,7 +111,7 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //asking for ticket type 
         JLabel ticketTypeLabel = new JLabel("Select your ticket type: ");
-        ticketTypeLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button
+        ticketTypeLabel.setForeground(new Color(118, 149, 182)); //dark blue
         ticketTypeLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         ticketTypeLabel.setBounds(50, 120, 200, 25);
         userInputPanel.add(ticketTypeLabel);
@@ -124,12 +124,12 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //asking to select number of tickets (max of 6 tickets per purchase)
         JLabel numberOfTicketsLabel = new JLabel("Select number of tickets to purchase: ");
-        numberOfTicketsLabel.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        numberOfTicketsLabel.setForeground(new Color(118, 149, 182)); //dark blue 
         numberOfTicketsLabel.setFont(new Font("Garamond", Font.BOLD, 16)); 
         numberOfTicketsLabel.setBounds(50, 160, 300, 25);
         userInputPanel.add(numberOfTicketsLabel);
 
-        //giving combo box so they can choose 
+        //combo box so they can choose (avoid recieving invalid input)
         numberOfTickets = new JComboBox();
         numberOfTickets.addItem(1);
         numberOfTickets.addItem(2);
@@ -143,7 +143,7 @@ public class BookingPage extends JPanel implements PanelInterface {
         //invisible message that displays when input is incorrect
         //the message is a friendly prompt on what the correct input should be 
         inputMessage = new JLabel("");
-        inputMessage.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        inputMessage.setForeground(new Color(118, 149, 182)); //dark blue 
         inputMessage.setFont(new Font("Garamond", Font.BOLD, 16)); 
         inputMessage.setBounds(50, 190, 500, 25);
         userInputPanel.add(inputMessage);
@@ -158,35 +158,35 @@ public class BookingPage extends JPanel implements PanelInterface {
 
         //recap message, displays once button is clicked
         JLabel recap = new JLabel("");
-        recap.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        recap.setForeground(new Color(118, 149, 182)); //dark blue 
         recap.setFont(new Font("Garamond", Font.BOLD, 16)); 
         recap.setBounds(50, 250, 250, 25);
         userInputPanel.add(recap);
         
         //the artist chosen, displays once button is clicked
         JLabel artist = new JLabel("");
-        artist.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        artist.setForeground(new Color(118, 149, 182)); //dark blue 
         artist.setFont(new Font("Garamond", Font.BOLD, 16)); 
         artist.setBounds(50, 280, 200, 25);
         userInputPanel.add(artist);
 
         //the ticket type chosen, displays once button is clicked
         JLabel ticketTypeChosen = new JLabel("");
-        ticketTypeChosen.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        ticketTypeChosen.setForeground(new Color(118, 149, 182)); //dark blue 
         ticketTypeChosen.setFont(new Font("Garamond", Font.BOLD, 16)); 
         ticketTypeChosen.setBounds(50, 310, 400, 25);
         userInputPanel.add(ticketTypeChosen);
 
         //the number of tickets chosen, displays once button is clicked
         JLabel numOfTickets = new JLabel("");
-        numOfTickets.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        numOfTickets.setForeground(new Color(118, 149, 182)); //dark blue 
         numOfTickets.setFont(new Font("Garamond", Font.BOLD, 16)); 
         numOfTickets.setBounds(50, 340, 200, 25);
         userInputPanel.add(numOfTickets);
 
         //what their total cost will be displays once button is clicked
         JLabel totalCost = new JLabel("");
-        totalCost.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        totalCost.setForeground(new Color(118, 149, 182)); //dark blue 
         totalCost.setFont(new Font("Garamond", Font.BOLD, 16)); 
         totalCost.setBounds(50, 370, 200, 25);
         userInputPanel.add(totalCost);

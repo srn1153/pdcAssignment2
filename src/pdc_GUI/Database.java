@@ -23,7 +23,7 @@ public final class Database {
 
     private Connection conn;
 
-    public Database() throws SQLException {
+    public Database() {
         establishConnection();
         dbSetup();
     }
@@ -53,8 +53,8 @@ public final class Database {
                         + "last_name VARCHAR(50), "
                         + "artist VARCHAR(50), "
                         + "location VARCHAR(50), "
-                        + "date VARCHAR(50), " 
-                        + "time VARCHAR(50), "        
+                        + "date VARCHAR(50), "
+                        + "time VARCHAR(50), "
                         + "ticket_type VARCHAR(50), "
                         + "number_of_tickets INT, "
                         + "total_cost DECIMAL(10, 2), "
@@ -156,9 +156,6 @@ public final class Database {
         return info;
     }
 
-    /*public Connection getConnection() {
-        return this.conn;
-    }*/
     //when user has made a booking/purchase
     public void insertInfo(int userId, String fName, String lName, String artist, String location, String date, String time, String ticketType, int numOfTickets, double totalCost) {
         CustomerUpdate info = new CustomerUpdate();
@@ -176,7 +173,7 @@ public final class Database {
 
     public CustomerUpdate retrieveBookings(int userId) {
         CustomerUpdate userInfo = new CustomerUpdate();
-        userInfo.setUserId(userId);
+        userInfo.setUserId(userId);//sets userId
 
         try {
             Statement statement = conn.createStatement();
@@ -184,31 +181,33 @@ public final class Database {
             //retrieving information based on userId 
             ResultSet rs = statement.executeQuery("SELECT booking_id, artist, location, date, time, ticket_type, number_of_tickets, total_cost, status, refund_amount FROM Booking_Records WHERE userId = " + userId);
             while (rs.next()) {
+                //gets all important variables needed for ViewMyTickets information
                 int bookingId = rs.getInt("booking_id");
                 String artist = rs.getString("artist");
-                String location = rs.getString("location"); 
-                String date = rs.getString("date"); 
-                String time = rs.getString("time"); 
+                String location = rs.getString("location");
+                String date = rs.getString("date");
+                String time = rs.getString("time");
                 String ticketType = rs.getString("ticket_type");
                 int numOfTickets = rs.getInt("number_of_tickets");
                 Double totalCost = rs.getDouble("total_cost");
-                String status = rs.getString("status"); 
-                Double refundAmount = rs.getDouble("refund_amount"); 
-                
+                String status = rs.getString("status");
+                Double refundAmount = rs.getDouble("refund_amount");
+
+                //this goes to addBookingDetails method which adds all details into lists 
                 userInfo.addBookingDetails(bookingId, artist, location, date, time, ticketType, numOfTickets, totalCost, status, refundAmount);
             }
             userInfo.setLoginFlag(true);
             rs.close();
-            statement.close(); 
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return userInfo;
     }
-    
+
     public CustomerUpdate retrieveBookingId(int bookingId) {
         CustomerUpdate userInfo = new CustomerUpdate();
-        userInfo.setBooking_id(bookingId);
+        userInfo.setBooking_id(bookingId); //sets bookingId
 
         try {
             Statement statement = conn.createStatement();
@@ -216,48 +215,50 @@ public final class Database {
             //retrieving information based on userId 
             ResultSet rs = statement.executeQuery("SELECT artist, location, date, time, ticket_type, number_of_tickets, total_cost FROM Booking_Records WHERE  booking_id  = " + bookingId);
             while (rs.next()) {
+                //gets all relative information needed during refunding stage 
                 String artist = rs.getString("artist");
-                String location = rs.getString("location"); 
-                String date = rs.getString("date"); 
-                String time = rs.getString("time"); 
+                String location = rs.getString("location");
+                String date = rs.getString("date");
+                String time = rs.getString("time");
                 String ticketType = rs.getString("ticket_type");
                 int numOfTickets = rs.getInt("number_of_tickets");
                 Double totalCost = rs.getDouble("total_cost");
-                
-                userInfo.setArtist(artist); 
-                userInfo.setLocation(location); 
-                userInfo.setDate(date); 
-                userInfo.setTime(time); 
-                userInfo.setTicket_type(ticketType); 
-                userInfo.setNumber_of_tickets(numOfTickets); 
-                userInfo.setTotal_cost(totalCost); 
+
+                //sets all variables here
+                userInfo.setArtist(artist);
+                userInfo.setLocation(location);
+                userInfo.setDate(date);
+                userInfo.setTime(time);
+                userInfo.setTicket_type(ticketType);
+                userInfo.setNumber_of_tickets(numOfTickets);
+                userInfo.setTotal_cost(totalCost);
             }
             userInfo.setLoginFlag(true);
             rs.close();
-            statement.close(); 
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return userInfo;
     }
-    
-    public void refundTickets(int bookingId, int numOfTickets, double refundAmount){
+
+    public void refundTickets(int bookingId, int numOfTickets, double refundAmount) {
         try {
             Statement statement = conn.createStatement();
-            
-            int rowsUpdated = statement.executeUpdate("UPDATE Booking_Records SET refund_amount = " + refundAmount + ",  number_of_tickets = (number_of_tickets - " + numOfTickets + "), refund_date = CURRENT_TIMESTAMP, status = 'Currently Refunding' WHERE booking_id = " + bookingId); 
-            
-            if (rowsUpdated > 0){
-                System.out.println("YAYAYYAYAYA");
-            } else {
-                System.out.println("oh no girl");
-            }
-            statement.close(); 
-            }catch (SQLException e){
+            //Changes necessary details in database table relating to refunding process
+            statement.executeUpdate("UPDATE Booking_Records SET refund_amount = " + refundAmount + ",  number_of_tickets = (number_of_tickets - " + numOfTickets + "), refund_date = CURRENT_TIMESTAMP, status = 'Currently Refunding' WHERE booking_id = " + bookingId);
+
+            statement.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
+    //retrieves connection
+    public Connection getConnection() {
+        return this.conn;
+    }
+
     //main used to view table data 
     public static void main(String[] args) throws SQLException {
         Database db = new Database();
@@ -281,7 +282,6 @@ public final class Database {
                 String phoneNumber = rs.getString("phone_number");
                 System.out.println("userId: " + userId + ", username: " + username + ", password: " + password + ", email: " + email + ", phone number: " + phoneNumber);
             }
-
             rs.close();
             statement.close();
         } catch (SQLException e) {
@@ -313,8 +313,8 @@ public final class Database {
                 String refundDate = rs.getString("refund_date");
 
                 System.out.println("Booking ID: " + bookingId + ", User ID: " + userId + ", First Name: " + firstName
-                        + ", Last Name: " + lastName + ", Artist: " + artist + ", Location: " + location 
-                        + ", Date: " + date + ", Time: " + time +", Ticket Type: " + ticketType
+                        + ", Last Name: " + lastName + ", Artist: " + artist + ", Location: " + location
+                        + ", Date: " + date + ", Time: " + time + ", Ticket Type: " + ticketType
                         + ", Number of Tickets: " + numberOfTickets + ", Total Cost: " + totalCost
                         + ", Booking Date: " + bookingDate + ", Status: " + status + ", Refund Amount: " + refundAmount
                         + ", Refund Date: " + refundDate);
@@ -325,16 +325,20 @@ public final class Database {
             e.printStackTrace();
         }
     }
-   
-    //establishing connection
-    public void establishConnection() throws SQLException {
-        if (this.conn == null) {
+
+    //establishes connection
+    public void establishConnection() {
+        try {
+            if (this.conn == null) {
                 conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
                 System.out.println(URL + " Get Connected Successfully ....");
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+    }
 
-    //closing connection 
+    //closes connection 
     public void closeConnections() {
         if (conn != null) {
             try {

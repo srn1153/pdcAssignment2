@@ -13,7 +13,6 @@ import java.util.Date;
  * @author nikis
  */
 public class CustomerUpdate { 
-
 //this class gets and sets important customer details
     
     //variables for customer login table 
@@ -36,6 +35,7 @@ public class CustomerUpdate {
     private double refund_amount;    
     public Date refund_date; 
     
+    //Lists in case user's have multiple bookings and I need to display their information
     private List<Integer> bookingIds = new ArrayList<>(); 
     private List<String> artists = new ArrayList<>(); 
     private List<String> locations = new ArrayList<>(); 
@@ -47,7 +47,7 @@ public class CustomerUpdate {
     private List<String> refundStatus = new ArrayList<>(); 
     private List<Double> refundAmount = new ArrayList<>(); 
 
-    
+    //adds all important information to list based on userId (used in Database class)
     public void addBookingDetails(int bookingId, String artist,String location, String date, String time, String ticketType, int numberOfTickets, double totalCost, String status, double refundAmount){
         this.getBookingIds().add(bookingId); 
         this.getArtists().add(artist); 

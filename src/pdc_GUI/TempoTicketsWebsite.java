@@ -4,9 +4,6 @@
  */
 package pdc_GUI;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -16,54 +13,52 @@ import javax.swing.SwingUtilities;
  * @author nikis
  */
 public class TempoTicketsWebsite extends JFrame {
-    private JPanel currPanel; 
-    Database db; 
+
+    private JPanel currPanel;
+    Database db;
     CustomerUpdate userInfo;
-    Artist aInfo; 
-    
-    public TempoTicketsWebsite(CustomerUpdate userInfo, Artist aInfo) throws SQLException {
-        //sets title to name of website!
-        setTitle("Tempo Tickets Website!"); 
+    Artist aInfo;
+
+    public TempoTicketsWebsite(CustomerUpdate userInfo, Artist aInfo) {
+        //sets title to name of website
+        setTitle("Tempo Tickets Website!");
         //sets size of frame
-        setSize(600, 600); 
+        setSize(600, 600);
         //ensure user can exit program at any time
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
+
         //starts the connection for the database
         db = new Database();
         //initialises userInfo
-        this.userInfo = userInfo; 
+        this.userInfo = userInfo;
         this.aInfo = aInfo;
- 
+
         //goes to Homepage panel first 
         HomepagePanel hpp = new HomepagePanel(this, this.userInfo, this.aInfo);
         this.nextPage(hpp);
-        add(hpp); 
+        add(hpp);
 
-        setVisible(true); 
+        setVisible(true);
     }
-    
+
     //goes to new page without creating a new window
-    public void nextPage(JPanel newPanel){
-        getContentPane().removeAll(); 
-        currPanel = newPanel; 
-        add(newPanel); 
-        revalidate(); 
-        repaint(); 
+    public void nextPage(JPanel newPanel) {
+        getContentPane().removeAll();
+        currPanel = newPanel;
+        add(newPanel);
+        revalidate();
+        repaint();
     }
-    
+
     //the main
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try { 
-                    new TempoTicketsWebsite(new CustomerUpdate(), new Artist("Artist Name", "Genre", "Location", "Date", "Time", 50.0));
-                } catch (SQLException ex) {
-                    Logger.getLogger(TempoTicketsWebsite.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new TempoTicketsWebsite(new CustomerUpdate(), new Artist("Artist Name", "Genre", "Location", "Date", "Time", 50.0));
             }
-        }); 
+        }
+        );
     }
 }

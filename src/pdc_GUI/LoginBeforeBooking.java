@@ -48,7 +48,7 @@ public class LoginBeforeBooking extends LoginPage{ //doesn't implement PanelInte
                 registerText.setText("Sign up by filling in details below and clicking the 'Register' button!");
                 
                 //adds JLables and JTextFields to panel
-                //user can fill in details if needed (unless they accidentally entered the wrong username/password
+                //user can fill in details if needed (unless they accidentally entered the wrong username/password)
                 loginPanel.add(email);
                 loginPanel.add(emailText);
                 loginPanel.add(phoneNo);

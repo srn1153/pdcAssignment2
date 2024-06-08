@@ -51,12 +51,12 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         JLabel welcome = new JLabel("Welcome to"); 
         welcome.setFont(new Font("Garamond", Font.BOLD, 30)); 
         welcome.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        welcome.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        welcome.setForeground(new Color(118, 149, 182)); //dark blue
         panel.add(welcome); 
         JLabel tempoTickets = new JLabel("Tempo Tickets"); 
         tempoTickets.setFont(new Font("Garamond", Font.BOLD, 30)); 
         tempoTickets.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        tempoTickets.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        tempoTickets.setForeground(new Color(118, 149, 182)); //dark blue 
         panel.add(tempoTickets); 
         
         //adding text 
@@ -67,8 +67,8 @@ public class HomepagePanel extends JPanel implements PanelInterface{
         clickArtist.setFont(new Font("Garamond", Font.BOLD, 20)); 
         clickArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalStrut(10)); 
-        upcoming.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
-        clickArtist.setForeground(new Color(118, 149, 182)); //darker shade of blue button 
+        upcoming.setForeground(new Color(118, 149, 182)); //dark blue 
+        clickArtist.setForeground(new Color(118, 149, 182)); //dark blue 
         panel.add(upcoming); 
         panel.add(clickArtist); 
         

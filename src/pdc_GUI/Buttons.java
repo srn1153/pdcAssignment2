@@ -57,7 +57,7 @@ public class Buttons {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CustomerUpdate cu = ttw.userInfo;  
-                //goes to Login in stage before final purchasing 
+                //goes to Login in stage before booking
                 ttw.nextPage(new LoginBeforeBooking(ttw, aInfo, cu) {}); 
             }
         }); 
