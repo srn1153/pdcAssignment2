@@ -159,11 +159,14 @@ public class PaymentPanel extends JPanel implements PanelInterface {
                     String fName = bp.fNameText.getText();
                     String lName = bp.lNameText.getText();
                     String artist = aInfo.getArtistName();
+                    String location = aInfo.getLoc();
+                    String date = aInfo.getDate();
+                    String time = aInfo.getTime();
                     String ticketTypeRecorded = bp.ticketType.getSelectedItem().toString();
                     int intNumberOfTicketsRecorded = Integer.parseInt(bp.numberOfTickets.getSelectedItem().toString());
                     double doubleTotalCost = aInfo.getPrice() * intNumberOfTicketsRecorded;
                     //inserts data into Booking_Records table
-                    ttw.db.insertInfo(userInfo.getUserId(), fName, lName, artist, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);
+                    ttw.db.insertInfo(userInfo.getUserId(), fName, lName, artist, location, date, time, ticketTypeRecorded, intNumberOfTicketsRecorded, doubleTotalCost);
                 }
             }
         });

@@ -51,19 +51,15 @@ public class LoginForAccountDetails extends LoginPage implements PanelInterface 
 
         viewMyTickets.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    //takes user to view my tickets panel, where their details are listed
-                    ttw.nextPage(new ViewMyTickets(ttw, aInfo, userInfo));
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(LoginForAccountDetails.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                //takes user to view my tickets panel, where their details are listed
+                ttw.nextPage(new ViewMyTickets(ttw, aInfo, userInfo));
             }
         });
 
         refundTickets.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //going to implement refunds page
-                //ttw.nextPage(new ViewMyTickets(ttw, aInfo, userInfo));
+                //goes to refund page
+                ttw.nextPage(new RefundPage(ttw, aInfo, userInfo));
             }
         });
     }

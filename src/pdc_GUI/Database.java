@@ -52,6 +52,9 @@ public final class Database {
                         + "first_name VARCHAR(50), "
                         + "last_name VARCHAR(50), "
                         + "artist VARCHAR(50), "
+                        + "location VARCHAR(50), "
+                        + "date VARCHAR(50), " 
+                        + "time VARCHAR(50), "        
                         + "ticket_type VARCHAR(50), "
                         + "number_of_tickets INT, "
                         + "total_cost DECIMAL(10, 2), "
@@ -157,14 +160,14 @@ public final class Database {
         return this.conn;
     }*/
     //when user has made a booking/purchase
-    public void insertInfo(int userId, String fName, String lName, String artist, String ticketType, int numOfTickets, double totalCost) {
+    public void insertInfo(int userId, String fName, String lName, String artist, String location, String date, String time, String ticketType, int numOfTickets, double totalCost) {
         CustomerUpdate info = new CustomerUpdate();
         try {
             Statement statement = conn.createStatement();
             System.out.println("inserting info ");
             //inserts row of data 
-            statement.executeUpdate("INSERT INTO Booking_Records (userId, first_name, last_name, artist, ticket_type, number_of_tickets, total_cost) VALUES(" + userId + ","
-                    + "'" + fName + "', '" + lName + "', '" + artist + "', '" + ticketType + "', " + numOfTickets + ", " + totalCost + ")");
+            statement.executeUpdate("INSERT INTO Booking_Records (userId, first_name, last_name, artist, location, date, time, ticket_type, number_of_tickets, total_cost) VALUES(" + userId + ","
+                    + "'" + fName + "', '" + lName + "', '" + artist + "', '" + location + "', '" + date + "', '" + time + "','" + ticketType + "', " + numOfTickets + ", " + totalCost + ")");
             info.setLoginFlag(true);//changes flag to true
         } catch (SQLException e) {
             e.printStackTrace();
@@ -179,16 +182,18 @@ public final class Database {
             Statement statement = conn.createStatement();
             System.out.println("Retrieving bookings using userId: " + userId);
             //retrieving information based on userId 
-            ResultSet rs = statement.executeQuery("SELECT booking_id, artist, ticket_type, number_of_tickets, total_cost FROM Booking_Records WHERE userId = " + userId);
+            ResultSet rs = statement.executeQuery("SELECT booking_id, artist, location, date, time, ticket_type, number_of_tickets, total_cost FROM Booking_Records WHERE userId = " + userId);
             while (rs.next()) {
                 int bookingId = rs.getInt("booking_id");
                 String artist = rs.getString("artist");
+                String location = rs.getString("location"); 
+                String date = rs.getString("date"); 
+                String time = rs.getString("time"); 
                 String ticketType = rs.getString("ticket_type");
                 int numOfTickets = rs.getInt("number_of_tickets");
                 Double totalCost = rs.getDouble("total_cost");
-                           
-                userInfo.addBookingDetails(bookingId, artist, ticketType, numOfTickets, totalCost);
-
+                
+                userInfo.addBookingDetails(bookingId, artist, location, date, time, ticketType, numOfTickets, totalCost);
             }
             userInfo.setLoginFlag(true);
             rs.close();
@@ -198,7 +203,7 @@ public final class Database {
         }
         return userInfo;
     }
-
+    
     //main used to view table data 
     public static void main(String[] args) {
         Database db = new Database();
@@ -206,7 +211,6 @@ public final class Database {
         db.printCustomerLoginTable();
         System.out.println("\nBooking records:");
         db.printBookingRecordsTable();
-
     }
 
     //used to print customer table
@@ -245,6 +249,9 @@ public final class Database {
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 String artist = rs.getString("artist");
+                String location = rs.getString("location");
+                String date = rs.getString("date");
+                String time = rs.getString("time");
                 String ticketType = rs.getString("ticket_type");
                 int numberOfTickets = rs.getInt("number_of_tickets");
                 double totalCost = rs.getDouble("total_cost");
@@ -254,7 +261,8 @@ public final class Database {
                 String refundDate = rs.getString("refund_date");
 
                 System.out.println("Booking ID: " + bookingId + ", User ID: " + userId + ", First Name: " + firstName
-                        + ", Last Name: " + lastName + ", Artist: " + artist + ", Ticket Type: " + ticketType
+                        + ", Last Name: " + lastName + ", Artist: " + artist + ", Location: " + location 
+                        + ", Date: " + date + ", Time: " + time +", Ticket Type: " + ticketType
                         + ", Number of Tickets: " + numberOfTickets + ", Total Cost: " + totalCost
                         + ", Booking Date: " + bookingDate + ", Status: " + status + ", Refund Amount: " + refundAmount
                         + ", Refund Date: " + refundDate);

@@ -35,7 +35,8 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
     public JLabel numOfTicketsChosen;
     public JLabel totalCost;
 
-    public ViewMyTickets(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) throws InterruptedException {
+    public ViewMyTickets(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo){
+        
         this.ttw = ttw;
         this.aInfo = aInfo;
         this.userInfo = userInfo;
@@ -102,16 +103,15 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         //creates exit button for the user to exit the website after looking at details 
-        JButton exitButton = new JButton("Exit the website");
-        panel.add(exitButton, BorderLayout.SOUTH);
-        panel.add(exitButton);
+        JButton backToLogin = new JButton("Back to Login Management");
+        panel.add(backToLogin, BorderLayout.SOUTH);
+        panel.add(backToLogin);
 
-        exitButton.addActionListener(new ActionListener() {
+        backToLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                ttw.nextPage(new LoginForAccountDetails(ttw, aInfo, userInfo) {});              
             }
-
         });
 
         //adding components to panel 

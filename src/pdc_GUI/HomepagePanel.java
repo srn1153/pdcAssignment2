@@ -26,7 +26,6 @@ public class HomepagePanel extends JPanel implements PanelInterface{
     private TempoTicketsWebsite ttw; 
     public CustomerUpdate userInfo; 
     public Artist aInfo; 
-
     
     public HomepagePanel(TempoTicketsWebsite ttw, CustomerUpdate userInfo, Artist aInfo){
         this.ttw = ttw; 

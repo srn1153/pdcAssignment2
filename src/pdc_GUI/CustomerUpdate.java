@@ -12,7 +12,9 @@ import java.util.Date;
  *
  * @author nikis
  */
-public class CustomerUpdate { //this class gets and sets important customer details
+public class CustomerUpdate { 
+
+//this class gets and sets important customer details
     
     //variables for customer login table 
     private int userId; 
@@ -23,6 +25,9 @@ public class CustomerUpdate { //this class gets and sets important customer deta
     public String fName; 
     public String lName;
     private String artist;
+    private String location; 
+    private String date; 
+    private String time; 
     private String ticket_type; 
     private int number_of_tickets; 
     private double total_cost; 
@@ -33,6 +38,9 @@ public class CustomerUpdate { //this class gets and sets important customer deta
     
     private List<Integer> bookingIds = new ArrayList<>(); 
     private List<String> artists = new ArrayList<>(); 
+    private List<String> locations = new ArrayList<>(); 
+    private List<String> dates = new ArrayList<>(); 
+    private List<String> times = new ArrayList<>(); 
     private List<String> ticketTypes = new ArrayList<>(); 
     private List<Integer> numberOfTickets = new ArrayList<>(); 
     private List<Double> totalCosts = new ArrayList<>(); 
@@ -92,6 +100,49 @@ public class CustomerUpdate { //this class gets and sets important customer deta
     public void setArtist(String artist) {
         this.artist = artist;
     }
+    
+    
+    /**
+     * @return the location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * @return the date
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    /**
+     * @return the time
+     */
+    public String getTime() {
+        return time;
+    }
+
+    /**
+     * @param time the time to set
+     */
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     /**
      * @return the ticket_type
@@ -135,9 +186,12 @@ public class CustomerUpdate { //this class gets and sets important customer deta
         this.total_cost = total_cost;
     }
     
-    public void addBookingDetails(int bookingId, String artist, String ticketType, int numberOfTickets, double totalCost){
+    public void addBookingDetails(int bookingId, String artist,String location, String date, String time, String ticketType, int numberOfTickets, double totalCost){
         this.getBookingIds().add(bookingId); 
         this.getArtists().add(artist); 
+        this.getLocations().add(location); 
+        this.getDates().add(date); 
+        this.getTimes().add(time); 
         this.getTicketTypes().add(ticketType); 
         this.getNumberOfTickets().add(numberOfTickets); 
         this.getTotalCosts().add(totalCost); 
@@ -156,7 +210,28 @@ public class CustomerUpdate { //this class gets and sets important customer deta
     public List<String> getArtists() {
         return artists;
     }
+    
+    
+    /**
+     * @return the locations
+     */
+    public List<String> getLocations() {
+        return locations;
+    }
 
+    /**
+     * @return the dates
+     */
+    public List<String> getDates() {
+        return dates;
+    }
+    /**
+     * @return the times
+     */
+    public List<String> getTimes() {
+        return times;
+    }
+    
     /**
      * @return the ticketTypes
      */
