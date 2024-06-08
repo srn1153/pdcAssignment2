@@ -239,6 +239,23 @@ public final class Database {
         return userInfo;
     }
     
+    public void refundTickets(int bookingId, int numOfTickets, double refundAmount){
+        try {
+            Statement statement = conn.createStatement();
+            
+            int rowsUpdated = statement.executeUpdate("UPDATE Booking_Records SET refund_amount = " + refundAmount + ",  number_of_tickets = (number_of_tickets - " + numOfTickets + "), refund_date = CURRENT_TIMESTAMP, status = 'Currently Refunding' WHERE booking_id = " + bookingId); 
+            
+            if (rowsUpdated > 0){
+                System.out.println("YAYAYYAYAYA");
+            } else {
+                System.out.println("oh no girl");
+            }
+            statement.close(); 
+            }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     //main used to view table data 
     public static void main(String[] args) {
         Database db = new Database();

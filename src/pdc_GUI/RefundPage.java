@@ -29,6 +29,8 @@ public class RefundPage extends JPanel implements PanelInterface {
     public JTextField userBookingId;
     public JLabel correctionInput;
     public JComboBox refundNumOfTickets;
+    public double refundAmountDouble; 
+    public int refundTicketsSelected; 
 
     public RefundPage(TempoTicketsWebsite ttw, Artist aInfo, CustomerUpdate userInfo) {
         this.ttw = ttw;
@@ -243,9 +245,10 @@ public class RefundPage extends JPanel implements PanelInterface {
                 String userBookingIdInput = userBookingId.getText().trim();
                 int intBookingIdInput = Integer.parseInt(userBookingIdInput);
                 CustomerUpdate bookingIdInfo = ttw.db.retrieveBookingId(intBookingIdInput);
+                
                 double perTicket = bookingIdInfo.getTotal_cost() / bookingIdInfo.getNumber_of_tickets();
-                int refundTicketsSelected = Integer.parseInt(refundNumOfTickets.getSelectedItem().toString());
-                double refundAmountDouble = refundTicketsSelected * perTicket;
+                refundTicketsSelected = Integer.parseInt(refundNumOfTickets.getSelectedItem().toString());
+                refundAmountDouble = refundTicketsSelected * perTicket;
 
                 refundAmountDouble = Math.round(refundAmountDouble * 100.0) / 100.0;
 
@@ -258,6 +261,10 @@ public class RefundPage extends JPanel implements PanelInterface {
         submitRefund.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String userBookingIdInput = userBookingId.getText().trim();
+                int intBookingIdInput = Integer.parseInt(userBookingIdInput);
+                //CustomerUpdate bookingIdInfo = ttw.db.retrieveBookingId(intBookingIdInput);
+                ttw.db.refundTickets(intBookingIdInput, refundTicketsSelected, refundAmountDouble); 
                 
                 success.setText("Refund Successful!"); 
                 refundInput.add(exitButton); 
