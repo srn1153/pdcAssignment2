@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -38,6 +39,7 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
         this.ttw = ttw;
         this.aInfo = aInfo;
         this.userInfo = userInfo;
+        //retrieves user's information
         this.userInfo = ttw.db.retrieveBookings(userInfo.getUserId());
         panelDisplay();
     }
@@ -76,156 +78,102 @@ public class ViewMyTickets extends JPanel implements PanelInterface {
 
         add(homeButtonPanel, BorderLayout.NORTH);
 
-        //creates new panel 
-        JPanel ticketDisplayPanel = new JPanel();
-        ticketDisplayPanel.setLayout(null);
+        //creating new panel to display details
+        JPanel bookingsPanel = new JPanel();
+        bookingsPanel.setLayout(new BoxLayout(bookingsPanel, BoxLayout.Y_AXIS));
 
-        //booking id text 
-        JLabel bookingId = new JLabel("Booking ID: ");
-        bookingId.setBounds(90, 40, 200, 25);
-        ticketDisplayPanel.add(bookingId);
-
-        //artist text 
-        JLabel artist = new JLabel("Artist: ");
-        artist.setBounds(90, 70, 200, 25);
-        ticketDisplayPanel.add(artist);
-
-        //venue text 
-        JLabel venueText = new JLabel("Event venue:");
-        venueText.setBounds(90, 100, 200, 25);
-        ticketDisplayPanel.add(venueText);
-
-        //date text 
-        JLabel dateText = new JLabel("Event Date: ");
-        dateText.setBounds(90, 130, 200, 25);
-        ticketDisplayPanel.add(dateText);
-        //retrieves user's artist's date 
-        date = new JLabel("");
-        date.setBounds(200, 130, 200, 25);
-        ticketDisplayPanel.add(date);
-
-        //time text 
-        JLabel timeText = new JLabel("Event Time: ");
-        timeText.setBounds(90, 160, 200, 25);
-        ticketDisplayPanel.add(timeText);
-        //retrieves user's artist's time 
-        time = new JLabel("");
-        time.setBounds(200, 160, 200, 25);
-        ticketDisplayPanel.add(time);
-
-        //ticketType text 
-        JLabel ticketType = new JLabel("Ticket type selected: ");
-        ticketType.setBounds(90, 190, 200, 25);
-        ticketDisplayPanel.add(ticketType);
-
-        //number of tickets text 
-        JLabel numOfTickets = new JLabel("Number of tickets purchased: ");
-        numOfTickets.setBounds(90, 220, 200, 25);
-        ticketDisplayPanel.add(numOfTickets);
-
-        //total cost text 
-        JLabel totalCostText = new JLabel("Total Cost: $");
-        totalCostText.setBounds(90, 250, 200, 25);
-        ticketDisplayPanel.add(totalCostText);
-        
-        System.out.println(userInfo.getBookingIds());
-
-        List<Integer> bookingIds = userInfo.getBookingIds(); 
-        List<String> artists = userInfo.getArtists(); 
-        List<String> ticketTypes = userInfo.getTicketTypes(); 
-        List<Integer> numberOfTickets = userInfo.getNumberOfTickets(); 
+        //retrieving lists from CustomerUpdate
+        List<Integer> bookingIds = userInfo.getBookingIds();
+        List<String> artists = userInfo.getArtists();
+        List<String> ticketTypes = userInfo.getTicketTypes();
+        List<Integer> numberOfTickets = userInfo.getNumberOfTickets();
         List<Double> totalCosts = userInfo.getTotalCosts();
-        
-        System.out.println(bookingIds);
-        System.out.println(artists);
-        System.out.println(ticketTypes);
-        System.out.println(numberOfTickets);
-        System.out.println(totalCosts);
 
-       /*for (int i = 0; i < bookingIds.size(); i++){
-            //JPanel for booking details 
-            JPanel bookingDetails = new JPanel(); 
-            bookingDetails.setLayout(null); 
-                    
-            //booking id text 
-            JLabel bookingId = new JLabel("Booking ID: " + bookingIds.get(i));
-            //bookingId.setBounds(90, 40, 200, 25);
-            bookingDetails.add(bookingId);
+        //specifically this 'for' loop is sourced from chatgpt this accounts for users with multiple bookings
+        for (int i = 0; i < bookingIds.size(); i++) {
+            JPanel bookingPanel = createBookingPanel(bookingIds.get(i), artists.get(i), ticketTypes.get(i), numberOfTickets.get(i), totalCosts.get(i));
+            bookingsPanel.add(bookingPanel);
+            bookingsPanel.add(Box.createVerticalStrut(10));
+        }
 
-            //artist text 
-            JLabel artist = new JLabel("Artist: " + artists.get(i));
-            //artist.setBounds(90, 70, 200, 25);
-            bookingDetails.add(artist);
-
-            //venue text 
-            JLabel venueText = new JLabel("Event venue:");
-            //venueText.setBounds(90, 100, 200, 25);
-            bookingDetails.add(venueText);
-
-            //date text 
-            JLabel dateText = new JLabel("Event Date: ");
-            //dateText.setBounds(90, 130, 200, 25);
-            bookingDetails.add(dateText);
-            //retrieves user's artist's date 
-            date = new JLabel("");
-            //date.setBounds(200, 130, 200, 25);
-            bookingDetails.add(date);
-
-            //time text 
-            JLabel timeText = new JLabel("Event Time: ");
-            //timeText.setBounds(90, 160, 200, 25);
-            bookingDetails.add(timeText);
-            //retrieves user's artist's time 
-            time = new JLabel("");
-            //time.setBounds(200, 160, 200, 25);
-            bookingDetails.add(time);
-
-            //ticketType text 
-            JLabel ticketType = new JLabel("Ticket type selected: " + ticketTypes.get(i));
-            //ticketType.setBounds(90, 190, 200, 25);
-            bookingDetails.add(ticketType);
-
-            //number of tickets text 
-            JLabel numOfTickets = new JLabel("Number of tickets purchased: " + numberOfTickets.get(i));
-            //numOfTickets.setBounds(90, 220, 200, 25);
-            bookingDetails.add(numOfTickets);
-
-            //total cost text 
-            JLabel totalCostText = new JLabel("Total Cost: $" + totalCosts.get(i));
-            //totalCostText.setBounds(90, 250, 200, 25);
-            bookingDetails.add(totalCostText);
-            
-            ticketDisplayPanel.add(bookingDetails); 
-            ticketDisplayPanel.add(Box.createVerticalStrut(20)); 
-        }*/
-        //adds another homepage button if they want to return after checking details 
-        JButton goBackToHomePage = Buttons.homePageButton(ttw, aInfo);
-        goBackToHomePage.setBounds(190, 290, 200, 25);
-        ticketDisplayPanel.add(goBackToHomePage);
+        //adding scrolling feature so if customer has multiple bookings they're able to see all bookings on one panel
+        JScrollPane scrollPane = new JScrollPane(bookingsPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        panel.add(scrollPane, BorderLayout.CENTER);
 
         //creates exit button for the user to exit the website after looking at details 
         JButton exitButton = new JButton("Exit the website");
-        exitButton.setBounds(190, 340, 200, 25);
-        ticketDisplayPanel.add(exitButton);
+        panel.add(exitButton, BorderLayout.SOUTH);
+        panel.add(exitButton);
 
-        //adding components to panel 
-        panel.add(ticketDisplayPanel, BorderLayout.SOUTH);
-        add(panel, BorderLayout.CENTER);
-        
-        exitButton.addActionListener(new ActionListener(){
+        exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0); 
+                System.exit(0);
             }
-        
-        }); 
+
+        });
+
+        //adding components to panel 
+        add(panel, BorderLayout.CENTER);
     }
-    
-    
+
+    //this method is sourced from chatgpt, however I changed the components within the method to make the bookings presentable
+    public JPanel createBookingPanel(int bookingId, String artist, String ticketType, int numberOfTickets, double totalCost) {
+        JPanel bookingPanel = new JPanel();
+        bookingPanel.setLayout(new BoxLayout(bookingPanel, BoxLayout.Y_AXIS));
+
+        //displaying booking id 
+        JLabel bookingIdLabel = new JLabel("Booking ID: " + bookingId);
+        //centering information
+        bookingIdLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bookingPanel.add(bookingIdLabel);
+
+        //displaying artist 
+        JLabel artistLabel = new JLabel("Artist: " + artist);
+        //centering information
+        artistLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(artistLabel);
+
+        //display ticket type selected 
+        JLabel ticketTypeLabel = new JLabel("Ticket Type: " + ticketType);
+        //centering information
+        ticketTypeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(ticketTypeLabel);
+
+        //displaying number of tickets 
+        JLabel numOfTicketsLabel = new JLabel("Number of Tickets: " + numberOfTickets);
+        //centering information
+        numOfTicketsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(numOfTicketsLabel);
+
+        //displaying total cost
+        JLabel totalCostLabel = new JLabel("Total Cost: $" + totalCost);
+        //centering information
+        totalCostLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(totalCostLabel);
+
+        //adding divider in between different bookings 
+        JLabel divider = new JLabel("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+        //centering information
+        divider.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //adding gaps between each row for readability
+        bookingPanel.add(Box.createVerticalStrut(10));
+        bookingPanel.add(divider);
+
+        return bookingPanel;
+    }
 
     @Override
     public boolean checkDetailRequirements() {
         return true;
     }
-
 }
